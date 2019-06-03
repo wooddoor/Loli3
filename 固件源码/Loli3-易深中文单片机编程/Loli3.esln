@@ -1,0 +1,29 @@
+{
+    "brand": "宏晶",
+    "crystal": "12.000",
+    "mcu_type": "STC12C5Axx",
+    "root": {
+        "file": [
+        ],
+        "folder": [
+            {
+                "file": [
+                    "LOLI_3.h"
+                ],
+                "folder": [
+                ],
+                "name": "头文件"
+            },
+            {
+                "file": [
+                    "Loli3.c"
+                ],
+                "folder": [
+                ],
+                "name": "源文件"
+            }
+        ],
+        "name": "Loli3"
+    },
+    "solution": "Loli3"
+}
