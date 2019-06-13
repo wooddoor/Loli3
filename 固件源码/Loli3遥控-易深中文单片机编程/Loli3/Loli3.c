@@ -90,7 +90,7 @@ __bit calibration_action,calibration_ok;
 
 //显示
 u8 word_hzk序号数组[10];
-u8 WW[11][6];//保存待显示字符串的字库序号
+u8 WW_菜单字符串[11][6];//保存待显示字符串的字库序号
 __bit LCD_big;
 __bit LCD_light=1;
 __bit LCD_reverse;
@@ -1390,7 +1390,7 @@ void send(u8 k)
    	LCD(font[k-32][j]);		
 }
 
-void send2(u8 k,u8 x,u8 y)		 //写大字母
+void send2_写大字母(u8 k,u8 x,u8 y)		 //写大字母
 {
 	u8 i;
 	k-=32;
@@ -1409,7 +1409,7 @@ void send2(u8 k,u8 x,u8 y)		 //写大字母
 /**
 写大字母，反显
 */
-void send2_rev(u8 k,u8 x, u8 y)
+void send2_rev_写大字母_反显(u8 k,u8 x, u8 y)
 {
 	u8 i;
 	k-=32;
@@ -1459,7 +1459,7 @@ void send2_hex(u8 k,u8 x,u8 y)
 	
 }
 
-void send3(u8 *p,u8 x,u8 y)		 //写汉字
+void send3_写汉字(u8 *p,u8 x,u8 y)		 //写汉字
 {
 	u8 i;
 	location(x,y);
@@ -1480,7 +1480,7 @@ void write_显示汉字(u8 x,u8 y)			//显示汉字
 	d=word_hzk序号数组;
 	while(*d)
 	{		
-		send3(hzk[*d],x,y);
+		send3_写汉字(hzk[*d],x,y);
 		d++;x+=12;
 	}
 
@@ -1490,7 +1490,7 @@ void write0_显示汉字串(u8 *d,u8 x,u8 y)			//显示汉字串
 
 	while(*d)
 	{		
-		send3(hzk[*d],x,y);
+		send3_写汉字(hzk[*d],x,y);
 		d++;x+=12;
 	}
 
@@ -1502,14 +1502,14 @@ void write2(u8 x,u8 y)			//显示大字母
 	d=word_hzk序号数组;
 	while(*d)
 	{		
-		send2(*d,x,y);
+		send2_写大字母(*d,x,y);
 		d++;x+=8;
 	}
 
 }*/
 
 
-void photo(u8 *p,u8 x,u8 y,u8 length,u8 width)//显示指定大小的图片
+void photo_显示指定大小的图片(u8 *p,u8 x,u8 y,u8 length,u8 width)//显示指定大小的图片
 {
   u8 i,j;
   for(i=0;i<width;i++)
@@ -1520,7 +1520,7 @@ void photo(u8 *p,u8 x,u8 y,u8 length,u8 width)//显示指定大小的图片
   }  	
 }
 
-void display_trim1(u8 v,u8 base)//显示竖微调
+void display_trim1_显示竖微调(u8 v,u8 base)//显示竖微调
 {
 	u8 i;unsigned long L1,L2=0,L3,L4=0;
 	L1=0x03e00000;v/=5;
@@ -1560,7 +1560,7 @@ void display_trim1(u8 v,u8 base)//显示竖微调
 	location(base,0);LCD(L2);	 LCD(L4);	 LCD(0xf8);LCD(L4);    LCD(L2);	   	 
 }
 
-void display_trim2(u8 v)//显示横微调
+void display_trim2_显示横微调(u8 v)//显示横微调
 {
 	u8 i;char m;
 	v=v/5+2;		
@@ -1583,7 +1583,7 @@ void display_trim2(u8 v)//显示横微调
 	}
 }
 
-void display_throttle(u8 x)//显示油门
+void display_throttle_显示油门(u8 x)//显示油门
 {
 	u8 i;long L=0;
 	x=x/8;
@@ -1599,7 +1599,7 @@ void display_throttle(u8 x)//显示油门
 	location(9,3);LCD(L);LCD(L);
 }
 
-void warning(u8 x,u8 y,u8 W)//警告
+void warning_显示警告图标(u8 x,u8 y,u8 W)//警告
 {
 	location(x,y);
 	if(W)
@@ -1619,24 +1619,24 @@ void write_num100(int num,u8 x,u8 y,u8 c)//写1000内数字，c为类型选择
 {
 	if(c=='-'||c=='/'||c=='#')
 	{
-		if(num>0)send2('+',x-8,y);
-		else if(num<0)num=-num,send2('-',x-8,y);
-		else send2(' ',x-8,y);
+		if(num>0)send2_写大字母('+',x-8,y);
+		else if(num<0)num=-num,send2_写大字母('-',x-8,y);
+		else send2_写大字母(' ',x-8,y);
 	}
-	if(num>99)send2(num/100+48,x,y);
-	else send2(' ',x,y);
-	send2(num%100/10+48,x+8,y);
+	if(num>99)send2_写大字母(num/100+48,x,y);
+	else send2_写大字母(' ',x,y);
+	send2_写大字母(num%100/10+48,x+8,y);
 	if(c=='.'||c=='#')
 	{
-		send2('.',x+16,y);
-		send2(num%10+48,x+24,y);
-		if(c=='#')send2('%',x+32,y);
+		send2_写大字母('.',x+16,y);
+		send2_写大字母(num%10+48,x+24,y);
+		if(c=='#')send2_写大字母('%',x+32,y);
 		
 	}
 	else
 	{
-		send2(num%10+48,x+16,y);
-		if(c=='%'||c=='/')send2('%',x+24,y);
+		send2_写大字母(num%10+48,x+16,y);
+		if(c=='%'||c=='/')send2_写大字母('%',x+24,y);
 	}
 	
 }
@@ -1674,7 +1674,7 @@ void write_num1000(int num,u8 c)//写10000内数字
 	
 }
 
-u8 move_cursor(u8 line,u8 line_max)//光标移动
+u8 move_cursor_光标移动(u8 line,u8 line_max)//光标移动
 {
 	if(last_line!=line)LCD_clean(0,0,128,8);
 	last_line=line;
@@ -1698,13 +1698,13 @@ u8 move_cursor(u8 line,u8 line_max)//光标移动
 /*********+军刀破+******************
 显示当前模型名称，当模型未有命名时，显示第几号模型，即当时系统所有的模型号数
 */
-void displayModel()
+void displayModel_显示当前模型名称()
 {
 			u8 i=0;
 		__bit have=0;
 		for(i=0;i<7;i++)
 		{
-			send2(Model_name[i]+32,70+i*8,3);
+			send2_写大字母(Model_name[i]+32,70+i*8,3);
 			if(Model_name[i]>0 && Model_name[i]<=90) have=1;
 		}
 	//没有命名的模型显示序号 
@@ -1713,85 +1713,85 @@ void displayModel()
 		int idx=70;
 		if(Model_current<10)
 		{
-		send3(hzk[Model_current+81],idx,3);
+		send3_写汉字(hzk[Model_current+81],idx,3);
 		idx+=12;
-		send3(hzk[68],idx,3);  //号
+		send3_写汉字(hzk[68],idx,3);  //号
 		idx+=12;
-		send3(hzk[8],idx,3);   //模
+		send3_写汉字(hzk[8],idx,3);   //模
 		idx+=12;
-		send3(hzk[159],idx,3); //型
+		send3_写汉字(hzk[159],idx,3); //型
 		}
 		else if(Model_current<19)
 		{
 			idx=64;
-			send3(hzk[90],idx,3);
+			send3_写汉字(hzk[90],idx,3);
 			idx+=12;
-			send3(hzk[Model_current+71],idx,3);  
+			send3_写汉字(hzk[Model_current+71],idx,3);  
 			idx+=12;
-			send3(hzk[68],idx,3);  //号
+			send3_写汉字(hzk[68],idx,3);  //号
 			idx+=12;
-			send3(hzk[8],idx,3);   //模
+			send3_写汉字(hzk[8],idx,3);   //模
 			idx+=12;
-			send3(hzk[159],idx,3); //型
+			send3_写汉字(hzk[159],idx,3); //型
 		}
 		else
 		{
 			idx=64;
-			send3(hzk[(Model_current+1)/10+80],idx,3);
+			send3_写汉字(hzk[(Model_current+1)/10+80],idx,3);
 			idx+=12;
-			send3(hzk[90],idx,3);  
+			send3_写汉字(hzk[90],idx,3);  
 			idx+=12;
-			send3(hzk[68],idx,3);  //号
+			send3_写汉字(hzk[68],idx,3);  //号
 			idx+=12;
-			send3(hzk[8],idx,3);   //模
+			send3_写汉字(hzk[8],idx,3);   //模
 			idx+=12;
-			send3(hzk[159],idx,3); //型
+			send3_写汉字(hzk[159],idx,3); //型
 		}
 	}
 }
 /*******+军刀破+******************/
 	
-void display_menu(u8 line,u8 line_max)//显示菜单
+void display_menu_显示菜单(u8 line,u8 line_max)//显示菜单
 {
 	
-	if(line_max<4)send3(hzk[1],0,line+line);
+	if(line_max<4)send3_写汉字(hzk[1],0,line+line);
 	else 
 	{
-		if(line<3)send3(hzk[1],0,line+line);
-		else if(line==line_max)send3(hzk[1],0,6);
-		else send3(hzk[1],0,4);
+		if(line<3)send3_写汉字(hzk[1],0,line+line);
+		else if(line==line_max)send3_写汉字(hzk[1],0,6);
+		else send3_写汉字(hzk[1],0,4);
 	}
 	
 	if(line<3)
 	{
 		if(line_max==2)
 		{
-			write0_显示汉字串(WW[0],12,0);
-			write0_显示汉字串(WW[1],12,2);
-			write0_显示汉字串(WW[2],12,4);
+			write0_显示汉字串(WW_菜单字符串[0],12,0);
+			write0_显示汉字串(WW_菜单字符串[1],12,2);
+			write0_显示汉字串(WW_菜单字符串[2],12,4);
 		}
 		else
 		{
-			write0_显示汉字串(WW[0],12,0);
-			write0_显示汉字串(WW[1],12,2);
-			write0_显示汉字串(WW[2],12,4);
-			write0_显示汉字串(WW[3],12,6);	
+			write0_显示汉字串(WW_菜单字符串[0],12,0);
+			write0_显示汉字串(WW_菜单字符串[1],12,2);
+			write0_显示汉字串(WW_菜单字符串[2],12,4);
+			write0_显示汉字串(WW_菜单字符串[3],12,6);	
 		}
 		
 	}
 	else if(line==line_max)
 	{
-		write0_显示汉字串(WW[line-3],12,0);
-		write0_显示汉字串(WW[line-2],12,2);
-		write0_显示汉字串(WW[line-1],12,4);
-		write0_显示汉字串(WW[line],12,6);
+		write0_显示汉字串(WW_菜单字符串[line-3],12,0);
+		write0_显示汉字串(WW_菜单字符串[line-2],12,2);
+		write0_显示汉字串(WW_菜单字符串[line-1],12,4);
+		write0_显示汉字串(WW_菜单字符串[line],12,6);
 	}
 	else if(line<line_max)
 	{
-		write0_显示汉字串(WW[line-2],12,0);
-		write0_显示汉字串(WW[line-1],12,2);
-		write0_显示汉字串(WW[line],12,4);
-		write0_显示汉字串(WW[line+1],12,6);
+		write0_显示汉字串(WW_菜单字符串[line-2],12,0);
+		write0_显示汉字串(WW_菜单字符串[line-1],12,2);
+		write0_显示汉字串(WW_菜单字符串[line],12,4);
+		write0_显示汉字串(WW_菜单字符串[line+1],12,6);
 	}
 	
 	
@@ -1810,63 +1810,63 @@ void display_menu(u8 line,u8 line_max)//显示菜单
 		
 }
 
-void display_mapping(u8 mode,u8 x,u8 y)//显示映射对象
+void display_mapping_显示映射对象(u8 mode,u8 x,u8 y)//显示映射对象
 {
 	switch(mode)
 	{
-		case 0:send3(hzk[96],x,y);send3(hzk[97],x+12,y);send2('1',x+24,y);break;
-		case 1:send3(hzk[96],x,y);send3(hzk[97],x+12,y);send2('2',x+24,y);break;
-		case 2:send3(hzk[96],x,y);send3(hzk[97],x+12,y);send2('3',x+24,y);break;
-		case 3:send3(hzk[96],x,y);send3(hzk[97],x+12,y);send2('4',x+24,y);break;
-		case 4:send3(hzk[100],x,y);send3(hzk[101],x+12,y);send2('1',x+24,y);break;
-		case 5:send3(hzk[100],x,y);send3(hzk[101],x+12,y);send2('2',x+24,y);break;
-		case 6:send3(hzk[100],x,y);send3(hzk[101],x+12,y);send2('3',x+24,y);break;
-		case 7:send3(hzk[58],x,y);send3(hzk[59],x+12,y);send2('A',x+24,y);break;
-		case 8:send3(hzk[58],x,y);send3(hzk[59],x+12,y);send2('B',x+24,y);break;
-		case 9:send3(hzk[58],x,y);send3(hzk[59],x+12,y);send2('C',x+24,y);break;
-		case 10:send3(hzk[58],x,y);send3(hzk[59],x+12,y);send2('D',x+24,y);break;
-		case 11:send3(hzk[58],x,y);send3(hzk[59],x+12,y);send2('E',x+24,y);break;
+		case 0:send3_写汉字(hzk[96],x,y);send3_写汉字(hzk[97],x+12,y);send2_写大字母('1',x+24,y);break;
+		case 1:send3_写汉字(hzk[96],x,y);send3_写汉字(hzk[97],x+12,y);send2_写大字母('2',x+24,y);break;
+		case 2:send3_写汉字(hzk[96],x,y);send3_写汉字(hzk[97],x+12,y);send2_写大字母('3',x+24,y);break;
+		case 3:send3_写汉字(hzk[96],x,y);send3_写汉字(hzk[97],x+12,y);send2_写大字母('4',x+24,y);break;
+		case 4:send3_写汉字(hzk[100],x,y);send3_写汉字(hzk[101],x+12,y);send2_写大字母('1',x+24,y);break;
+		case 5:send3_写汉字(hzk[100],x,y);send3_写汉字(hzk[101],x+12,y);send2_写大字母('2',x+24,y);break;
+		case 6:send3_写汉字(hzk[100],x,y);send3_写汉字(hzk[101],x+12,y);send2_写大字母('3',x+24,y);break;
+		case 7:send3_写汉字(hzk[58],x,y);send3_写汉字(hzk[59],x+12,y);send2_写大字母('A',x+24,y);break;
+		case 8:send3_写汉字(hzk[58],x,y);send3_写汉字(hzk[59],x+12,y);send2_写大字母('B',x+24,y);break;
+		case 9:send3_写汉字(hzk[58],x,y);send3_写汉字(hzk[59],x+12,y);send2_写大字母('C',x+24,y);break;
+		case 10:send3_写汉字(hzk[58],x,y);send3_写汉字(hzk[59],x+12,y);send2_写大字母('D',x+24,y);break;
+		case 11:send3_写汉字(hzk[58],x,y);send3_写汉字(hzk[59],x+12,y);send2_写大字母('E',x+24,y);break;
 		
-		case 12:send3(hzk[104],x,y);send3(hzk[105],x+12,y);send2('1',x+24,y);break;
-/*		case 14:send3(hzk[104],x,y);send3(hzk[105],x+12,y);send2('2',x+24,y);break;*/
-		case 13:send2('P',x,y);send2('P',x+8,y);send2('M',x+16,y);send2('1',x+24,y);break;
-		case 14:send2('P',x,y);send2('P',x+8,y);send2('M',x+16,y);send2('2',x+24,y);break;
-		case 15:send2('P',x,y);send2('P',x+8,y);send2('M',x+16,y);send2('3',x+24,y);break;
-		case 16:send2('P',x,y);send2('P',x+8,y);send2('M',x+16,y);send2('4',x+24,y);break;
-		case 17:send2('P',x,y);send2('P',x+8,y);send2('M',x+16,y);send2('5',x+24,y);break;
-		case 18:send2('P',x,y);send2('P',x+8,y);send2('M',x+16,y);send2('6',x+24,y);break;
-		case 19:send2('P',x,y);send2('P',x+8,y);send2('M',x+16,y);send2('7',x+24,y);break;
-		case 20:send2('P',x,y);send2('P',x+8,y);send2('M',x+16,y);send2('8',x+24,y);break;
+		case 12:send3_写汉字(hzk[104],x,y);send3_写汉字(hzk[105],x+12,y);send2_写大字母('1',x+24,y);break;
+/*		case 14:send3_写汉字(hzk[104],x,y);send3_写汉字(hzk[105],x+12,y);send2_写大字母('2',x+24,y);break;*/
+		case 13:send2_写大字母('P',x,y);send2_写大字母('P',x+8,y);send2_写大字母('M',x+16,y);send2_写大字母('1',x+24,y);break;
+		case 14:send2_写大字母('P',x,y);send2_写大字母('P',x+8,y);send2_写大字母('M',x+16,y);send2_写大字母('2',x+24,y);break;
+		case 15:send2_写大字母('P',x,y);send2_写大字母('P',x+8,y);send2_写大字母('M',x+16,y);send2_写大字母('3',x+24,y);break;
+		case 16:send2_写大字母('P',x,y);send2_写大字母('P',x+8,y);send2_写大字母('M',x+16,y);send2_写大字母('4',x+24,y);break;
+		case 17:send2_写大字母('P',x,y);send2_写大字母('P',x+8,y);send2_写大字母('M',x+16,y);send2_写大字母('5',x+24,y);break;
+		case 18:send2_写大字母('P',x,y);send2_写大字母('P',x+8,y);send2_写大字母('M',x+16,y);send2_写大字母('6',x+24,y);break;
+		case 19:send2_写大字母('P',x,y);send2_写大字母('P',x+8,y);send2_写大字母('M',x+16,y);send2_写大字母('7',x+24,y);break;
+		case 20:send2_写大字母('P',x,y);send2_写大字母('P',x+8,y);send2_写大字母('M',x+16,y);send2_写大字母('8',x+24,y);break;
 	}
 	
 }
 
-void display_receiver_mode(u8 mode,u8 x,u8 y)//显示接收机模式
+void display_receiver_mode_显示接收机模式(u8 mode,u8 x,u8 y)//显示接收机模式
 {
 	switch(mode)
 	{
-		case 0:send3(hzk[36],x,y);send3(hzk[37],x+12,y);break;
-		case 1:send3(hzk[175],x,y);send3(hzk[180],x+12,y);break;
-		case 2:send2('P',x,y);send2('W',x+8,y);send2('M',x+16,y);break;
-		case 3:send2('P',x,y);send2('P',x+8,y);send2('M',x+16,y);break;
-		case 4:send2('S',x,y);send2('.',x+8,y);send2('B',x+16,y);break;
+		case 0:send3_写汉字(hzk[36],x,y);send3_写汉字(hzk[37],x+12,y);break;
+		case 1:send3_写汉字(hzk[175],x,y);send3_写汉字(hzk[180],x+12,y);break;
+		case 2:send2_写大字母('P',x,y);send2_写大字母('W',x+8,y);send2_写大字母('M',x+16,y);break;
+		case 3:send2_写大字母('P',x,y);send2_写大字母('P',x+8,y);send2_写大字母('M',x+16,y);break;
+		case 4:send2_写大字母('S',x,y);send2_写大字母('.',x+8,y);send2_写大字母('B',x+16,y);break;
 	}	
 }
 
-void display_switch(u8 sw,u8 x,u8 y)//显示开关
+void display_switch_显示开关(u8 sw,u8 x,u8 y)//显示开关
 {
 	switch(sw)
 	{
-		case 0:send2(' ',x,y);send2('-',x+4,y);send3(hzk[10],x+12,y);send2('-',x+24,y);break;
-		case 1:send3(hzk[58],x,y);send3(hzk[59],x+12,y);send2('A',x+24,y);break;
-		case 2:send3(hzk[58],x,y);send3(hzk[59],x+12,y);send2('B',x+24,y);break;
-		case 3:send3(hzk[58],x,y);send3(hzk[59],x+12,y);send2('C',x+24,y);break;
-		case 4:send3(hzk[58],x,y);send3(hzk[59],x+12,y);send2('D',x+24,y);break;
-		case 5:send3(hzk[58],x,y);send3(hzk[59],x+12,y);send2('E',x+24,y);break;
+		case 0:send2_写大字母(' ',x,y);send2_写大字母('-',x+4,y);send3_写汉字(hzk[10],x+12,y)/*“无”*/;send2_写大字母('-',x+24,y);break;
+		case 1:send3_写汉字(hzk[58],x,y);send3_写汉字(hzk[59],x+12,y);send2_写大字母('A',x+24,y);break;//开关A
+		case 2:send3_写汉字(hzk[58],x,y);send3_写汉字(hzk[59],x+12,y);send2_写大字母('B',x+24,y);break;//开关B
+		case 3:send3_写汉字(hzk[58],x,y);send3_写汉字(hzk[59],x+12,y);send2_写大字母('C',x+24,y);break;//开关C
+		case 4:send3_写汉字(hzk[58],x,y);send3_写汉字(hzk[59],x+12,y);send2_写大字母('D',x+24,y);break;//开关D
+		case 5:send3_写汉字(hzk[58],x,y);send3_写汉字(hzk[59],x+12,y);send2_写大字母('E',x+24,y);break;//开关E
 	}
 }
 
-void display_bar(int *p)//显示条形图
+void display_bar_显示条形图(int *p)//显示条形图
 {
 	u8 i,j;
 	for(i=0;i<8;i++)
@@ -1967,7 +1967,7 @@ void point(u8 x,u8 z,u8 line)			  //画点
 	location(75+x,7);LCD(d0);
 }
 
-void display_curve() //显示指数曲线
+void display_curve_显示指数曲线() //显示指数曲线
 {
 	u8 i;
 		
@@ -1985,7 +1985,7 @@ void display_curve() //显示指数曲线
 
 
 
-void display_curve2() //显示折线曲线
+void display_curve2_显示折线曲线() //显示折线曲线
 {
 	u8 i,n;
 	
@@ -2034,7 +2034,7 @@ void Xdata_check(int *p)//坑爹的STC Xdata，只能用指针来调用，否则
 	
 }
 
-u8 rounding(float x)//四舍五入
+u8 rounding_四舍五入(float x)//四舍五入
 {
 	u8 y;
 	y=x;
@@ -2042,7 +2042,7 @@ u8 rounding(float x)//四舍五入
 	return y;
 }
 
-void get_curve(float index)//计算指数曲线
+void get_curve_计算指数曲线(float index)//计算指数曲线
 {
 	u8 i;
 	
@@ -2054,7 +2054,7 @@ void get_curve(float index)//计算指数曲线
 		{
 
 			
-			curve_buff[i-1]=rounding(powf(i*0.04,index)*25);
+			curve_buff[i-1]=rounding_四舍五入(powf(i*0.04,index)*25);
 
 		}
 	}
@@ -2065,7 +2065,7 @@ void get_curve(float index)//计算指数曲线
 		{
 
 			
-			curve_buff[i-1]=rounding(25-powf(1-i*0.04,index)*25);
+			curve_buff[i-1]=rounding_四舍五入(25-powf(1-i*0.04,index)*25);
 
 		}
 	}
@@ -2073,7 +2073,7 @@ void get_curve(float index)//计算指数曲线
 	
 }
 
-void get_curve2()//油门曲线数据
+void get_curve2_油门曲线数据()//油门曲线数据
 {
 	
 	int i;
@@ -2120,7 +2120,7 @@ void get_curve2()//油门曲线数据
 	}
 }
 
-void function_size(u8 num,u8 mode)//舵量函数
+void function_size_舵量函数(u8 num,u8 mode)//舵量函数
 {
 	u8 r0,r1;
 	if(mode)
@@ -2145,7 +2145,7 @@ void function_size(u8 num,u8 mode)//舵量函数
 	
 }
 
-void function_inverted(u8 num)//反转函数
+void function_inverted_反转函数(u8 num)//反转函数
 {
 	
 	if(CH_inverted[num]==1)operation[num]=-operation[num]+CH_middle[num];
@@ -2153,7 +2153,7 @@ void function_inverted(u8 num)//反转函数
 }
 
 
-void function_mix(u8 same,u8 contrary)//混控函数 
+void function_mix_混控函数(u8 same,u8 contrary)//混控函数 
 {
 	int y1,y2;
 	
@@ -2165,7 +2165,7 @@ void function_mix(u8 same,u8 contrary)//混控函数
 			
 }
 
-void function_curve(u8 num)//指数曲线
+void function_curve_指数曲线(u8 num)//指数曲线
 {
 	float Index;int temp;
 	
@@ -2204,7 +2204,7 @@ void function_curve(u8 num)//指数曲线
 	
 }
 
-void function_curve2(u8 num)//多点曲线
+void function_curve2_多点曲线(u8 num)//多点曲线
 {
 	u16 temp;
 	int b[7];
@@ -2265,7 +2265,7 @@ void function_curve2(u8 num)//多点曲线
 
 
 
-void function_mapping(u8 num)//输入映射
+void function_mapping_输入映射(u8 num)//输入映射
 {
 
 	switch(IN_mapping[num])
@@ -2307,7 +2307,7 @@ void function_mapping(u8 num)//输入映射
 	}
 }
 
-void change_trim(u8 num,u8 direction)//按键微调
+void change_trim_按键微调(u8 num,u8 direction)//按键微调
 {
 	if(direction)
 	{
@@ -2373,7 +2373,7 @@ void change_trim(u8 num,u8 direction)//按键微调
 
 
 
-int CH_calib(int x,u8 offset)				//修正摇杆行程
+int CH_calib_修正摇杆行程(int x,u8 offset)				//修正摇杆行程
 {
 
 	x=512+(x-512)*51/offset;
@@ -2384,7 +2384,7 @@ int CH_calib(int x,u8 offset)				//修正摇杆行程
 }
 
 
-void function_filter(u8 num)  //ADC滤波
+void function_filter_ADC滤波(u8 num)  //ADC滤波
 {
 	if(num==0)
 	{
@@ -2394,7 +2394,7 @@ void function_filter(u8 num)  //ADC滤波
 	else adc[num]=adc_buff[num];
 }
 
-u8 Switch_Check(u8 num)//获取开关状态
+u8 Switch_Check_获取开关状态(u8 num)//获取开关状态
 {
 	switch(num)
 	{
@@ -2499,13 +2499,13 @@ main()
 	{
 		while(1)//设置
 		{
-			word_hzk序号数组[0]=130,word_hzk序号数组[1]=81,word_hzk序号数组[2]=131,word_hzk序号数组[3]=58,word_hzk序号数组[4]=132,word_hzk序号数组[5]=0,write_显示汉字(30,0);
-			word_hzk序号数组[0]=141,word_hzk序号数组[1]=142,word_hzk序号数组[2]=18,word_hzk序号数组[3]=13,word_hzk序号数组[4]=0,write_显示汉字(0,2);
-			word_hzk序号数组[0]=149,word_hzk序号数组[1]=150,word_hzk序号数组[2]=137,word_hzk序号数组[3]=109,word_hzk序号数组[4]=0,write_显示汉字(64,2);
+			word_hzk序号数组[0]=130,word_hzk序号数组[1]=81,word_hzk序号数组[2]=131,word_hzk序号数组[3]=58,word_hzk序号数组[4]=132,word_hzk序号数组[5]=0,write_显示汉字(30,0);//第一次开机
+			word_hzk序号数组[0]=141,word_hzk序号数组[1]=142,word_hzk序号数组[2]=18,word_hzk序号数组[3]=13,word_hzk序号数组[4]=0,write_显示汉字(0,2);//油门设置
+			word_hzk序号数组[0]=149,word_hzk序号数组[1]=150,word_hzk序号数组[2]=137,word_hzk序号数组[3]=109,word_hzk序号数组[4]=0,write_显示汉字(64,2);//菜单确认
 			if(adc_buff[4]>510)
 			{
-				send3(hzk[1],0,4);send2('1',12,4);send2('2',20,4);send2('L',28,4);send2('E',36,4);
-				send3(hzk[2],0,6);send2('1',12,6);send2('2',20,6);send2('C',28,6);send2(' ',36,6);
+				send3_写汉字(hzk[1],0,4);send2_写大字母('1',12,4);send2_写大字母('2',20,4);send2_写大字母('L',28,4);send2_写大字母('E',36,4);
+				send3_写汉字(hzk[2],0,6);send2_写大字母('1',12,6);send2_写大字母('2',20,6);send2_写大字母('C',28,6);send2_写大字母(' ',36,6);
 				if(KEY_P47_菜单键==0)
 				{
 					Battery_1s=1;
@@ -2515,8 +2515,8 @@ main()
 			}
 			else 
 			{
-				send3(hzk[2],0,4);send2('1',12,4);send2('2',20,4);send2('L',28,4);send2('E',36,4);
-				send3(hzk[1],0,6);send2('1',12,6);send2('2',20,6);send2('C',28,6);send2(' ',36,6);
+				send3_写汉字(hzk[2],0,4);send2_写大字母('1',12,4);send2_写大字母('2',20,4);send2_写大字母('L',28,4);send2_写大字母('E',36,4);
+				send3_写汉字(hzk[1],0,6);send2_写大字母('1',12,6);send2_写大字母('2',20,6);send2_写大字母('C',28,6);send2_写大字母(' ',36,6);
 				if(KEY_P47_菜单键==0)
 				{
 					Battery_1s=0;
@@ -2538,24 +2538,24 @@ main()
 		
 		word_hzk序号数组[0]=157,word_hzk序号数组[1]=132,word_hzk序号数组[2]=12,word_hzk序号数组[3]=13,word_hzk序号数组[4]=52,word_hzk序号数组[5]=53;word_hzk序号数组[6]=0,write_显示汉字(0,4);
 		delay_ms(500);
-		send3(hzk[1],0,6);delay_ms(200);
-		send3(hzk[1],12,6);delay_ms(200);
-		send3(hzk[1],24,6);delay_ms(200);
-		send3(hzk[1],36,6);delay_ms(200);
-		send3(hzk[1],48,6);delay_ms(200);
-		send3(hzk[1],60,6);delay_ms(200);
+		send3_写汉字(hzk[1],0,6);delay_ms(200);
+		send3_写汉字(hzk[1],12,6);delay_ms(200);
+		send3_写汉字(hzk[1],24,6);delay_ms(200);
+		send3_写汉字(hzk[1],36,6);delay_ms(200);
+		send3_写汉字(hzk[1],48,6);delay_ms(200);
+		send3_写汉字(hzk[1],60,6);delay_ms(200);
 
 		
 	}
 	else if(Throttle_check)//开机安全油门
 	{
 		delay_ms(100);
-		CH_value[2]=CH_calib(adc_buff[4],CH3_offset);
+		CH_value[2]=CH_calib_修正摇杆行程(adc_buff[4],CH3_offset);
 		if(CH_value[2]>80)	
 			{
 				while(1)
 				{
-					if(boot_screen==0)photo(bmp5,40,2,50,4);
+					if(boot_screen==0)photo_显示指定大小的图片(bmp5,40,2,50,4);
 					else
 					{
 						word_hzk序号数组[0]=141,word_hzk序号数组[1]=142,word_hzk序号数组[2]=185,word_hzk序号数组[3]=186,word_hzk序号数组[4]=0,write_显示汉字(38,4);
@@ -2566,7 +2566,7 @@ main()
 			
 					delay_ms(100);
 					if(KEY_P47_菜单键==0)break;
-					CH_value[2]=CH_calib(adc_buff[4],CH3_offset);
+					CH_value[2]=CH_calib_修正摇杆行程(adc_buff[4],CH3_offset);
 					if(CH_value[2]<80)break;
 				}  
 			}	
@@ -2580,7 +2580,7 @@ main()
 	NRF_init();
 	if(NRF_error)
 	{
-		photo(screen2,0,0,128,8);
+		photo_显示指定大小的图片(screen2,0,0,128,8);
 		if(NRF_error&0x01)location(39,5),send(133),location(106,5),send(133);
 		if(NRF_error&0x02)location(83,5),send(133);
 		if(NRF_error&0x04)location(29,5),send(133);
@@ -2593,11 +2593,11 @@ main()
 
 		if(boot_screen==0)//开机画面
 		{
-			photo(screen3,0,0,128,8);
+			photo_显示指定大小的图片(screen3,0,0,128,8);
 			if(i<100)
 			{
 				delay_ms(500);
-				photo(bmp4,80,4,46,4);
+				photo_显示指定大小的图片(bmp4,80,4,46,4);
 				location(107,6);LCD(0);LCD(0x20);LCD(0xf0);LCD(0);
 				location(107,7);LCD(0xc0);LCD(0xc8);LCD(0xcf);LCD(0xc8);
 				delay_ms(500);
@@ -2605,7 +2605,7 @@ main()
 			else if(i<200)
 			{
 				delay_ms(1000);
-				photo(bmp4,80,4,46,4);
+				photo_显示指定大小的图片(bmp4,80,4,46,4);
 				location(107,6);LCD(0x20);LCD(0x10);LCD(0x10);LCD(0xe0);
 				location(107,7);LCD(0xcc);LCD(0xca);LCD(0xc9);LCD(0xc8);
 				delay_ms(1000);
@@ -2613,13 +2613,13 @@ main()
 			else 
 			{
 				delay_ms(2000);
-				photo(bmp4,80,4,46,4);
+				photo_显示指定大小的图片(bmp4,80,4,46,4);
 				delay_ms(1500);
 			}	
 		}
 		else if(boot_screen==1)
 		{
-			photo(screen4,0,0,128,8);
+			photo_显示指定大小的图片(screen4,0,0,128,8);
 			location(37,7);
 			for(i=0;i<50;i++)
 			{
@@ -2851,7 +2851,7 @@ main()
 				if(menu)decrease=1;
 				else 
 				{
-					change_trim(3,0);
+					change_trim_按键微调(3,0);
 				}
 			}
 			if(key2)
@@ -2860,7 +2860,7 @@ main()
 				if(menu)increase=1;
 				else 
 				{
-					change_trim(3,1);
+					change_trim_按键微调(3,1);
 				}
 			}
 			if(key3)
@@ -2870,7 +2870,7 @@ main()
 					left=1;
 				else 
 				{
-					change_trim(0,0);
+					change_trim_按键微调(0,0);
 					
 				}
 			}
@@ -2880,7 +2880,7 @@ main()
 				if(menu)right=1;
 				else 
 				{
-					change_trim(0,1);
+					change_trim_按键微调(0,1);
 					
 				}
 			}
@@ -2890,7 +2890,7 @@ main()
 				if(menu)down=1;
 				else 
 				{
-					change_trim(1,0);
+					change_trim_按键微调(1,0);
 				}
 			}
 			if(key6)
@@ -2899,7 +2899,7 @@ main()
 				if(menu)up=1;
 				else 
 				{
-					change_trim(1,1);
+					change_trim_按键微调(1,1);
 				}
 			}
 
@@ -2933,14 +2933,14 @@ main()
 							
 							if(menu_3==1)//新舵量
 							{
-								line_3=move_cursor(line_3,3);
+								line_3=move_cursor_光标移动(line_3,3);
 								
-								WW[0][0]=94,WW[0][1]=95,WW[0][2]=81,WW[0][3]=0;//运算一
-								WW[1][0]=94,WW[1][1]=95,WW[1][2]=82,WW[1][3]=0;//运算二
-								WW[2][0]=94,WW[2][1]=95,WW[2][2]=83,WW[2][3]=0;//运算三
-								WW[3][0]=94,WW[3][1]=95,WW[3][2]=84,WW[3][3]=0;//运算四
+								WW_菜单字符串[0][0]=94,WW_菜单字符串[0][1]=95,WW_菜单字符串[0][2]=81,WW_菜单字符串[0][3]=0;//运算一
+								WW_菜单字符串[1][0]=94,WW_菜单字符串[1][1]=95,WW_菜单字符串[1][2]=82,WW_菜单字符串[1][3]=0;//运算二
+								WW_菜单字符串[2][0]=94,WW_菜单字符串[2][1]=95,WW_菜单字符串[2][2]=83,WW_菜单字符串[2][3]=0;//运算三
+								WW_菜单字符串[3][0]=94,WW_菜单字符串[3][1]=95,WW_菜单字符串[3][2]=84,WW_菜单字符串[3][3]=0;//运算四
 								
-								display_menu(line_3,3);
+								display_menu_显示菜单(line_3,3);
 								
 								if(increase)
 								{
@@ -2969,32 +2969,32 @@ main()
 								
 								if(ratio_mode)
 								{
-									send2('+',62,0);
-									send2('+',62,2);
-									send2('+',62,4);
-									send2('+',62,6);
+									send2_写大字母('+',62,0);
+									send2_写大字母('+',62,2);
+									send2_写大字母('+',62,4);
+									send2_写大字母('+',62,6);
 								}
 								else
 								{
-									send2('-',62,0);
-									send2('-',62,2);
-									send2('-',62,4);
-									send2('-',62,6);
+									send2_写大字母('-',62,0);
+									send2_写大字母('-',62,2);
+									send2_写大字母('-',62,4);
+									send2_写大字母('-',62,6);
 								}
 							
 							}
 							else if(menu_3==2)//组合舵量
 							{
-								line_3=move_cursor(line_3,5);
+								line_3=move_cursor_光标移动(line_3,5);
 								
-								WW[0][0]=8,WW[0][1]=9,WW[0][2]=81,WW[0][3]=0;//模式一
-								WW[1][0]=8,WW[1][1]=9,WW[1][2]=82,WW[1][3]=0;//模式二
-								WW[2][0]=8,WW[2][1]=9,WW[2][2]=83,WW[2][3]=0;//模式三
-								WW[3][0]=8,WW[3][1]=9,WW[3][2]=84,WW[3][3]=0;//模式四
-								WW[4][0]=8,WW[4][1]=9,WW[4][2]=85,WW[4][3]=0;//模式五
-								WW[5][0]=8,WW[5][1]=9,WW[5][2]=86,WW[5][3]=0;//模式六
+								WW_菜单字符串[0][0]=8,WW_菜单字符串[0][1]=9,WW_菜单字符串[0][2]=81,WW_菜单字符串[0][3]=0;//模式一
+								WW_菜单字符串[1][0]=8,WW_菜单字符串[1][1]=9,WW_菜单字符串[1][2]=82,WW_菜单字符串[1][3]=0;//模式二
+								WW_菜单字符串[2][0]=8,WW_菜单字符串[2][1]=9,WW_菜单字符串[2][2]=83,WW_菜单字符串[2][3]=0;//模式三
+								WW_菜单字符串[3][0]=8,WW_菜单字符串[3][1]=9,WW_菜单字符串[3][2]=84,WW_菜单字符串[3][3]=0;//模式四
+								WW_菜单字符串[4][0]=8,WW_菜单字符串[4][1]=9,WW_菜单字符串[4][2]=85,WW_菜单字符串[4][3]=0;//模式五
+								WW_菜单字符串[5][0]=8,WW_菜单字符串[5][1]=9,WW_菜单字符串[5][2]=86,WW_菜单字符串[5][3]=0;//模式六
 								
-								display_menu(line_3,5);
+								display_menu_显示菜单(line_3,5);
 								
 								if(increase)
 								{
@@ -3051,50 +3051,50 @@ main()
 						{
 							if(menu_2==1)//正反
 							{
-								line_2=move_cursor(line_2,7);
+								line_2=move_cursor_光标移动(line_2,7);
 								
-								WW[0][0]=94,WW[0][1]=95,WW[0][2]=81,WW[0][3]=0;//运算一
-								WW[1][0]=94,WW[1][1]=95,WW[1][2]=82,WW[1][3]=0;//运算二
-								WW[2][0]=94,WW[2][1]=95,WW[2][2]=83,WW[2][3]=0;//运算三
-								WW[3][0]=94,WW[3][1]=95,WW[3][2]=84,WW[3][3]=0;//运算四
-								WW[4][0]=94,WW[4][1]=95,WW[4][2]=85,WW[4][3]=0;//运算五
-								WW[5][0]=94,WW[5][1]=95,WW[5][2]=86,WW[5][3]=0;//运算六
-								WW[6][0]=94,WW[6][1]=95,WW[6][2]=87,WW[6][3]=0;//运算七
-								WW[7][0]=94,WW[7][1]=95,WW[7][2]=88,WW[7][3]=0;//运算八
-								display_menu(line_2,7);
+								WW_菜单字符串[0][0]=94,WW_菜单字符串[0][1]=95,WW_菜单字符串[0][2]=81,WW_菜单字符串[0][3]=0;//运算一
+								WW_菜单字符串[1][0]=94,WW_菜单字符串[1][1]=95,WW_菜单字符串[1][2]=82,WW_菜单字符串[1][3]=0;//运算二
+								WW_菜单字符串[2][0]=94,WW_菜单字符串[2][1]=95,WW_菜单字符串[2][2]=83,WW_菜单字符串[2][3]=0;//运算三
+								WW_菜单字符串[3][0]=94,WW_菜单字符串[3][1]=95,WW_菜单字符串[3][2]=84,WW_菜单字符串[3][3]=0;//运算四
+								WW_菜单字符串[4][0]=94,WW_菜单字符串[4][1]=95,WW_菜单字符串[4][2]=85,WW_菜单字符串[4][3]=0;//运算五
+								WW_菜单字符串[5][0]=94,WW_菜单字符串[5][1]=95,WW_菜单字符串[5][2]=86,WW_菜单字符串[5][3]=0;//运算六
+								WW_菜单字符串[6][0]=94,WW_菜单字符串[6][1]=95,WW_菜单字符串[6][2]=87,WW_菜单字符串[6][3]=0;//运算七
+								WW_菜单字符串[7][0]=94,WW_菜单字符串[7][1]=95,WW_菜单字符串[7][2]=88,WW_菜单字符串[7][3]=0;//运算八
+								display_menu_显示菜单(line_2,7);
 								
 								if(line_2<3)
 								{
-									if(CH_inverted[0])send3(hzk[35],60,0);
-									else send3(hzk[34],60,0);
-									if(CH_inverted[1])send3(hzk[35],60,2);
-									else send3(hzk[34],60,2);
-									if(CH_inverted[2])send3(hzk[35],60,4);
-									else send3(hzk[34],60,4);
-									if(CH_inverted[3])send3(hzk[35],60,6);
-									else send3(hzk[34],60,6);
+									if(CH_inverted[0])send3_写汉字(hzk[35],60,0);
+									else send3_写汉字(hzk[34],60,0);
+									if(CH_inverted[1])send3_写汉字(hzk[35],60,2);
+									else send3_写汉字(hzk[34],60,2);
+									if(CH_inverted[2])send3_写汉字(hzk[35],60,4);
+									else send3_写汉字(hzk[34],60,4);
+									if(CH_inverted[3])send3_写汉字(hzk[35],60,6);
+									else send3_写汉字(hzk[34],60,6);
 								}
 								else if(line_2==7)
 								{
-									if(CH_inverted[4])send3(hzk[35],60,0);
-									else send3(hzk[34],60,0);
-									if(CH_inverted[5])send3(hzk[35],60,2);
-									else send3(hzk[34],60,2);
-									if(CH_inverted[6])send3(hzk[35],60,4);
-									else send3(hzk[34],60,4);
-									if(CH_inverted[7])send3(hzk[35],60,6);
-									else send3(hzk[34],60,6);
+									if(CH_inverted[4])send3_写汉字(hzk[35],60,0);
+									else send3_写汉字(hzk[34],60,0);
+									if(CH_inverted[5])send3_写汉字(hzk[35],60,2);
+									else send3_写汉字(hzk[34],60,2);
+									if(CH_inverted[6])send3_写汉字(hzk[35],60,4);
+									else send3_写汉字(hzk[34],60,4);
+									if(CH_inverted[7])send3_写汉字(hzk[35],60,6);
+									else send3_写汉字(hzk[34],60,6);
 								}
 								else
 								{
-									if(CH_inverted[line_2-2])send3(hzk[35],60,0);
-									else send3(hzk[34],60,0);
-									if(CH_inverted[line_2-1])send3(hzk[35],60,2);
-									else send3(hzk[34],60,2);
-									if(CH_inverted[line_2])send3(hzk[35],60,4);
-									else send3(hzk[34],60,4);
-									if(CH_inverted[line_2+1])send3(hzk[35],60,6);
-									else send3(hzk[34],60,6);
+									if(CH_inverted[line_2-2])send3_写汉字(hzk[35],60,0);
+									else send3_写汉字(hzk[34],60,0);
+									if(CH_inverted[line_2-1])send3_写汉字(hzk[35],60,2);
+									else send3_写汉字(hzk[34],60,2);
+									if(CH_inverted[line_2])send3_写汉字(hzk[35],60,4);
+									else send3_写汉字(hzk[34],60,4);
+									if(CH_inverted[line_2+1])send3_写汉字(hzk[35],60,6);
+									else send3_写汉字(hzk[34],60,6);
 								}
 									
 									
@@ -3116,17 +3116,17 @@ main()
 							}
 							else if(menu_2==2)//舵量
 							{
-								line_2=move_cursor(line_2,7);
+								line_2=move_cursor_光标移动(line_2,7);
 								
-								WW[0][0]=94,WW[0][1]=95,WW[0][2]=81,WW[0][3]=0;//运算一
-								WW[1][0]=94,WW[1][1]=95,WW[1][2]=82,WW[1][3]=0;//运算二
-								WW[2][0]=94,WW[2][1]=95,WW[2][2]=83,WW[2][3]=0;//运算3
-								WW[3][0]=94,WW[3][1]=95,WW[3][2]=84,WW[3][3]=0;//运算4
-								WW[4][0]=94,WW[4][1]=95,WW[4][2]=85,WW[4][3]=0;//运算5
-								WW[5][0]=94,WW[5][1]=95,WW[5][2]=86,WW[5][3]=0;//运算6
-								WW[6][0]=94,WW[6][1]=95,WW[6][2]=87,WW[6][3]=0;//运算7
-								WW[7][0]=94,WW[7][1]=95,WW[7][2]=88,WW[7][3]=0;//运算8
-								display_menu(line_2,7);
+								WW_菜单字符串[0][0]=94,WW_菜单字符串[0][1]=95,WW_菜单字符串[0][2]=81,WW_菜单字符串[0][3]=0;//运算一
+								WW_菜单字符串[1][0]=94,WW_菜单字符串[1][1]=95,WW_菜单字符串[1][2]=82,WW_菜单字符串[1][3]=0;//运算二
+								WW_菜单字符串[2][0]=94,WW_菜单字符串[2][1]=95,WW_菜单字符串[2][2]=83,WW_菜单字符串[2][3]=0;//运算3
+								WW_菜单字符串[3][0]=94,WW_菜单字符串[3][1]=95,WW_菜单字符串[3][2]=84,WW_菜单字符串[3][3]=0;//运算4
+								WW_菜单字符串[4][0]=94,WW_菜单字符串[4][1]=95,WW_菜单字符串[4][2]=85,WW_菜单字符串[4][3]=0;//运算5
+								WW_菜单字符串[5][0]=94,WW_菜单字符串[5][1]=95,WW_菜单字符串[5][2]=86,WW_菜单字符串[5][3]=0;//运算6
+								WW_菜单字符串[6][0]=94,WW_菜单字符串[6][1]=95,WW_菜单字符串[6][2]=87,WW_菜单字符串[6][3]=0;//运算7
+								WW_菜单字符串[7][0]=94,WW_菜单字符串[7][1]=95,WW_菜单字符串[7][2]=88,WW_菜单字符串[7][3]=0;//运算8
+								display_menu_显示菜单(line_2,7);
 								
 								if(increase)
 								{
@@ -3171,39 +3171,39 @@ main()
 								
 								if(ratio_mode)
 								{
-									send2('+',62,0);
-									send2('+',62,2);
-									send2('+',62,4);
-									send2('+',62,6);
+									send2_写大字母('+',62,0);
+									send2_写大字母('+',62,2);
+									send2_写大字母('+',62,4);
+									send2_写大字母('+',62,6);
 								}
 								else
 								{
-									send2('-',62,0);
-									send2('-',62,2);
-									send2('-',62,4);
-									send2('-',62,6);
+									send2_写大字母('-',62,0);
+									send2_写大字母('-',62,2);
+									send2_写大字母('-',62,4);
+									send2_写大字母('-',62,6);
 								}
 								
 								
 							}
 							else if(menu_2==3)//输入映射
 							{
-								line_2=move_cursor(line_2,7);
+								line_2=move_cursor_光标移动(line_2,7);
 								
-								WW[0][0]=94,WW[0][1]=95,WW[0][2]=81,WW[0][3]=0;//运算一
-								WW[1][0]=94,WW[1][1]=95,WW[1][2]=82,WW[1][3]=0;//运算2
-								WW[2][0]=94,WW[2][1]=95,WW[2][2]=83,WW[2][3]=0;//运算3
-								WW[3][0]=94,WW[3][1]=95,WW[3][2]=84,WW[3][3]=0;//运算4
-								WW[4][0]=94,WW[4][1]=95,WW[4][2]=85,WW[4][3]=0;//运算5
-								WW[5][0]=94,WW[5][1]=95,WW[5][2]=86,WW[5][3]=0;//运算6
-								WW[6][0]=94,WW[6][1]=95,WW[6][2]=87,WW[6][3]=0;//运算7
-								WW[7][0]=94,WW[7][1]=95,WW[7][2]=88,WW[7][3]=0;//运算8
-								display_menu(line_2,7);
+								WW_菜单字符串[0][0]=94,WW_菜单字符串[0][1]=95,WW_菜单字符串[0][2]=81,WW_菜单字符串[0][3]=0;//运算一
+								WW_菜单字符串[1][0]=94,WW_菜单字符串[1][1]=95,WW_菜单字符串[1][2]=82,WW_菜单字符串[1][3]=0;//运算2
+								WW_菜单字符串[2][0]=94,WW_菜单字符串[2][1]=95,WW_菜单字符串[2][2]=83,WW_菜单字符串[2][3]=0;//运算3
+								WW_菜单字符串[3][0]=94,WW_菜单字符串[3][1]=95,WW_菜单字符串[3][2]=84,WW_菜单字符串[3][3]=0;//运算4
+								WW_菜单字符串[4][0]=94,WW_菜单字符串[4][1]=95,WW_菜单字符串[4][2]=85,WW_菜单字符串[4][3]=0;//运算5
+								WW_菜单字符串[5][0]=94,WW_菜单字符串[5][1]=95,WW_菜单字符串[5][2]=86,WW_菜单字符串[5][3]=0;//运算6
+								WW_菜单字符串[6][0]=94,WW_菜单字符串[6][1]=95,WW_菜单字符串[6][2]=87,WW_菜单字符串[6][3]=0;//运算7
+								WW_菜单字符串[7][0]=94,WW_菜单字符串[7][1]=95,WW_菜单字符串[7][2]=88,WW_菜单字符串[7][3]=0;//运算8
+								display_menu_显示菜单(line_2,7);
 								
-								send3(hzk[4],60,0);//hzk[4]="<-"
-								send3(hzk[4],60,2);
-								send3(hzk[4],60,4);
-								send3(hzk[4],60,6);
+								send3_写汉字(hzk[4],60,0);//hzk[4]="<-"
+								send3_写汉字(hzk[4],60,2);
+								send3_写汉字(hzk[4],60,4);
+								send3_写汉字(hzk[4],60,6);
 								
 								if(increase)
 								{
@@ -3218,24 +3218,24 @@ main()
 								
 								if(line_2<3)
 								{
-									display_mapping(IN_mapping[0],72,0);
-									display_mapping(IN_mapping[1],72,2);
-									display_mapping(IN_mapping[2],72,4);
-									display_mapping(IN_mapping[3],72,6);
+									display_mapping_显示映射对象(IN_mapping[0],72,0);
+									display_mapping_显示映射对象(IN_mapping[1],72,2);
+									display_mapping_显示映射对象(IN_mapping[2],72,4);
+									display_mapping_显示映射对象(IN_mapping[3],72,6);
 								}
 								else if(line_2==7)
 								{
-									display_mapping(IN_mapping[4],72,0);
-									display_mapping(IN_mapping[5],72,2);
-									display_mapping(IN_mapping[6],72,4);
-									display_mapping(IN_mapping[7],72,6);
+									display_mapping_显示映射对象(IN_mapping[4],72,0);
+									display_mapping_显示映射对象(IN_mapping[5],72,2);
+									display_mapping_显示映射对象(IN_mapping[6],72,4);
+									display_mapping_显示映射对象(IN_mapping[7],72,6);
 								}
 								else 
 								{
-									display_mapping(IN_mapping[line_2-2],72,0);
-									display_mapping(IN_mapping[line_2-1],72,2);
-									display_mapping(IN_mapping[line_2],72,4);
-									display_mapping(IN_mapping[line_2+1],72,6);
+									display_mapping_显示映射对象(IN_mapping[line_2-2],72,0);
+									display_mapping_显示映射对象(IN_mapping[line_2-1],72,2);
+									display_mapping_显示映射对象(IN_mapping[line_2],72,4);
+									display_mapping_显示映射对象(IN_mapping[line_2+1],72,6);
 								}
 								
 								
@@ -3244,17 +3244,17 @@ main()
 							}
 							else if(menu_2==4)//微调
 							{
-								line_2=move_cursor(line_2,7);
+								line_2=move_cursor_光标移动(line_2,7);
 								
-								WW[0][0]=94,WW[0][1]=95,WW[0][2]=81,WW[0][3]=0;//运算一
-								WW[1][0]=94,WW[1][1]=95,WW[1][2]=82,WW[1][3]=0;//运算2
-								WW[2][0]=94,WW[2][1]=95,WW[2][2]=83,WW[2][3]=0;//运算3
-								WW[3][0]=94,WW[3][1]=95,WW[3][2]=84,WW[3][3]=0;//运算4
-								WW[4][0]=94,WW[4][1]=95,WW[4][2]=85,WW[4][3]=0;//运算5
-								WW[5][0]=94,WW[5][1]=95,WW[5][2]=86,WW[5][3]=0;//运算6
-								WW[6][0]=94,WW[6][1]=95,WW[6][2]=87,WW[6][3]=0;//运算7
-								WW[7][0]=94,WW[7][1]=95,WW[7][2]=88,WW[7][3]=0;//运算8
-								display_menu(line_2,7);
+								WW_菜单字符串[0][0]=94,WW_菜单字符串[0][1]=95,WW_菜单字符串[0][2]=81,WW_菜单字符串[0][3]=0;//运算一
+								WW_菜单字符串[1][0]=94,WW_菜单字符串[1][1]=95,WW_菜单字符串[1][2]=82,WW_菜单字符串[1][3]=0;//运算2
+								WW_菜单字符串[2][0]=94,WW_菜单字符串[2][1]=95,WW_菜单字符串[2][2]=83,WW_菜单字符串[2][3]=0;//运算3
+								WW_菜单字符串[3][0]=94,WW_菜单字符串[3][1]=95,WW_菜单字符串[3][2]=84,WW_菜单字符串[3][3]=0;//运算4
+								WW_菜单字符串[4][0]=94,WW_菜单字符串[4][1]=95,WW_菜单字符串[4][2]=85,WW_菜单字符串[4][3]=0;//运算5
+								WW_菜单字符串[5][0]=94,WW_菜单字符串[5][1]=95,WW_菜单字符串[5][2]=86,WW_菜单字符串[5][3]=0;//运算6
+								WW_菜单字符串[6][0]=94,WW_菜单字符串[6][1]=95,WW_菜单字符串[6][2]=87,WW_菜单字符串[6][3]=0;//运算7
+								WW_菜单字符串[7][0]=94,WW_菜单字符串[7][1]=95,WW_菜单字符串[7][2]=88,WW_菜单字符串[7][3]=0;//运算8
+								display_menu_显示菜单(line_2,7);
 								
 								if(increase)
 								{
@@ -3300,12 +3300,12 @@ main()
 							}
 							else if(menu_2==5)//混控
 							{
-								line_2=move_cursor(line_2,2);
+								line_2=move_cursor_光标移动(line_2,2);
 								
-								WW[0][0]=91,WW[0][1]=79,WW[0][2]=92,WW[0][3]=0;//同向端
-								WW[1][0]=93,WW[1][1]=79,WW[1][2]=92,WW[1][3]=0;//差向端
-								WW[2][0]=106,WW[2][1]=107,WW[2][2]=108,WW[2][3]=109;WW[2][4]=0;//恢复默认
-								display_menu(line_2,2);
+								WW_菜单字符串[0][0]=91,WW_菜单字符串[0][1]=79,WW_菜单字符串[0][2]=92,WW_菜单字符串[0][3]=0;//同向端
+								WW_菜单字符串[1][0]=93,WW_菜单字符串[1][1]=79,WW_菜单字符串[1][2]=92,WW_菜单字符串[1][3]=0;//差向端
+								WW_菜单字符串[2][0]=106,WW_菜单字符串[2][1]=107,WW_菜单字符串[2][2]=108,WW_菜单字符串[2][3]=109;WW_菜单字符串[2][4]=0;//恢复默认
+								display_menu_显示菜单(line_2,2);
 								
 								if(mixer_name==1)
 								{//三角翼
@@ -3317,7 +3317,7 @@ main()
 								}
 								else if(mixer_name==3)
 								{//V尾
-									send2('V',64,4);send3(hzk[115],72,4);
+									send2_写大字母('V',64,4);send3_写汉字(hzk[115],72,4);
 								}
 								else if(mixer_name==4)
 								{//襟副翼
@@ -3443,39 +3443,39 @@ main()
 								
 								if(mixer_name==1)
 								{
-									send2(mixer1_same+49,60,0);
-									send2(mixer1_contrary+49,60,2);
+									send2_写大字母(mixer1_same+49,60,0);
+									send2_写大字母(mixer1_contrary+49,60,2);
 								}
 								else if(mixer_name==2)
 								{
-									send2(mixer2_same+49,60,0);
-									send2(mixer2_contrary+49,60,2);
+									send2_写大字母(mixer2_same+49,60,0);
+									send2_写大字母(mixer2_contrary+49,60,2);
 								}
 								else if(mixer_name==3)
 								{
-									send2(mixer3_same+49,60,0);
-									send2(mixer3_contrary+49,60,2);
+									send2_写大字母(mixer3_same+49,60,0);
+									send2_写大字母(mixer3_contrary+49,60,2);
 								}
 								else if(mixer_name==4)
 								{
-									send2(mixer4_same+49,60,0);
-									send2(mixer4_contrary+49,60,2);
+									send2_写大字母(mixer4_same+49,60,0);
+									send2_写大字母(mixer4_contrary+49,60,2);
 								}
 								
 							}
 							else if(menu_2==6)//失控舵量
 							{
-								line_2=move_cursor(line_2,7);
+								line_2=move_cursor_光标移动(line_2,7);
 								
-								WW[0][0]=29,WW[0][1]=30,WW[0][2]=81,WW[0][3]=0;//发射一
-								WW[1][0]=29,WW[1][1]=30,WW[1][2]=82,WW[1][3]=0;//发射2
-								WW[2][0]=29,WW[2][1]=30,WW[2][2]=83,WW[2][3]=0;//发射3
-								WW[3][0]=29,WW[3][1]=30,WW[3][2]=84,WW[3][3]=0;//发射4
-								WW[4][0]=29,WW[4][1]=30,WW[4][2]=85,WW[4][3]=0;//发射5
-								WW[5][0]=29,WW[5][1]=30,WW[5][2]=86,WW[5][3]=0;//发射6
-								WW[6][0]=29,WW[6][1]=30,WW[6][2]=87,WW[6][3]=0;//发射7
-								WW[7][0]=29,WW[7][1]=30,WW[7][2]=88,WW[7][3]=0;//发射8
-								display_menu(line_2,7);
+								WW_菜单字符串[0][0]=29,WW_菜单字符串[0][1]=30,WW_菜单字符串[0][2]=81,WW_菜单字符串[0][3]=0;//发射一
+								WW_菜单字符串[1][0]=29,WW_菜单字符串[1][1]=30,WW_菜单字符串[1][2]=82,WW_菜单字符串[1][3]=0;//发射2
+								WW_菜单字符串[2][0]=29,WW_菜单字符串[2][1]=30,WW_菜单字符串[2][2]=83,WW_菜单字符串[2][3]=0;//发射3
+								WW_菜单字符串[3][0]=29,WW_菜单字符串[3][1]=30,WW_菜单字符串[3][2]=84,WW_菜单字符串[3][3]=0;//发射4
+								WW_菜单字符串[4][0]=29,WW_菜单字符串[4][1]=30,WW_菜单字符串[4][2]=85,WW_菜单字符串[4][3]=0;//发射5
+								WW_菜单字符串[5][0]=29,WW_菜单字符串[5][1]=30,WW_菜单字符串[5][2]=86,WW_菜单字符串[5][3]=0;//发射6
+								WW_菜单字符串[6][0]=29,WW_菜单字符串[6][1]=30,WW_菜单字符串[6][2]=87,WW_菜单字符串[6][3]=0;//发射7
+								WW_菜单字符串[7][0]=29,WW_菜单字符串[7][1]=30,WW_菜单字符串[7][2]=88,WW_菜单字符串[7][3]=0;//发射8
+								display_menu_显示菜单(line_2,7);
 								
 								if(increase)
 								{
@@ -3556,15 +3556,15 @@ main()
 							}
 							else if(menu_2==7)//通信密码
 							{
-								line_2=move_cursor(line_2,4);
+								line_2=move_cursor_光标移动(line_2,4);
 								
-								WW[0][0]=48,WW[0][1]=49,WW[0][2]=81,WW[0][3]=0;//密码一
-								WW[1][0]=48,WW[1][1]=49,WW[1][2]=82,WW[1][3]=0;//密码2
-								WW[2][0]=48,WW[2][1]=49,WW[2][2]=83,WW[2][3]=0;//密码3
-								WW[3][0]=48,WW[3][1]=49,WW[3][2]=84,WW[3][3]=0;//密码4
-								WW[4][0]=48,WW[4][1]=49,WW[4][2]=85,WW[4][3]=0;//密码5
+								WW_菜单字符串[0][0]=48,WW_菜单字符串[0][1]=49,WW_菜单字符串[0][2]=81,WW_菜单字符串[0][3]=0;//密码一
+								WW_菜单字符串[1][0]=48,WW_菜单字符串[1][1]=49,WW_菜单字符串[1][2]=82,WW_菜单字符串[1][3]=0;//密码2
+								WW_菜单字符串[2][0]=48,WW_菜单字符串[2][1]=49,WW_菜单字符串[2][2]=83,WW_菜单字符串[2][3]=0;//密码3
+								WW_菜单字符串[3][0]=48,WW_菜单字符串[3][1]=49,WW_菜单字符串[3][2]=84,WW_菜单字符串[3][3]=0;//密码4
+								WW_菜单字符串[4][0]=48,WW_菜单字符串[4][1]=49,WW_菜单字符串[4][2]=85,WW_菜单字符串[4][3]=0;//密码5
 
-								display_menu(line_2,4);
+								display_menu_显示菜单(line_2,4);
 								if(line_2<3)
 								{
 									send2_hex((u8)(address[0]>>4),60,0);send2_hex((u8)(address[0]&0x0f),68,0);
@@ -3595,14 +3595,14 @@ main()
 							}
 							else if(menu_2==8)//跳频
 							{
-								line_2=move_cursor(line_2,4);
+								line_2=move_cursor_光标移动(line_2,4);
 								
-								WW[0][0]=53,WW[0][1]=51,WW[0][2]=81,WW[0][3]=0;//频点一
-								WW[1][0]=53,WW[1][1]=51,WW[1][2]=82,WW[1][3]=0;//频点2
-								WW[2][0]=53,WW[2][1]=51,WW[2][2]=83,WW[2][3]=0;//频点3
-								WW[3][0]=53,WW[3][1]=51,WW[3][2]=84,WW[3][3]=0;//频点4
-								WW[4][0]=53,WW[4][1]=51,WW[4][2]=85,WW[4][3]=0;//频点5
-								display_menu(line_2,4);
+								WW_菜单字符串[0][0]=53,WW_菜单字符串[0][1]=51,WW_菜单字符串[0][2]=81,WW_菜单字符串[0][3]=0;//频点一
+								WW_菜单字符串[1][0]=53,WW_菜单字符串[1][1]=51,WW_菜单字符串[1][2]=82,WW_菜单字符串[1][3]=0;//频点2
+								WW_菜单字符串[2][0]=53,WW_菜单字符串[2][1]=51,WW_菜单字符串[2][2]=83,WW_菜单字符串[2][3]=0;//频点3
+								WW_菜单字符串[3][0]=53,WW_菜单字符串[3][1]=51,WW_菜单字符串[3][2]=84,WW_菜单字符串[3][3]=0;//频点4
+								WW_菜单字符串[4][0]=53,WW_菜单字符串[4][1]=51,WW_菜单字符串[4][2]=85,WW_菜单字符串[4][3]=0;//频点5
+								display_menu_显示菜单(line_2,4);
 								
 								if(line_2<3)
 								{
@@ -3633,17 +3633,17 @@ main()
 							}
 							else if(menu_2==9)//通道映射
 							{
-								line_2=move_cursor(line_2,7);
+								line_2=move_cursor_光标移动(line_2,7);
 								
-								WW[0][0]=16,WW[0][1]=17,WW[0][2]=81,WW[0][3]=0;//通道一
-								WW[1][0]=16,WW[1][1]=17,WW[1][2]=82,WW[1][3]=0;//通道2
-								WW[2][0]=16,WW[2][1]=17,WW[2][2]=83,WW[2][3]=0;//通道3
-								WW[3][0]=16,WW[3][1]=17,WW[3][2]=84,WW[3][3]=0;//通道4
-								WW[4][0]=16,WW[4][1]=17,WW[4][2]=85,WW[4][3]=0;//通道5
-								WW[5][0]=16,WW[5][1]=17,WW[5][2]=86,WW[5][3]=0;//通道6
-								WW[6][0]=16,WW[6][1]=17,WW[6][2]=87,WW[6][3]=0;//通道7
-								WW[7][0]=16,WW[7][1]=17,WW[7][2]=88,WW[7][3]=0;//通道8
-								display_menu(line_2,7);
+								WW_菜单字符串[0][0]=16,WW_菜单字符串[0][1]=17,WW_菜单字符串[0][2]=81,WW_菜单字符串[0][3]=0;//通道一
+								WW_菜单字符串[1][0]=16,WW_菜单字符串[1][1]=17,WW_菜单字符串[1][2]=82,WW_菜单字符串[1][3]=0;//通道2
+								WW_菜单字符串[2][0]=16,WW_菜单字符串[2][1]=17,WW_菜单字符串[2][2]=83,WW_菜单字符串[2][3]=0;//通道3
+								WW_菜单字符串[3][0]=16,WW_菜单字符串[3][1]=17,WW_菜单字符串[3][2]=84,WW_菜单字符串[3][3]=0;//通道4
+								WW_菜单字符串[4][0]=16,WW_菜单字符串[4][1]=17,WW_菜单字符串[4][2]=85,WW_菜单字符串[4][3]=0;//通道5
+								WW_菜单字符串[5][0]=16,WW_菜单字符串[5][1]=17,WW_菜单字符串[5][2]=86,WW_菜单字符串[5][3]=0;//通道6
+								WW_菜单字符串[6][0]=16,WW_菜单字符串[6][1]=17,WW_菜单字符串[6][2]=87,WW_菜单字符串[6][3]=0;//通道7
+								WW_菜单字符串[7][0]=16,WW_菜单字符串[7][1]=17,WW_菜单字符串[7][2]=88,WW_菜单字符串[7][3]=0;//通道8
+								display_menu_显示菜单(line_2,7);
 								
 								word_hzk序号数组[0]=4;word_hzk序号数组[1]=94;word_hzk序号数组[2]=95;word_hzk序号数组[3]=0;write_显示汉字(60,0);
 								write_显示汉字(60,2);write_显示汉字(60,4);write_显示汉字(60,6);
@@ -3661,39 +3661,39 @@ main()
 								
 								if(line_2<3)
 								{
-									send2(NRF_mapping[0]+49,96,0);
-									send2(NRF_mapping[1]+49,96,2);
-									send2(NRF_mapping[2]+49,96,4);
-									send2(NRF_mapping[3]+49,96,6);
+									send2_写大字母(NRF_mapping[0]+49,96,0);
+									send2_写大字母(NRF_mapping[1]+49,96,2);
+									send2_写大字母(NRF_mapping[2]+49,96,4);
+									send2_写大字母(NRF_mapping[3]+49,96,6);
 								}
 								else if(line_2==7)
 								{
-									send2(NRF_mapping[4]+49,96,0);
-									send2(NRF_mapping[5]+49,96,2);
-									send2(NRF_mapping[6]+49,96,4);
-									send2(NRF_mapping[7]+49,96,6);
+									send2_写大字母(NRF_mapping[4]+49,96,0);
+									send2_写大字母(NRF_mapping[5]+49,96,2);
+									send2_写大字母(NRF_mapping[6]+49,96,4);
+									send2_写大字母(NRF_mapping[7]+49,96,6);
 								}
 								else 
 								{
-									send2(NRF_mapping[line_2-2]+49,96,0);
-									send2(NRF_mapping[line_2-1]+49,96,2);
-									send2(NRF_mapping[line_2]+49,96,4);
-									send2(NRF_mapping[line_2+1]+49,96,6);
+									send2_写大字母(NRF_mapping[line_2-2]+49,96,0);
+									send2_写大字母(NRF_mapping[line_2-1]+49,96,2);
+									send2_写大字母(NRF_mapping[line_2]+49,96,4);
+									send2_写大字母(NRF_mapping[line_2+1]+49,96,6);
 								}
 
 							}
 							else if(menu_2==10)//版本信息
 							{
-								photo(bmp0,4,0,120,3);
-								send3(hzk[73],56,6);send3(hzk[74],68,6);
-								send2('V',80,6);send2('3',88,6);send2('.',96,6);
-								send2('A',104,6);send2('1',112,6);send2('2',120,6);
+								photo_显示指定大小的图片(bmp0,4,0,120,3);
+								send3_写汉字(hzk[73],56,6);send3_写汉字(hzk[74],68,6);
+								send2_写大字母('V',80,6);send2_写大字母('3',88,6);send2_写大字母('.',96,6);
+								send2_写大字母('A',104,6);send2_写大字母('1',112,6);send2_写大字母('2',120,6);
 								
 							}
 							else if(menu_2==11)//对频
 							{
 								word_hzk序号数组[0]=121;word_hzk序号数组[1]=122;word_hzk序号数组[2]=43;word_hzk序号数组[3]=44;word_hzk序号数组[4]=123;word_hzk序号数组[5]=0;write_显示汉字(24,0);
-								send2('.',84,0);send2('.',92,0);send2('.',100,0);
+								send2_写大字母('.',84,0);send2_写大字母('.',92,0);send2_写大字母('.',100,0);
 								
 															
 								device_connect();
@@ -3714,7 +3714,7 @@ main()
 							else if(menu_2==12)//恢复出厂
 							{
 								word_hzk序号数组[0]=106,word_hzk序号数组[1]=107,word_hzk序号数组[2]=32,word_hzk序号数组[3]=136,word_hzk序号数组[4]=0,write_显示汉字(40,2);
-								word_hzk序号数组[0]=137,word_hzk序号数组[1]=109,word_hzk序号数组[2]=0,write_显示汉字(52,4);send2('?',80,4);
+								word_hzk序号数组[0]=137,word_hzk序号数组[1]=109,word_hzk序号数组[2]=0,write_显示汉字(52,4);send2_写大字母('?',80,4);
 								if(right)
 								{								
 									IAP_CONTR=0x83;		//擦除所有数据
@@ -3722,29 +3722,29 @@ main()
 									EEPROM_clean(2);
 									EEPROM_clean(4);
 									IAP_CONTR=0;
-									send3(hzk[3],80,4);
+									send3_写汉字(hzk[3],80,4);
 									word_hzk序号数组[0]=138,word_hzk序号数组[1]=139,word_hzk序号数组[2]=140,word_hzk序号数组[3]=57,word_hzk序号数组[4]=0,write_显示汉字(40,6);
 									TR0=0,TR1=0,CCON=0;while(1);
 								}
 							}
 							else if(menu_2==13)//回传报警
 							{
-								line_2=move_cursor(line_2,5);
+								line_2=move_cursor_光标移动(line_2,5);
 								
-								WW[0][0]=160,WW[0][1]=161,WW[0][2]=0;//状态
-								WW[1][0]=58,WW[1][1]=59,WW[1][2]=0;//开关
-								WW[2][0]=105,WW[2][1]=206,WW[2][2]=0;//动，没有206对应的汉字？？？
-								WW[3][0]=207,WW[3][1]=208,WW[3][2]=0;
-								WW[4][0]=29,WW[4][1]=30,WW[4][2]=0;//发射
-								WW[5][0]=66,WW[5][1]=67,WW[5][2]=0;//回传
+								WW_菜单字符串[0][0]=160,WW_菜单字符串[0][1]=161,WW_菜单字符串[0][2]=0;//状态
+								WW_菜单字符串[1][0]=58,WW_菜单字符串[1][1]=59,WW_菜单字符串[1][2]=0;//开关
+								WW_菜单字符串[2][0]=105,WW_菜单字符串[2][1]=206,WW_菜单字符串[2][2]=0;//动力
+								WW_菜单字符串[3][0]=207,WW_菜单字符串[3][1]=208,WW_菜单字符串[3][2]=0;//芯片
+								WW_菜单字符串[4][0]=29,WW_菜单字符串[4][1]=30,WW_菜单字符串[4][2]=0;//发射
+								WW_菜单字符串[5][0]=66,WW_菜单字符串[5][1]=67,WW_菜单字符串[5][2]=0;//回传
 								
-								display_menu(line_2,5);
+								display_menu_显示菜单(line_2,5);
 								
 								
 								if(line_2<3)
 								{
-									if(Switch_Check(Return_alarm_switch)==3)send3(hzk[58],64,0);
-									else send3(hzk[59],64,0);
+									if(Switch_Check_获取开关状态(Return_alarm_switch)==3)send3_写汉字(hzk[58],64,0);
+									else send3_写汉字(hzk[59],64,0);
 								}
 								
 								
@@ -3764,7 +3764,7 @@ main()
 
 									}
 									
-									display_switch(Return_alarm_switch,60,2);
+									display_switch_显示开关(Return_alarm_switch,60,2);
 								}
 								else if(line_2==2)
 								{
@@ -3785,7 +3785,7 @@ main()
 										}
 									}	
 
-									write_num100(Power_V,60,4,'.');send2('V',92,4);
+									write_num100(Power_V,60,4,'.');send2_写大字母('V',92,4);
 									
 								}
 								else if(line_2==3)
@@ -3807,7 +3807,7 @@ main()
 										}
 									}
 
-									write_num100(Chip_V,60,4,'.');send2('V',92,4);									
+									write_num100(Chip_V,60,4,'.');send2_写大字母('V',92,4);									
 									
 								}
 								else if(line_2==4)
@@ -3859,23 +3859,23 @@ main()
 							}
 							else if(menu_2==14)//显示设置
 							{
-								line_2=move_cursor(line_2,3);
+								line_2=move_cursor_光标移动(line_2,3);
 								
-								WW[0][0]=187,WW[0][1]=188,WW[0][2]=103,WW[0][3]=0;//没有187等对应的汉字？？？
-								WW[1][0]=178,WW[1][1]=179,WW[1][2]=64,WW[1][3]=0;//没有178等对应的汉字？？？
-								WW[2][0]=60,WW[2][1]=61,WW[2][2]=0;//背光
-								WW[3][0]=213,WW[3][1]=79,WW[3][2]=0;//？向，没有213对应的汉字？？？
+								WW_菜单字符串[0][0]=187,WW_菜单字符串[0][1]=188,WW_菜单字符串[0][2]=103,WW_菜单字符串[0][3]=0;//对比度
+								WW_菜单字符串[1][0]=178,WW_菜单字符串[1][1]=179,WW_菜单字符串[1][2]=64,WW_菜单字符串[1][3]=0;//大小屏
+								WW_菜单字符串[2][0]=60,WW_菜单字符串[2][1]=61,WW_菜单字符串[2][2]=0;//背光
+								WW_菜单字符串[3][0]=213,WW_菜单字符串[3][1]=79,WW_菜单字符串[3][2]=0;//方向
 								
-								display_menu(line_2,3);
+								display_menu_显示菜单(line_2,3);
 								
 								write_num100(LCD_vop,60,0,0);
-								if(LCD_big)send3(hzk[178],68,2);
-								else send3(hzk[179],68,2);
+								if(LCD_big)send3_写汉字(hzk[178],68,2);
+								else send3_写汉字(hzk[179],68,2);
 								
-								if(LCD_light)send3(hzk[58],68,4);
-								else send3(hzk[59],68,4);
-								if(LCD_reverse)send3(hzk[35],68,6);
-								else send3(hzk[34],68,6);
+								if(LCD_light)send3_写汉字(hzk[58],68,4);
+								else send3_写汉字(hzk[59],68,4);
+								if(LCD_reverse)send3_写汉字(hzk[35],68,6);
+								else send3_写汉字(hzk[34],68,6);
 								
 								if(line_2==0)
 								{
@@ -3955,17 +3955,17 @@ main()
 							}
 							else if(menu_2==15)//PPM映射
 							{
-								line_2=move_cursor(line_2,7);
+								line_2=move_cursor_光标移动(line_2,7);
 								
-								WW[0][0]=192,WW[0][1]=193,WW[0][2]=81,WW[0][3]=0;//没有192等对应的汉字？？？？
-								WW[1][0]=192,WW[1][1]=193,WW[1][2]=82,WW[1][3]=0;
-								WW[2][0]=192,WW[2][1]=193,WW[2][2]=83,WW[2][3]=0;
-								WW[3][0]=192,WW[3][1]=193,WW[3][2]=84,WW[3][3]=0;
-								WW[4][0]=192,WW[4][1]=193,WW[4][2]=85,WW[4][3]=0;
-								WW[5][0]=192,WW[5][1]=193,WW[5][2]=86,WW[5][3]=0;
-								WW[6][0]=192,WW[6][1]=193,WW[6][2]=87,WW[6][3]=0;
-								WW[7][0]=192,WW[7][1]=193,WW[7][2]=88,WW[7][3]=0;
-								display_menu(line_2,7);
+								WW_菜单字符串[0][0]=192,WW_菜单字符串[0][1]=193,WW_菜单字符串[0][2]=81,WW_菜单字符串[0][3]=0;//PPM PPM 一
+								WW_菜单字符串[1][0]=192,WW_菜单字符串[1][1]=193,WW_菜单字符串[1][2]=82,WW_菜单字符串[1][3]=0;//PPM PPM 二
+								WW_菜单字符串[2][0]=192,WW_菜单字符串[2][1]=193,WW_菜单字符串[2][2]=83,WW_菜单字符串[2][3]=0;//PPM PPM 三
+								WW_菜单字符串[3][0]=192,WW_菜单字符串[3][1]=193,WW_菜单字符串[3][2]=84,WW_菜单字符串[3][3]=0;//PPM PPM 四
+								WW_菜单字符串[4][0]=192,WW_菜单字符串[4][1]=193,WW_菜单字符串[4][2]=85,WW_菜单字符串[4][3]=0;//PPM PPM 五
+								WW_菜单字符串[5][0]=192,WW_菜单字符串[5][1]=193,WW_菜单字符串[5][2]=86,WW_菜单字符串[5][3]=0;//PPM PPM 六
+								WW_菜单字符串[6][0]=192,WW_菜单字符串[6][1]=193,WW_菜单字符串[6][2]=87,WW_菜单字符串[6][3]=0;//PPM PPM 七
+								WW_菜单字符串[7][0]=192,WW_菜单字符串[7][1]=193,WW_菜单字符串[7][2]=88,WW_菜单字符串[7][3]=0;//PPM PPM 八
+								display_menu_显示菜单(line_2,7);
 								
 								word_hzk序号数组[0]=4;word_hzk序号数组[1]=94;word_hzk序号数组[2]=95;word_hzk序号数组[3]=0;write_显示汉字(60,0);//“<-运算”
 								write_显示汉字(60,2);write_显示汉字(60,4);write_显示汉字(60,6);
@@ -3983,42 +3983,42 @@ main()
 								
 								if(line_2<3)
 								{
-									send2(PPM_mapping[0]+49,96,0);
-									send2(PPM_mapping[1]+49,96,2);
-									send2(PPM_mapping[2]+49,96,4);
-									send2(PPM_mapping[3]+49,96,6);
+									send2_写大字母(PPM_mapping[0]+49,96,0);
+									send2_写大字母(PPM_mapping[1]+49,96,2);
+									send2_写大字母(PPM_mapping[2]+49,96,4);
+									send2_写大字母(PPM_mapping[3]+49,96,6);
 								}
 								else if(line_2==7)
 								{
-									send2(PPM_mapping[4]+49,96,0);
-									send2(PPM_mapping[5]+49,96,2);
-									send2(PPM_mapping[6]+49,96,4);
-									send2(PPM_mapping[7]+49,96,6);
+									send2_写大字母(PPM_mapping[4]+49,96,0);
+									send2_写大字母(PPM_mapping[5]+49,96,2);
+									send2_写大字母(PPM_mapping[6]+49,96,4);
+									send2_写大字母(PPM_mapping[7]+49,96,6);
 								}
 								else 
 								{
-									send2(PPM_mapping[line_2-2]+49,96,0);
-									send2(PPM_mapping[line_2-1]+49,96,2);
-									send2(PPM_mapping[line_2]+49,96,4);
-									send2(PPM_mapping[line_2+1]+49,96,6);
+									send2_写大字母(PPM_mapping[line_2-2]+49,96,0);
+									send2_写大字母(PPM_mapping[line_2-1]+49,96,2);
+									send2_写大字母(PPM_mapping[line_2]+49,96,4);
+									send2_写大字母(PPM_mapping[line_2+1]+49,96,6);
 								}
 							}
 							else if(menu_2==16)//大小舵
 							{
-								line_2=move_cursor(line_2,3);
+								line_2=move_cursor_光标移动(line_2,3);
 								
-								WW[0][0]=160,WW[0][1]=161,WW[0][2]=0;//状态
-								WW[1][0]=58,WW[1][1]=59,WW[1][2]=0;//开关
-								WW[2][0]=202,WW[2][1]=34,WW[2][2]=36,WW[2][3]=37;//？正舵量，202对应的汉字？？？
-								WW[3][0]=202,WW[3][1]=134,WW[3][2]=36,WW[3][3]=37;//？负舵量，202对应的汉字？？？
+								WW_菜单字符串[0][0]=160,WW_菜单字符串[0][1]=161,WW_菜单字符串[0][2]=0;//状态
+								WW_菜单字符串[1][0]=58,WW_菜单字符串[1][1]=59,WW_菜单字符串[1][2]=0;//开关
+								WW_菜单字符串[2][0]=202,WW_菜单字符串[2][1]=34,WW_菜单字符串[2][2]=36,WW_菜单字符串[2][3]=37;//新正舵量
+								WW_菜单字符串[3][0]=202,WW_菜单字符串[3][1]=134,WW_菜单字符串[3][2]=36,WW_菜单字符串[3][3]=37;//新负舵量
 								
-								display_menu(line_2,3);
+								display_menu_显示菜单(line_2,3);
 								
 								
-									if(use_new_ratio)send3(hzk[202],60,0),send3(hzk[36],72,0),send3(hzk[37],84,0);
-									else send3(hzk[201],60,0),send3(hzk[36],72,0),send3(hzk[37],84,0);
+									if(use_new_ratio)send3_写汉字(hzk[202],60,0),send3_写汉字(hzk[36],72,0),send3_写汉字(hzk[37],84,0);
+									else send3_写汉字(hzk[201],60,0),send3_写汉字(hzk[36],72,0),send3_写汉字(hzk[37],84,0);
 								
-								display_switch(ratio_switch,60,2);
+								display_switch_显示开关(ratio_switch,60,2);
 								
 								if(line_2==1)
 								{
@@ -4069,15 +4069,15 @@ main()
 							}
 							else if(menu_2==18)//无线协议
 							{
-								line_2=move_cursor(line_2,2);
+								line_2=move_cursor_光标移动(line_2,2);
 								
-								WW[0][0]=65,WW[0][1]=79,WW[0][2]=50,WW[0][3]=53,WW[0][4]=51,WW[0][5]=0;//单向多频点
-								WW[1][0]=66,WW[1][1]=67,WW[1][2]=65,WW[1][3]=53,WW[1][4]=51,WW[1][5]=0;//回传单频点
-								WW[2][0]=66,WW[2][1]=67,WW[2][2]=50,WW[2][3]=53,WW[2][4]=51,WW[2][5]=0;//回传多频点
+								WW_菜单字符串[0][0]=65,WW_菜单字符串[0][1]=79,WW_菜单字符串[0][2]=50,WW_菜单字符串[0][3]=53,WW_菜单字符串[0][4]=51,WW_菜单字符串[0][5]=0;//单向多频点
+								WW_菜单字符串[1][0]=66,WW_菜单字符串[1][1]=67,WW_菜单字符串[1][2]=65,WW_菜单字符串[1][3]=53,WW_菜单字符串[1][4]=51,WW_菜单字符串[1][5]=0;//回传单频点
+								WW_菜单字符串[2][0]=66,WW_菜单字符串[2][1]=67,WW_菜单字符串[2][2]=50,WW_菜单字符串[2][3]=53,WW_菜单字符串[2][4]=51,WW_菜单字符串[2][5]=0;//回传多频点
 								
-	//							WW[3][0]=69,WW[3][1]=70,WW[3][2]=71,WW[3][3]=72,WW[3][4]=0,WW[3][5]=0;//低压报警
+	//							WW_菜单字符串[3][0]=69,WW_菜单字符串[3][1]=70,WW_菜单字符串[3][2]=71,WW_菜单字符串[3][3]=72,WW_菜单字符串[3][4]=0,WW_菜单字符串[3][5]=0;//低压报警
 								
-								display_menu(line_2,2);
+								display_menu_显示菜单(line_2,2);
 								
 								if(right)
 								{
@@ -4085,9 +4085,9 @@ main()
 									TX_protocol=line_2+1;Data_change(1);
 								}
 								
-								if(TX_protocol==1)send3(hzk[3],80,0);
-								if(TX_protocol==2)send3(hzk[3],80,2);
-								if(TX_protocol==3)send3(hzk[3],80,4);
+								if(TX_protocol==1)send3_写汉字(hzk[3],80,0);
+								if(TX_protocol==2)send3_写汉字(hzk[3],80,2);
+								if(TX_protocol==3)send3_写汉字(hzk[3],80,4);
 							}
 							else if(menu_2==19)//全频扫描
 							{
@@ -4183,17 +4183,17 @@ main()
 							
 								}
 								
-								send3(hzk[209],24,6);send3(hzk[210],36,6);
-								send3(hzk[98],48,6);send3(hzk[99],60,6);
+								send3_写汉字(hzk[209],24,6);send3_写汉字(hzk[210],36,6);
+								send3_写汉字(hzk[98],48,6);send3_写汉字(hzk[99],60,6);
 								
 								if(calibration_action)
 								{
 									
-									send3(hzk[3],84,6);	
+									send3_写汉字(hzk[3],84,6);	
 						
 								
 								}
-								else send2('?',84,6);	
+								else send2_写大字母('?',84,6);	
 								
 																			
 								
@@ -4223,14 +4223,14 @@ main()
 									if(PPM_offset>-100)PPM_offset--,Data_change(1);
 								}
 								
-								display_bar(PPM_DATA);
+								display_bar_显示条形图(PPM_DATA);
 								
 								
 								if(delay_time>0)
 								{
 									delay_time--;
 								
-									photo(bmp3,57,5,32,3);
+									photo_显示指定大小的图片(bmp3,57,5,32,3);
 									location(60,6);
 													
 									write_num1000(PPM_offset,'-');
@@ -4247,16 +4247,16 @@ main()
 								location(0,6);send('C');send('H');send('7');
 								location(0,7);send('C');send('H');send('8');
 			
-								display_bar(operation);
+								display_bar_显示条形图(operation);
 							}
 							else if(menu_2==23)//自动扫描
 							{
-								line_2=move_cursor(line_2,2);
+								line_2=move_cursor_光标移动(line_2,2);
 								
-								WW[0][0]=172,WW[0][1]=51,WW[0][2]=0;//起点
-								WW[1][0]=173,WW[1][1]=51,WW[1][2]=0;//终点
-								WW[2][0]=114,WW[2][1]=103,WW[2][2]=0;//速度
-								display_menu(line_2,2);
+								WW_菜单字符串[0][0]=172,WW_菜单字符串[0][1]=51,WW_菜单字符串[0][2]=0;//起点
+								WW_菜单字符串[1][0]=173,WW_菜单字符串[1][1]=51,WW_菜单字符串[1][2]=0;//终点
+								WW_菜单字符串[2][0]=114,WW_菜单字符串[2][1]=103,WW_菜单字符串[2][2]=0;//速度
+								display_menu_显示菜单(line_2,2);
 								
 								if(line_2<1)
 								{
@@ -4310,32 +4310,32 @@ main()
 							}
 							else if(menu_2==24)//电压设置
 							{
-								line_2=move_cursor(line_2,2);
+								line_2=move_cursor_光标移动(line_2,2);
 								
-								WW[0][0]=175,WW[0][1]=70,WW[0][2]=0;//电压
-								WW[1][0]=71,WW[1][1]=72,WW[1][2]=0;//报警
-								WW[2][0]=39,WW[2][1]=40,WW[2][2]=0;//微调						
+								WW_菜单字符串[0][0]=175,WW_菜单字符串[0][1]=70,WW_菜单字符串[0][2]=0;//电压
+								WW_菜单字符串[1][0]=71,WW_菜单字符串[1][1]=72,WW_菜单字符串[1][2]=0;//报警
+								WW_菜单字符串[2][0]=39,WW_菜单字符串[2][1]=40,WW_菜单字符串[2][2]=0;//微调						
 								
 							
-								display_menu(line_2,2);
+								display_menu_显示菜单(line_2,2);
 								
 								temp=battery_voltage;
-								if(temp>999)send2(temp%10000/1000+48,52,0);
-								send2(temp%1000/100+48,60,0);
-								send2('.',68,0);							
-								send2(temp%100/10+48,76,0);
-								send2(temp%10+48,84,0);
-								send2('V',92,0);
+								if(temp>999)send2_写大字母(temp%10000/1000+48,52,0);
+								send2_写大字母(temp%1000/100+48,60,0);
+								send2_写大字母('.',68,0);							
+								send2_写大字母(temp%100/10+48,76,0);
+								send2_写大字母(temp%10+48,84,0);
+								send2_写大字母('V',92,0);
 								
 								
 								if(Battery_1s==1)
 								{
-									write_num100(VLD1,60,2,'.');send2('V',92,2);
+									write_num100(VLD1,60,2,'.');send2_写大字母('V',92,2);
 									write_num100(v_trim1,60,4,'#');
 								}
 								else if(Battery_1s==0)
 								{
-									write_num100(VLD2,60,2,'.');send2('V',92,2);
+									write_num100(VLD2,60,2,'.');send2_写大字母('V',92,2);
 									write_num100(v_trim2,60,4,'#');
 								}
 								
@@ -4409,21 +4409,21 @@ main()
 							}
 							else if(menu_2==25)//接收机输出模式
 							{
-								line_2=move_cursor(line_2,7);
+								line_2=move_cursor_光标移动(line_2,7);
 								
-								WW[0][0]=16,WW[0][1]=17,WW[0][2]=81,WW[0][3]=0;//通道一
-								WW[1][0]=16,WW[1][1]=17,WW[1][2]=82,WW[1][3]=0;//通道2
-								WW[2][0]=16,WW[2][1]=17,WW[2][2]=83,WW[2][3]=0;//通道3
-								WW[3][0]=16,WW[3][1]=17,WW[3][2]=84,WW[3][3]=0;//通道4
-								WW[4][0]=16,WW[4][1]=17,WW[4][2]=85,WW[4][3]=0;//通道5
-								WW[5][0]=16,WW[5][1]=17,WW[5][2]=86,WW[5][3]=0;//通道6
-								WW[6][0]=16,WW[6][1]=17,WW[6][2]=87,WW[6][3]=0;//通道7
-								WW[7][0]=16,WW[7][1]=17,WW[7][2]=88,WW[7][3]=0;//通道8
-								display_menu(line_2,7);
-								send3(hzk[1],60,0);
-								send3(hzk[1],60,2);
-								send3(hzk[1],60,4);
-								send3(hzk[1],60,6);
+								WW_菜单字符串[0][0]=16,WW_菜单字符串[0][1]=17,WW_菜单字符串[0][2]=81,WW_菜单字符串[0][3]=0;//通道一
+								WW_菜单字符串[1][0]=16,WW_菜单字符串[1][1]=17,WW_菜单字符串[1][2]=82,WW_菜单字符串[1][3]=0;//通道2
+								WW_菜单字符串[2][0]=16,WW_菜单字符串[2][1]=17,WW_菜单字符串[2][2]=83,WW_菜单字符串[2][3]=0;//通道3
+								WW_菜单字符串[3][0]=16,WW_菜单字符串[3][1]=17,WW_菜单字符串[3][2]=84,WW_菜单字符串[3][3]=0;//通道4
+								WW_菜单字符串[4][0]=16,WW_菜单字符串[4][1]=17,WW_菜单字符串[4][2]=85,WW_菜单字符串[4][3]=0;//通道5
+								WW_菜单字符串[5][0]=16,WW_菜单字符串[5][1]=17,WW_菜单字符串[5][2]=86,WW_菜单字符串[5][3]=0;//通道6
+								WW_菜单字符串[6][0]=16,WW_菜单字符串[6][1]=17,WW_菜单字符串[6][2]=87,WW_菜单字符串[6][3]=0;//通道7
+								WW_菜单字符串[7][0]=16,WW_菜单字符串[7][1]=17,WW_菜单字符串[7][2]=88,WW_菜单字符串[7][3]=0;//通道8
+								display_menu_显示菜单(line_2,7);
+								send3_写汉字(hzk[1],60,0);
+								send3_写汉字(hzk[1],60,2);
+								send3_写汉字(hzk[1],60,4);
+								send3_写汉字(hzk[1],60,6);
 							
 								
 								if(increase)
@@ -4545,54 +4545,54 @@ main()
 								
 								if(line_2<3)
 								{
-									display_receiver_mode(receiver_mode[0],72,0);
-									display_receiver_mode(receiver_mode[1],72,2);
-									display_receiver_mode(receiver_mode[2],72,4);
-									display_receiver_mode(receiver_mode[3],72,6);
+									display_receiver_mode_显示接收机模式(receiver_mode[0],72,0);
+									display_receiver_mode_显示接收机模式(receiver_mode[1],72,2);
+									display_receiver_mode_显示接收机模式(receiver_mode[2],72,4);
+									display_receiver_mode_显示接收机模式(receiver_mode[3],72,6);
 								}
 								else if(line_2==7)
 								{
-									display_receiver_mode(receiver_mode[4],72,0);
-									display_receiver_mode(receiver_mode[5],72,2);
-									display_receiver_mode(receiver_mode[6],72,4);
-									display_receiver_mode(receiver_mode[7],72,6);
+									display_receiver_mode_显示接收机模式(receiver_mode[4],72,0);
+									display_receiver_mode_显示接收机模式(receiver_mode[5],72,2);
+									display_receiver_mode_显示接收机模式(receiver_mode[6],72,4);
+									display_receiver_mode_显示接收机模式(receiver_mode[7],72,6);
 								}
 								else 
 								{
-									display_receiver_mode(receiver_mode[line_2-2],72,0);
-									display_receiver_mode(receiver_mode[line_2-1],72,2);
-									display_receiver_mode(receiver_mode[line_2],72,4);
-									display_receiver_mode(receiver_mode[line_2+1],72,6);
+									display_receiver_mode_显示接收机模式(receiver_mode[line_2-2],72,0);
+									display_receiver_mode_显示接收机模式(receiver_mode[line_2-1],72,2);
+									display_receiver_mode_显示接收机模式(receiver_mode[line_2],72,4);
+									display_receiver_mode_显示接收机模式(receiver_mode[line_2+1],72,6);
 								}
 							}
 							else if(menu_2==26)//定时器
 							{
-								line_2=move_cursor(line_2,2);
+								line_2=move_cursor_光标移动(line_2,2);
 								
-								WW[0][0]=160,WW[0][1]=161,WW[0][2]=0;//状态
-								WW[1][0]=58,WW[1][1]=59,WW[1][2]=0;//开关
-								WW[2][0]=71,WW[2][1]=72,WW[2][2]=0;//报警						
+								WW_菜单字符串[0][0]=160,WW_菜单字符串[0][1]=161,WW_菜单字符串[0][2]=0;//状态
+								WW_菜单字符串[1][0]=58,WW_菜单字符串[1][1]=59,WW_菜单字符串[1][2]=0;//开关
+								WW_菜单字符串[2][0]=71,WW_菜单字符串[2][1]=72,WW_菜单字符串[2][2]=0;//报警						
 								
 							
-								display_menu(line_2,2);
+								display_menu_显示菜单(line_2,2);
 								
 								if(clock_switch)
 								{
-									if(clock_go)send3(hzk[196],60,0),send3(hzk[182],72,0);
+									if(clock_go)send3_写汉字(hzk[196],60,0),send3_写汉字(hzk[182],72,0);
 									else
 									{
 										
-										if(Switch_Check(clock_switch)==2)send3(hzk[199],60,0),send3(hzk[200],72,0);
-										else send3(hzk[211],60,0),send3(hzk[212],72,0);
+										if(Switch_Check_获取开关状态(clock_switch)==2)send3_写汉字(hzk[199],60,0),send3_写汉字(hzk[200],72,0);
+										else send3_写汉字(hzk[211],60,0),send3_写汉字(hzk[212],72,0);
 									
 									}
 								}
-								else send3(hzk[0],60,0),send3(hzk[0],72,0);
+								else send3_写汉字(hzk[0],60,0),send3_写汉字(hzk[0],72,0);
 									
 										
 								
-								display_switch(clock_switch,60,2);
-								write_num100(clock_set,60,4,0);send3(hzk[174],84,4);send3(hzk[135],96,4);
+								display_switch_显示开关(clock_switch,60,2);
+								write_num100(clock_set,60,4,0);send3_写汉字(hzk[174],84,4);send3_写汉字(hzk[135],96,4);
 								
 								if(line_2==1)
 								{
@@ -4632,15 +4632,15 @@ main()
 							}
 							else if(menu_2==27)//开机画面
 							{
-								line_2=move_cursor(line_2,1);
+								line_2=move_cursor_光标移动(line_2,1);
 								
 								if(line_2<1)
 								{
-									photo(screen3,0,0,128,8);
+									photo_显示指定大小的图片(screen3,0,0,128,8);
 								}
 								else if(line_2<2)
 								{
-									photo(screen4,0,0,128,8);
+									photo_显示指定大小的图片(screen4,0,0,128,8);
 								}
 								
 								if(right)
@@ -4653,25 +4653,25 @@ main()
 							}
 							else if(menu_2==28)//偏好设置
 							{
-								line_2=move_cursor(line_2,3);
+								line_2=move_cursor_光标移动(line_2,3);
 								
-								WW[0][0]=56,WW[0][1]=57,WW[0][2]=0;//音效
-								WW[1][0]=141,WW[1][1]=142,WW[1][2]=104,WW[1][3]=194,WW[1][4]=0;//油门自？，194等对应汉字？？？
-								WW[2][0]=141,WW[2][1]=142,WW[2][2]=195,WW[2][3]=196,WW[2][4]=0;//油门？？
-								WW[3][0]=39,WW[3][1]=40,WW[3][2]=197,WW[3][3]=198,WW[3][4]=0;//微调？？
+								WW_菜单字符串[0][0]=56,WW_菜单字符串[0][1]=57,WW_菜单字符串[0][2]=0;//音效
+								WW_菜单字符串[1][0]=141,WW_菜单字符串[1][1]=142,WW_菜单字符串[1][2]=104,WW_菜单字符串[1][3]=194,WW_菜单字符串[1][4]=0;//油门自检
+								WW_菜单字符串[2][0]=141,WW_菜单字符串[2][1]=142,WW_菜单字符串[2][2]=195,WW_菜单字符串[2][3]=196,WW_菜单字符串[2][4]=0;//油门锁计
+								WW_菜单字符串[3][0]=39,WW_菜单字符串[3][1]=40,WW_菜单字符串[3][2]=197,WW_菜单字符串[3][3]=198,WW_菜单字符串[3][4]=0;//微调步进
 								
-								display_menu(line_2,3);
+								display_menu_显示菜单(line_2,3);
 								
-								if(Sound_enable)send3(hzk[58],72,0);
-								else send3(hzk[59],72,0);
-								if(Throttle_check)send3(hzk[58],72,2),send3(hzk[132],84,2);
-								else send3(hzk[10],72,2);
-								if(Auto_lock)send3(hzk[104],72,4),send3(hzk[105],84,4);
-								else send3(hzk[191],72,4),send3(hzk[105],84,4);
-								if(Trim_step)send2('1',72,6);
-								else send2('5',72,6);
-					//			if(Right_throttle)send3(hzk[190],68,2),send3(hzk[191],80,2);
-					//			else send3(hzk[189],68,2),send3(hzk[191],80,2);
+								if(Sound_enable)send3_写汉字(hzk[58],72,0);
+								else send3_写汉字(hzk[59],72,0);
+								if(Throttle_check)send3_写汉字(hzk[58],72,2),send3_写汉字(hzk[132],84,2);
+								else send3_写汉字(hzk[10],72,2);
+								if(Auto_lock)send3_写汉字(hzk[104],72,4),send3_写汉字(hzk[105],84,4);
+								else send3_写汉字(hzk[191],72,4),send3_写汉字(hzk[105],84,4);
+								if(Trim_step)send2_写大字母('1',72,6);
+								else send2_写大字母('5',72,6);
+					//			if(Right_throttle)send3_写汉字(hzk[190],68,2),send3_写汉字(hzk[191],80,2);
+					//			else send3_写汉字(hzk[189],68,2),send3_写汉字(hzk[191],80,2);
 								
 								if(line_2<1)
 								{
@@ -4726,7 +4726,7 @@ main()
 							}
 							else if(menu_2==29)//指数曲线
 							{
-								line_2=move_cursor(line_2,1);
+								line_2=move_cursor_光标移动(line_2,1);
 								
 								if(line_2==0)
 								{
@@ -4759,13 +4759,13 @@ main()
 									}
 								}
 								
-								send3(hzk[1],0,line_2+line_2);
-								send3(hzk[2],0,2-line_2-line_2);
+								send3_写汉字(hzk[1],0,line_2+line_2);
+								send3_写汉字(hzk[2],0,2-line_2-line_2);
 
-								send3(hzk[94],12,0);send3(hzk[95],24,0);
+								send3_写汉字(hzk[94],12,0);send3_写汉字(hzk[95],24,0);
 								
-								if(index_number==2)send3(hzk[84],36,0);
-								else send3(hzk[81+index_number],36,0);
+								if(index_number==2)send3_写汉字(hzk[84],36,0);
+								else send3_写汉字(hzk[81+index_number],36,0);
 
 								write_num100(CH_index[index_number],24,2,'/');
 								
@@ -4777,12 +4777,12 @@ main()
 								}
 								
 								
-								display_curve();
+								display_curve_显示指数曲线();
 								
 							}
 							else if(menu_2==30)//多点曲线
 							{
-								line_2=move_cursor(line_2,2);														
+								line_2=move_cursor_光标移动(line_2,2);														
 								
 								
 								if(line_2==0)
@@ -4800,9 +4800,9 @@ main()
 										
 									}
 									
-									send3(hzk[1],0,0);
-									send3(hzk[2],0,2);
-									send3(hzk[2],0,4);
+									send3_写汉字(hzk[1],0,0);
+									send3_写汉字(hzk[2],0,2);
+									send3_写汉字(hzk[2],0,4);
 								}
 								else if(line_2==1)
 								{
@@ -4819,9 +4819,9 @@ main()
 										
 									}
 									
-									send3(hzk[2],0,0);
-									send3(hzk[1],0,2);
-									send3(hzk[2],0,4);
+									send3_写汉字(hzk[2],0,0);
+									send3_写汉字(hzk[1],0,2);
+									send3_写汉字(hzk[2],0,4);
 								}
 								else if(line_2==2)
 								{
@@ -4842,60 +4842,60 @@ main()
 										}
 									}	
 									
-									send3(hzk[2],0,0);
-									send3(hzk[2],0,2);
-									send3(hzk[1],0,4);
+									send3_写汉字(hzk[2],0,0);
+									send3_写汉字(hzk[2],0,2);
+									send3_写汉字(hzk[1],0,4);
 								}
 															
 								
 								
 				
-								send3(hzk[94],12,0);send3(hzk[95],24,0);
-								if(curve_num==0)send3(hzk[83],40,0);
-								else if(curve_num>0)send3(hzk[84+curve_num],40,0);
+								send3_写汉字(hzk[94],12,0);send3_写汉字(hzk[95],24,0);
+								if(curve_num==0)send3_写汉字(hzk[83],40,0);
+								else if(curve_num>0)send3_写汉字(hzk[84+curve_num],40,0);
 									
 				
-								send3(hzk[51],12,2);
-								send3(hzk[81+point_num],28,2);
+								send3_写汉字(hzk[51],12,2);
+								send3_写汉字(hzk[81+point_num],28,2);
 								
 								write_num100(turnning_point[curve_num][point_num],12,4,'%');
-								get_curve2();
-								display_curve2();
+								get_curve2_油门曲线数据();
+								display_curve2_显示折线曲线();
 							}
 							else if(menu_2==31)//组合开关
 							{
-								line_2=move_cursor(line_2,4);
+								line_2=move_cursor_光标移动(line_2,4);
 							
-								WW[0][0]=160,WW[0][1]=161,WW[0][2]=0;//状态
-								WW[1][0]=83,WW[1][1]=205,WW[1][2]=0;//三？，205对应的汉字？？？
-								WW[2][0]=82,WW[2][1]=205,WW[2][2]=0;//二？，205对应的汉字？？？
-								WW[3][0]=38,WW[3][1]=30,WW[3][2]=0;//映射
-								WW[4][0]=36,WW[4][1]=37,WW[4][2]=0;//舵量
+								WW_菜单字符串[0][0]=160,WW_菜单字符串[0][1]=161,WW_菜单字符串[0][2]=0;//状态
+								WW_菜单字符串[1][0]=83,WW_菜单字符串[1][1]=205,WW_菜单字符串[1][2]=0;//三段
+								WW_菜单字符串[2][0]=82,WW_菜单字符串[2][1]=205,WW_菜单字符串[2][2]=0;//二段
+								WW_菜单字符串[3][0]=38,WW_菜单字符串[3][1]=30,WW_菜单字符串[3][2]=0;//映射
+								WW_菜单字符串[4][0]=36,WW_菜单字符串[4][1]=37,WW_菜单字符串[4][2]=0;//舵量
 								
-								display_menu(line_2,4);
+								display_menu_显示菜单(line_2,4);
 								
 								if(line_2<3)
 								{
 									if(Com_Swt_IN1)
 									{
-										send3(hzk[8],60,0),send3(hzk[9],72,0);								
-										send3(hzk[81+Combination_Switch],84,0);	
+										send3_写汉字(hzk[8],60,0),send3_写汉字(hzk[9],72,0);								
+										send3_写汉字(hzk[81+Combination_Switch],84,0);	
 									}
 									else
 									{
-										send3(hzk[2],60,0),send3(hzk[59],72,0);send3(hzk[2],84,0);
+										send3_写汉字(hzk[2],60,0),send3_写汉字(hzk[59],72,0);send3_写汉字(hzk[2],84,0);
 									}
 									
 									
-									display_switch(Com_Swt_IN1,60,2);
-									display_switch(Com_Swt_IN2,60,4);	
-									send3(hzk[94],60,6);send3(hzk[95],72,6);send3(hzk[Com_Swt_mapping+81],84,6);
+									display_switch_显示开关(Com_Swt_IN1,60,2);
+									display_switch_显示开关(Com_Swt_IN2,60,4);	
+									send3_写汉字(hzk[94],60,6);send3_写汉字(hzk[95],72,6);send3_写汉字(hzk[Com_Swt_mapping+81],84,6);
 								}
 								else
 								{
-									display_switch(Com_Swt_IN1,60,0);
-									display_switch(Com_Swt_IN2,60,2);
-									send3(hzk[94],60,4);send3(hzk[95],72,4);send3(hzk[Com_Swt_mapping+81],84,4);
+									display_switch_显示开关(Com_Swt_IN1,60,0);
+									display_switch_显示开关(Com_Swt_IN2,60,2);
+									send3_写汉字(hzk[94],60,4);send3_写汉字(hzk[95],72,4);send3_写汉字(hzk[Com_Swt_mapping+81],84,4);
 								}
 								
 								
@@ -4958,13 +4958,13 @@ main()
 							}
 							else if(menu_2==32)//
 							{
-								line_2=move_cursor(line_2,1);
+								line_2=move_cursor_光标移动(line_2,1);
 								
 								
 							}
 							else if(menu_2==33)//
 							{
-								line_2=move_cursor(line_2,1);
+								line_2=move_cursor_光标移动(line_2,1);
 								
 								
 							}
@@ -4981,13 +4981,13 @@ main()
 
 						if(menu_1==1)//工作模式
 						{
-							line_1=move_cursor(line_1,2);
+							line_1=move_cursor_光标移动(line_1,2);
 							
-							WW[0][0]=10,WW[0][1]=11,WW[0][2]=29,WW[0][3]=30,WW[0][4]=0;//无线发射
-							WW[1][0]=192,WW[1][1]=193,WW[1][2]=31,WW[1][3]=32,WW[1][4]=0;//？？输出，192、193对应的汉字？？？
-							WW[2][0]=192,WW[2][1]=193,WW[2][2]=31,WW[2][3]=33,WW[2][4]=0;//？？输入，192、193对应的汉字？？？
+							WW_菜单字符串[0][0]=10,WW_菜单字符串[0][1]=11,WW_菜单字符串[0][2]=29,WW_菜单字符串[0][3]=30,WW_菜单字符串[0][4]=0;//无线发射
+							WW_菜单字符串[1][0]=192,WW_菜单字符串[1][1]=193,WW_菜单字符串[1][2]=31,WW_菜单字符串[1][3]=32,WW_菜单字符串[1][4]=0;//PPM PPM 输出
+							WW_菜单字符串[2][0]=192,WW_菜单字符串[2][1]=193,WW_菜单字符串[2][2]=31,WW_菜单字符串[2][3]=33,WW_菜单字符串[2][4]=0;//PPM PPM 输入
 							
-							display_menu(line_1,2);
+							display_menu_显示菜单(line_1,2);
 							
 							if(line_1==0)//无线
 							{								
@@ -5043,23 +5043,23 @@ main()
 								}
 								
 							}
-							if(RC_TX)send3(hzk[3],62,0);
-							else send3(hzk[2],62,0);
-							if(PPM_IN)send3(hzk[3],62,4);
-							else send3(hzk[2],62,4);
-							if(PPM_OUT)send3(hzk[3],62,2);
-							else send3(hzk[2],62,2);
+							if(RC_TX)send3_写汉字(hzk[3],62,0);
+							else send3_写汉字(hzk[2],62,0);
+							if(PPM_IN)send3_写汉字(hzk[3],62,4);
+							else send3_写汉字(hzk[2],62,4);
+							if(PPM_OUT)send3_写汉字(hzk[3],62,2);
+							else send3_写汉字(hzk[2],62,2);
 						}
 						else if(menu_1==2)//快捷功能
 						{
-							line_1=move_cursor(line_1,3);
+							line_1=move_cursor_光标移动(line_1,3);
 							
-							WW[0][0]=181,WW[0][1]=182,WW[0][2]=80,WW[0][3]=0;//定时器
-							WW[1][0]=183,WW[1][1]=184,WW[1][2]=36,WW[1][3]=0;//大小舵
-							WW[2][0]=203,WW[2][1]=204,WW[2][2]=58,WW[2][3]=59,WW[2][4]=0;//组合开关
-							WW[3][0]=66,WW[3][1]=67,WW[3][2]=71,WW[3][3]=72,WW[3][4]=0;//回传报警
+							WW_菜单字符串[0][0]=181,WW_菜单字符串[0][1]=182,WW_菜单字符串[0][2]=80,WW_菜单字符串[0][3]=0;//定时器
+							WW_菜单字符串[1][0]=183,WW_菜单字符串[1][1]=184,WW_菜单字符串[1][2]=36,WW_菜单字符串[1][3]=0;//大小舵
+							WW_菜单字符串[2][0]=203,WW_菜单字符串[2][1]=204,WW_菜单字符串[2][2]=58,WW_菜单字符串[2][3]=59,WW_菜单字符串[2][4]=0;//组合开关
+							WW_菜单字符串[3][0]=66,WW_菜单字符串[3][1]=67,WW_菜单字符串[3][2]=71,WW_菜单字符串[3][3]=72,WW_菜单字符串[3][4]=0;//回传报警
 
-							display_menu(line_1,3);
+							display_menu_显示菜单(line_1,3);
 							
 							
 							
@@ -5088,16 +5088,16 @@ main()
 						}
 						else if(menu_1==3)//通道设置
 						{
-							line_1=move_cursor(line_1,6);
+							line_1=move_cursor_光标移动(line_1,6);
 							
-							WW[0][0]=34,WW[0][1]=35,WW[0][2]=0;//正反
-							WW[1][0]=39,WW[1][1]=40,WW[1][2]=0;//微调
-							WW[2][0]=34,WW[2][1]=36,WW[2][2]=37,WW[2][3]=0;//正舵量
-							WW[3][0]=134,WW[3][1]=36,WW[3][2]=37,WW[3][3]=0;//负舵量
-							WW[4][0]=31,WW[4][1]=33,WW[4][2]=38,WW[4][3]=30,WW[4][4]=0;//输入映射
-							WW[5][0]=143,WW[5][1]=144,WW[5][2]=118,WW[5][3]=11,WW[5][4]=0;//指数曲线
-							WW[6][0]=50,WW[6][1]=51,WW[6][2]=118,WW[6][3]=11,WW[6][4]=0;//多点曲线
-							display_menu(line_1,6);
+							WW_菜单字符串[0][0]=34,WW_菜单字符串[0][1]=35,WW_菜单字符串[0][2]=0;//正反
+							WW_菜单字符串[1][0]=39,WW_菜单字符串[1][1]=40,WW_菜单字符串[1][2]=0;//微调
+							WW_菜单字符串[2][0]=34,WW_菜单字符串[2][1]=36,WW_菜单字符串[2][2]=37,WW_菜单字符串[2][3]=0;//正舵量
+							WW_菜单字符串[3][0]=134,WW_菜单字符串[3][1]=36,WW_菜单字符串[3][2]=37,WW_菜单字符串[3][3]=0;//负舵量
+							WW_菜单字符串[4][0]=31,WW_菜单字符串[4][1]=33,WW_菜单字符串[4][2]=38,WW_菜单字符串[4][3]=30,WW_菜单字符串[4][4]=0;//输入映射
+							WW_菜单字符串[5][0]=143,WW_菜单字符串[5][1]=144,WW_菜单字符串[5][2]=118,WW_菜单字符串[5][3]=11,WW_菜单字符串[5][4]=0;//指数曲线
+							WW_菜单字符串[6][0]=50,WW_菜单字符串[6][1]=51,WW_菜单字符串[6][2]=118,WW_菜单字符串[6][3]=11,WW_菜单字符串[6][4]=0;//多点曲线
+							display_menu_显示菜单(line_1,6);
 							
 							
 							if(line_1==0)
@@ -5131,21 +5131,21 @@ main()
 						}
 						else if(menu_1==4)//高级混控
 						{
-							line_1=move_cursor(line_1,3);
+							line_1=move_cursor_光标移动(line_1,3);
 							/*start-----改自“柴门”-------*/
 							/*
-							WW[0][0]=21,WW[0][1]=22,WW[0][2]=80,WW[0][3]=81,WW[0][4]=0;//混控器一
-							WW[1][0]=21,WW[1][1]=22,WW[1][2]=80,WW[1][3]=82,WW[1][4]=0;//混控器2
-							WW[2][0]=21,WW[2][1]=22,WW[2][2]=80,WW[2][3]=83,WW[2][4]=0;//混控器3
-							WW[3][0]=21,WW[3][1]=22,WW[3][2]=80,WW[3][3]=84,WW[3][4]=0;//混控器4
+							WW_菜单字符串[0][0]=21,WW_菜单字符串[0][1]=22,WW_菜单字符串[0][2]=80,WW_菜单字符串[0][3]=81,WW_菜单字符串[0][4]=0;//混控器一
+							WW_菜单字符串[1][0]=21,WW_菜单字符串[1][1]=22,WW_菜单字符串[1][2]=80,WW_菜单字符串[1][3]=82,WW_菜单字符串[1][4]=0;//混控器2
+							WW_菜单字符串[2][0]=21,WW_菜单字符串[2][1]=22,WW_菜单字符串[2][2]=80,WW_菜单字符串[2][3]=83,WW_菜单字符串[2][4]=0;//混控器3
+							WW_菜单字符串[3][0]=21,WW_菜单字符串[3][1]=22,WW_菜单字符串[3][2]=80,WW_菜单字符串[3][3]=84,WW_菜单字符串[3][4]=0;//混控器4
 							*/
 							/*混控菜单中4种混控器直接显示混控类型，不用再进入下一级菜单才能看到是哪种类型的混控*/
-							WW[0][0]=110,WW[0][1]=111,WW[0][2]=112,WW[0][3]=21,WW[0][4]=22,WW[0][5]=0;//三角翼混控
-							WW[1][0]=113,WW[1][1]=114,WW[1][2]=21,WW[1][3]=22,WW[1][4]=0;//差速混控
-							WW[2][0]=214,WW[2][1]=115,WW[2][2]=21,WW[2][3]=22,WW[2][4]=0;//V尾混控
-							WW[3][0]=116,WW[3][1]=117,WW[3][2]=112,WW[3][3]=21,WW[3][4]=22,WW[3][5]=0;//襟副翼混控
+							WW_菜单字符串[0][0]=110,WW_菜单字符串[0][1]=111,WW_菜单字符串[0][2]=112,WW_菜单字符串[0][3]=21,WW_菜单字符串[0][4]=22,WW_菜单字符串[0][5]=0;//三角翼混控
+							WW_菜单字符串[1][0]=113,WW_菜单字符串[1][1]=114,WW_菜单字符串[1][2]=21,WW_菜单字符串[1][3]=22,WW_菜单字符串[1][4]=0;//差速混控
+							WW_菜单字符串[2][0]=214,WW_菜单字符串[2][1]=115,WW_菜单字符串[2][2]=21,WW_菜单字符串[2][3]=22,WW_菜单字符串[2][4]=0;//V尾混控
+							WW_菜单字符串[3][0]=116,WW_菜单字符串[3][1]=117,WW_菜单字符串[3][2]=112,WW_菜单字符串[3][3]=21,WW_菜单字符串[3][4]=22,WW_菜单字符串[3][5]=0;//襟副翼混控
 							/*end-----改自“柴门”-------*/
-							display_menu(line_1,3);
+							display_menu_显示菜单(line_1,3);
 							
 							if(increase|decrease)
 							{
@@ -5156,28 +5156,28 @@ main()
 								else if(line_1<4)mixer4=!mixer4,Data_change(2);
 							}
 							
-							if(mixer1)send3(hzk[58],75,0);
-							else send3(hzk[59],75,0);
-							if(mixer2)send3(hzk[58],75,2);
-							else send3(hzk[59],75,2);
-							if(mixer3)send3(hzk[58],75,4);
-							else send3(hzk[59],75,4);
-							if(mixer4)send3(hzk[58],75,6);
-							else send3(hzk[59],75,6);
+							if(mixer1)send3_写汉字(hzk[58],75,0);
+							else send3_写汉字(hzk[59],75,0);
+							if(mixer2)send3_写汉字(hzk[58],75,2);
+							else send3_写汉字(hzk[59],75,2);
+							if(mixer3)send3_写汉字(hzk[58],75,4);
+							else send3_写汉字(hzk[59],75,4);
+							if(mixer4)send3_写汉字(hzk[58],75,6);
+							else send3_写汉字(hzk[59],75,6);
 							if(right)right=0,menu_2=5,line_2=0,star=1,mixer_name=line_1+1;						
 							
 						}
 						else if(menu_1==5)//无线配置
 						{
-							line_1=move_cursor(line_1,4);
+							line_1=move_cursor_光标移动(line_1,4);
 							
 													
-							WW[0][0]=16,WW[0][1]=47,WW[0][2]=48,WW[0][3]=49,WW[0][4]=0;//通信密码
-							WW[1][0]=50,WW[1][1]=51,WW[1][2]=52,WW[1][3]=53,WW[1][4]=0;//多点跳频
-							WW[2][0]=76,WW[2][1]=53,WW[2][2]=77,WW[2][3]=78,WW[2][4]=0;//全频扫描
-							WW[3][0]=16,WW[3][1]=47,WW[3][2]=119,WW[3][3]=120,WW[3][4]=0;//通信协议
-							WW[4][0]=29,WW[4][1]=30,WW[4][2]=27,WW[4][3]=45,WW[4][4]=0;//发射功率
-							display_menu(line_1,4);
+							WW_菜单字符串[0][0]=16,WW_菜单字符串[0][1]=47,WW_菜单字符串[0][2]=48,WW_菜单字符串[0][3]=49,WW_菜单字符串[0][4]=0;//通信密码
+							WW_菜单字符串[1][0]=50,WW_菜单字符串[1][1]=51,WW_菜单字符串[1][2]=52,WW_菜单字符串[1][3]=53,WW_菜单字符串[1][4]=0;//多点跳频
+							WW_菜单字符串[2][0]=76,WW_菜单字符串[2][1]=53,WW_菜单字符串[2][2]=77,WW_菜单字符串[2][3]=78,WW_菜单字符串[2][4]=0;//全频扫描
+							WW_菜单字符串[3][0]=16,WW_菜单字符串[3][1]=47,WW_菜单字符串[3][2]=119,WW_菜单字符串[3][3]=120,WW_菜单字符串[3][4]=0;//通信协议
+							WW_菜单字符串[4][0]=29,WW_菜单字符串[4][1]=30,WW_菜单字符串[4][2]=27,WW_菜单字符串[4][3]=45,WW_菜单字符串[4][4]=0;//发射功率
+							display_menu_显示菜单(line_1,4);
 							
 
 							if(line_1<1)
@@ -5221,23 +5221,23 @@ main()
 								
 								if(TX_power==3)
 								{
-									send2('1',60,6);send2('0',68,6);send2('0',76,6);send2('m',84,6);send2('W',92,6);
+									send2_写大字母('1',60,6);send2_写大字母('0',68,6);send2_写大字母('0',76,6);send2_写大字母('m',84,6);send2_写大字母('W',92,6);
 								}
 								else if(TX_power==2)
 								{
-									send2(' ',60,6);send2('2',68,6);send2('5',76,6);send2('m',84,6);send2('W',92,6);
+									send2_写大字母(' ',60,6);send2_写大字母('2',68,6);send2_写大字母('5',76,6);send2_写大字母('m',84,6);send2_写大字母('W',92,6);
 								}
 								else if(TX_power==1)
 								{
-									send2(' ',60,6);send2(' ',68,6);send2('6',76,6);send2('m',84,6);send2('W',92,6);
+									send2_写大字母(' ',60,6);send2_写大字母(' ',68,6);send2_写大字母('6',76,6);send2_写大字母('m',84,6);send2_写大字母('W',92,6);
 								}
 								else if(TX_power==0)
 								{
-									send2(' ',60,6);send2(' ',68,6);send2('2',76,6);send2('m',84,6);send2('W',92,6);
+									send2_写大字母(' ',60,6);send2_写大字母(' ',68,6);send2_写大字母('2',76,6);send2_写大字母('m',84,6);send2_写大字母('W',92,6);
 								}
 								else 
 								{
-									send2('E',60,6);send2('R',68,6);send2('R',76,6);send2('O',84,6);send2('R',92,6);
+									send2_写大字母('E',60,6);send2_写大字母('R',68,6);send2_写大字母('R',76,6);send2_写大字母('O',84,6);send2_写大字母('R',92,6);
 
 								}
 								
@@ -5251,13 +5251,13 @@ main()
 						else if(menu_1==7)//PPM配置
 						{		
 							
-							line_1=move_cursor(line_1,3);
+							line_1=move_cursor_光标移动(line_1,3);
 							
-							WW[0][0]=31,WW[0][1]=32,WW[0][2]=38,WW[0][3]=30,WW[0][4]=0;//输出映射
-							WW[1][0]=31,WW[1][1]=33,WW[1][2]=98,WW[1][3]=99,WW[1][4]=0;//输入校准
-							WW[2][0]=54,WW[2][1]=55,WW[2][2]=160,WW[2][3]=161,WW[2][4]=0;//教练状态
-							WW[3][0]=54,WW[3][1]=55,WW[3][2]=58,WW[3][3]=59,WW[3][4]=0;//教练开关
-							display_menu(line_1,3);
+							WW_菜单字符串[0][0]=31,WW_菜单字符串[0][1]=32,WW_菜单字符串[0][2]=38,WW_菜单字符串[0][3]=30,WW_菜单字符串[0][4]=0;//输出映射
+							WW_菜单字符串[1][0]=31,WW_菜单字符串[1][1]=33,WW_菜单字符串[1][2]=98,WW_菜单字符串[1][3]=99,WW_菜单字符串[1][4]=0;//输入校准
+							WW_菜单字符串[2][0]=54,WW_菜单字符串[2][1]=55,WW_菜单字符串[2][2]=160,WW_菜单字符串[2][3]=161,WW_菜单字符串[2][4]=0;//教练状态
+							WW_菜单字符串[3][0]=54,WW_菜单字符串[3][1]=55,WW_菜单字符串[3][2]=58,WW_菜单字符串[3][3]=59,WW_菜单字符串[3][4]=0;//教练开关
+							display_menu_显示菜单(line_1,3);
 							
 							if(line_1<1)
 							{
@@ -5293,31 +5293,31 @@ main()
 							{
 								if(train_output)
 								{
-									send3(hzk[2],72,4),send3(hzk[58],84,4),send3(hzk[2],96,4);
+									send3_写汉字(hzk[2],72,4),send3_写汉字(hzk[58],84,4),send3_写汉字(hzk[2],96,4);
 								}
-								else send3(hzk[2],72,4),send3(hzk[59],84,4),send3(hzk[2],96,4);
+								else send3_写汉字(hzk[2],72,4),send3_写汉字(hzk[59],84,4),send3_写汉字(hzk[2],96,4);
 
 							}
-							else send3(hzk[10],72,4),send3(hzk[47],84,4),send3(hzk[68],96,4);
+							else send3_写汉字(hzk[10],72,4),send3_写汉字(hzk[47],84,4),send3_写汉字(hzk[68],96,4);
 							
-							display_switch(train_switch,72,6);
+							display_switch_显示开关(train_switch,72,6);
 
 						}
 						else if(menu_1==8)//系统设置
 						{
-							line_1=move_cursor(line_1,8);
+							line_1=move_cursor_光标移动(line_1,8);
 							
-							WW[0][0]=62,WW[0][1]=63,WW[0][2]=18,WW[0][3]=13,WW[0][4]=0;//液晶设置
-							WW[1][0]=133,WW[1][1]=152,WW[1][2]=18,WW[1][3]=13,WW[1][4]=0;//偏好设置
-							WW[2][0]=175,WW[2][1]=70,WW[2][2]=18,WW[2][3]=13,WW[2][4]=0;//电压设置
-							WW[3][0]=58,WW[3][1]=132,WW[3][2]=145,WW[3][3]=146,WW[3][4]=0;//开机画面
-							WW[4][0]=154,WW[4][1]=155,WW[4][2]=144,WW[4][3]=156,WW[4][4]=0;//原始数据
-							WW[5][0]=36,WW[5][1]=37,WW[5][2]=167,WW[5][3]=168,WW[5][4]=0;//舵量监视
-							WW[6][0]=96,WW[6][1]=97,WW[6][2]=98,WW[6][3]=99,WW[6][4]=0;//摇杆校准
-							WW[7][0]=73,WW[7][1]=74,WW[7][2]=47,WW[7][3]=75,WW[7][4]=0;//版本信息
+							WW_菜单字符串[0][0]=62,WW_菜单字符串[0][1]=63,WW_菜单字符串[0][2]=18,WW_菜单字符串[0][3]=13,WW_菜单字符串[0][4]=0;//液晶设置
+							WW_菜单字符串[1][0]=133,WW_菜单字符串[1][1]=152,WW_菜单字符串[1][2]=18,WW_菜单字符串[1][3]=13,WW_菜单字符串[1][4]=0;//偏好设置
+							WW_菜单字符串[2][0]=175,WW_菜单字符串[2][1]=70,WW_菜单字符串[2][2]=18,WW_菜单字符串[2][3]=13,WW_菜单字符串[2][4]=0;//电压设置
+							WW_菜单字符串[3][0]=58,WW_菜单字符串[3][1]=132,WW_菜单字符串[3][2]=145,WW_菜单字符串[3][3]=146,WW_菜单字符串[3][4]=0;//开机画面
+							WW_菜单字符串[4][0]=154,WW_菜单字符串[4][1]=155,WW_菜单字符串[4][2]=144,WW_菜单字符串[4][3]=156,WW_菜单字符串[4][4]=0;//原始数据
+							WW_菜单字符串[5][0]=36,WW_菜单字符串[5][1]=37,WW_菜单字符串[5][2]=167,WW_菜单字符串[5][3]=168,WW_菜单字符串[5][4]=0;//舵量监视
+							WW_菜单字符串[6][0]=96,WW_菜单字符串[6][1]=97,WW_菜单字符串[6][2]=98,WW_菜单字符串[6][3]=99,WW_菜单字符串[6][4]=0;//摇杆校准
+							WW_菜单字符串[7][0]=73,WW_菜单字符串[7][1]=74,WW_菜单字符串[7][2]=47,WW_菜单字符串[7][3]=75,WW_菜单字符串[7][4]=0;//版本信息
 							
-							WW[8][0]=106,WW[8][1]=107,WW[8][2]=32,WW[8][3]=136,WW[8][4]=0;//恢复出厂
-							display_menu(line_1,8);
+							WW_菜单字符串[8][0]=106,WW_菜单字符串[8][1]=107,WW_菜单字符串[8][2]=32,WW_菜单字符串[8][3]=136,WW_菜单字符串[8][4]=0;//恢复出厂
+							display_menu_显示菜单(line_1,8);
 							
 							if(line_1<1)
 							{
@@ -5341,8 +5341,8 @@ main()
 									boot_screen_en=!boot_screen_en;
 										Data_change(1);
 								}
-								if(boot_screen_en)send3(hzk[58],72,4);
-								else send3(hzk[59],72,4);
+								if(boot_screen_en)send3_写汉字(hzk[58],72,4);
+								else send3_写汉字(hzk[59],72,4);
 								
 								
 							}
@@ -5376,25 +5376,25 @@ main()
 						}
 						else if(menu_1==10)//自动控制
 						{
-							line_1=move_cursor(line_1,3);
+							line_1=move_cursor_光标移动(line_1,3);
 							
-							WW[0][0]=160,WW[0][1]=161,WW[0][2]=0;//状态
-							WW[1][0]=58,WW[1][1]=59,WW[1][2]=0;//开关
+							WW_菜单字符串[0][0]=160,WW_菜单字符串[0][1]=161,WW_菜单字符串[0][2]=0;//状态
+							WW_菜单字符串[1][0]=58,WW_菜单字符串[1][1]=59,WW_菜单字符串[1][2]=0;//开关
 							
-							WW[2][0]=170,WW[2][1]=171,WW[2][2]=0;//归位
-							WW[3][0]=77,WW[3][1]=78,WW[3][2]=0;//扫描
-							display_menu(line_1,3);
+							WW_菜单字符串[2][0]=170,WW_菜单字符串[2][1]=171,WW_菜单字符串[2][2]=0;//归位
+							WW_菜单字符串[3][0]=77,WW_菜单字符串[3][1]=78,WW_菜单字符串[3][2]=0;//扫描
+							display_menu_显示菜单(line_1,3);
 							
 							
 								if(auto_switch)
 								{
-									if(auto_mode==1)send3(hzk[170],60,0),send3(hzk[171],72,0);//归位
-									else if(auto_mode==2)send3(hzk[199],60,0),send3(hzk[200],72,0);//停止
-									else if(auto_mode==3)send3(hzk[77],60,0),send3(hzk[78],72,0);//扫描
+									if(auto_mode==1)send3_写汉字(hzk[170],60,0),send3_写汉字(hzk[171],72,0);//归位
+									else if(auto_mode==2)send3_写汉字(hzk[199],60,0),send3_写汉字(hzk[200],72,0);//停止
+									else if(auto_mode==3)send3_写汉字(hzk[77],60,0),send3_写汉字(hzk[78],72,0);//扫描
 								}
-								else send3(hzk[59],60,0),send3(hzk[2],72,0);//“关  ”
+								else send3_写汉字(hzk[59],60,0),send3_写汉字(hzk[2],72,0);//“关  ”
 							
-								display_switch(auto_switch,60,2);
+								display_switch_显示开关(auto_switch,60,2);
 							write_num100(auto_middle,66,4,'/');
 							
 							
@@ -5439,16 +5439,16 @@ main()
 						}
 						else if(menu_1==11)//模型管理
 						{
-							line_1=move_cursor(line_1,3);
+							line_1=move_cursor_光标移动(line_1,3);
 							
-							WW[0][0]=162,WW[0][1]=163,WW[0][2]=0;//选择
-							WW[1][0]=164,WW[1][1]=165,WW[1][2]=0;//命名
-							WW[2][0]=166,WW[2][1]=169,WW[2][2]=0;//复制
-							WW[3][0]=166,WW[3][1]=171,WW[3][2]=0;//复位
-							display_menu(line_1,3);
+							WW_菜单字符串[0][0]=162,WW_菜单字符串[0][1]=163,WW_菜单字符串[0][2]=0;//选择
+							WW_菜单字符串[1][0]=164,WW_菜单字符串[1][1]=165,WW_菜单字符串[1][2]=0;//命名
+							WW_菜单字符串[2][0]=166,WW_菜单字符串[2][1]=169,WW_菜单字符串[2][2]=0;//复制
+							WW_菜单字符串[3][0]=166,WW_菜单字符串[3][1]=171,WW_菜单字符串[3][2]=0;//复位
+							display_menu_显示菜单(line_1,3);
 							
 							
-							send3(hzk[Model_number+81],60,0);send3(hzk[68],72,0);//一号、二号、……
+							send3_写汉字(hzk[Model_number+81],60,0);send3_写汉字(hzk[68],72,0);//一号、二号、……
 							
 							
 							if(line_1<1)
@@ -5494,11 +5494,11 @@ main()
 								{
 									if(i==Name_idx_模型名字字母索引)
 									{
-										send2_rev(Model_name[i]+32,60+8*i,2);
+										send2_rev_写大字母_反显(Model_name[i]+32,60+8*i,2);
 									}
 									else
 									{
-										send2(Model_name[i]+32,60+8*i,2);
+										send2_写大字母(Model_name[i]+32,60+8*i,2);
 									}
 								}
 								if(increase)
@@ -5506,7 +5506,7 @@ main()
 									increase=0;
 									Model_name[Name_idx_模型名字字母索引]++;
 									if(Model_name[Name_idx_模型名字字母索引]>90) Model_name[Name_idx_模型名字字母索引]=0;
-									send2_rev(Model_name[Name_idx_模型名字字母索引]+32,60+Name_idx_模型名字字母索引*8,2);									
+									send2_rev_写大字母_反显(Model_name[Name_idx_模型名字字母索引]+32,60+Name_idx_模型名字字母索引*8,2);									
 									ROM_enable=1,Data_model=1,Model_change=1;
 								}
 								if(decrease)
@@ -5514,7 +5514,7 @@ main()
 									decrease=0;
 									if(Model_name[Name_idx_模型名字字母索引]>0) Model_name[Name_idx_模型名字字母索引]--;
 									else Model_name[Name_idx_模型名字字母索引]=90;
-									send2_rev(Model_name[Name_idx_模型名字字母索引]+32,60+Name_idx_模型名字字母索引*8,2);
+									send2_rev_写大字母_反显(Model_name[Name_idx_模型名字字母索引]+32,60+Name_idx_模型名字字母索引*8,2);
 									ROM_enable=1,Data_model=1,Model_change=1;
 								}
 								if(right)
@@ -5560,14 +5560,14 @@ main()
 									{
 										left=0;
 										copy_ready=0;paste_ready=0;
-										send3(hzk[2],60,4);send3(hzk[2],72,4);send3(hzk[2],84,4);send3(hzk[2],96,4);
+										send3_写汉字(hzk[2],60,4);send3_写汉字(hzk[2],72,4);send3_写汉字(hzk[2],84,4);send3_写汉字(hzk[2],96,4);
 									}
 									else
 									{
-										send3(hzk[176],60,4);send3(hzk[Model_target+81],72,4);send3(hzk[68],84,4);
+										send3_写汉字(hzk[176],60,4);send3_写汉字(hzk[Model_target+81],72,4);send3_写汉字(hzk[68],84,4);
 										if(paste_ready)
 										{
-											send3(hzk[3],96,4);
+											send3_写汉字(hzk[3],96,4);
 											delay_time++;
 											if(delay_time>4)
 											{
@@ -5577,7 +5577,7 @@ main()
 												copy_ready=0;paste_ready=0;
 											}
 										}
-										else send2('?',96,4);	
+										else send2_写大字母('?',96,4);	
 									}
 
 
@@ -5611,14 +5611,14 @@ main()
 									{
 										left=0;
 										reset_action=0;Model_reset=0;
-										send3(hzk[2],60,6);send3(hzk[2],72,6);send3(hzk[2],84,6);
+										send3_写汉字(hzk[2],60,6);send3_写汉字(hzk[2],72,6);send3_写汉字(hzk[2],84,6);
 									}	
 									else
 									{
-										send3(hzk[137],60,6);send3(hzk[109],72,6);
+										send3_写汉字(hzk[137],60,6);send3_写汉字(hzk[109],72,6);
 										if(Model_reset)
 										{
-											send3(hzk[3],84,6);
+											send3_写汉字(hzk[3],84,6);
 											delay_time++;
 											if(delay_time>4)
 											{
@@ -5628,7 +5628,7 @@ main()
 											}
 											
 										}
-										else send2('?',84,6);	
+										else send2_写大字母('?',84,6);	
 									}
 									
 								}
@@ -5637,14 +5637,14 @@ main()
 						}
 						else if(menu_1==12)//接收机管理
 						{
-							line_1=move_cursor(line_1,3);
+							line_1=move_cursor_光标移动(line_1,3);
 							
-							WW[0][0]=41,WW[0][1]=42,WW[0][2]=43,WW[0][3]=44,WW[0][4]=0;//新建接收
-							WW[1][0]=46,WW[1][1]=22,WW[1][2]=36,WW[1][3]=37,WW[1][4]=0;//失控舵量
-							WW[2][0]=31,WW[2][1]=32,WW[2][2]=8,WW[2][3]=9,WW[2][4]=0;//输出模式
-							WW[3][0]=16,WW[3][1]=17,WW[3][2]=38,WW[3][3]=30,WW[3][4]=0;//通道映射
+							WW_菜单字符串[0][0]=41,WW_菜单字符串[0][1]=42,WW_菜单字符串[0][2]=43,WW_菜单字符串[0][3]=44,WW_菜单字符串[0][4]=0;//新建接收
+							WW_菜单字符串[1][0]=46,WW_菜单字符串[1][1]=22,WW_菜单字符串[1][2]=36,WW_菜单字符串[1][3]=37,WW_菜单字符串[1][4]=0;//失控舵量
+							WW_菜单字符串[2][0]=31,WW_菜单字符串[2][1]=32,WW_菜单字符串[2][2]=8,WW_菜单字符串[2][3]=9,WW_菜单字符串[2][4]=0;//输出模式
+							WW_菜单字符串[3][0]=16,WW_菜单字符串[3][1]=17,WW_菜单字符串[3][2]=38,WW_菜单字符串[3][3]=30,WW_菜单字符串[3][4]=0;//通道映射
 
-							display_menu(line_1,3);
+							display_menu_显示菜单(line_1,3);
 							
 							
 							if(line_1<1)
@@ -5680,22 +5680,22 @@ main()
 
 					
 
-					line=move_cursor(line,10);
-					WW[0][0]=209,WW[0][1]=210,WW[0][2]=39,WW[0][3]=40,WW[0][4]=0;//保存微调
+					line=move_cursor_光标移动(line,10);
+					WW_菜单字符串[0][0]=209,WW_菜单字符串[0][1]=210,WW_菜单字符串[0][2]=39,WW_菜单字符串[0][3]=40,WW_菜单字符串[0][4]=0;//保存微调
 					
-					WW[1][0]=6,WW[1][1]=7,WW[1][2]=8,WW[1][3]=9,WW[1][4]=0;//工作模式
-					WW[2][0]=25,WW[2][1]=26,WW[2][2]=27,WW[2][3]=28,WW[2][4]=0;//快捷功能
-					WW[3][0]=16,WW[3][1]=17,WW[3][2]=18,WW[3][3]=13,WW[3][4]=0;//通道设置
-					WW[4][0]=19,WW[4][1]=20,WW[4][2]=21,WW[4][3]=22,WW[4][4]=0;//高级混控
-					WW[5][0]=10,WW[5][1]=11,WW[5][2]=12,WW[5][3]=13,WW[5][4]=0;//无线配置
-					WW[6][0]=192,WW[6][1]=193,WW[6][2]=12,WW[6][3]=13,WW[6][4]=0;//PPM PPM 配置
-					WW[7][0]=104,WW[7][1]=105,WW[7][2]=22,WW[7][3]=169,WW[7][4]=0;//自动控制
-					WW[8][0]=8,WW[8][1]=159,WW[8][2]=14,WW[8][3]=15,WW[8][4]=0;//模型管理
-					WW[9][0]=43,WW[9][1]=44,WW[9][2]=14,WW[9][3]=15,WW[9][4]=0;//接收管理
-					WW[10][0]=23,WW[10][1]=24,WW[10][2]=18,WW[10][3]=13,WW[10][4]=0;//系统设置
+					WW_菜单字符串[1][0]=6,WW_菜单字符串[1][1]=7,WW_菜单字符串[1][2]=8,WW_菜单字符串[1][3]=9,WW_菜单字符串[1][4]=0;//工作模式
+					WW_菜单字符串[2][0]=25,WW_菜单字符串[2][1]=26,WW_菜单字符串[2][2]=27,WW_菜单字符串[2][3]=28,WW_菜单字符串[2][4]=0;//快捷功能
+					WW_菜单字符串[3][0]=16,WW_菜单字符串[3][1]=17,WW_菜单字符串[3][2]=18,WW_菜单字符串[3][3]=13,WW_菜单字符串[3][4]=0;//通道设置
+					WW_菜单字符串[4][0]=19,WW_菜单字符串[4][1]=20,WW_菜单字符串[4][2]=21,WW_菜单字符串[4][3]=22,WW_菜单字符串[4][4]=0;//高级混控
+					WW_菜单字符串[5][0]=10,WW_菜单字符串[5][1]=11,WW_菜单字符串[5][2]=12,WW_菜单字符串[5][3]=13,WW_菜单字符串[5][4]=0;//无线配置
+					WW_菜单字符串[6][0]=192,WW_菜单字符串[6][1]=193,WW_菜单字符串[6][2]=12,WW_菜单字符串[6][3]=13,WW_菜单字符串[6][4]=0;//PPM PPM 配置
+					WW_菜单字符串[7][0]=104,WW_菜单字符串[7][1]=105,WW_菜单字符串[7][2]=22,WW_菜单字符串[7][3]=169,WW_菜单字符串[7][4]=0;//自动控制
+					WW_菜单字符串[8][0]=8,WW_菜单字符串[8][1]=159,WW_菜单字符串[8][2]=14,WW_菜单字符串[8][3]=15,WW_菜单字符串[8][4]=0;//模型管理
+					WW_菜单字符串[9][0]=43,WW_菜单字符串[9][1]=44,WW_菜单字符串[9][2]=14,WW_菜单字符串[9][3]=15,WW_菜单字符串[9][4]=0;//接收管理
+					WW_菜单字符串[10][0]=23,WW_菜单字符串[10][1]=24,WW_菜单字符串[10][2]=18,WW_菜单字符串[10][3]=13,WW_菜单字符串[10][4]=0;//系统设置
 
 
-					display_menu(line,10);
+					display_menu_显示菜单(line,10);
 					if(line==0)
 					{
 
@@ -5703,7 +5703,7 @@ main()
 						if(save_action)
 						{
 							Data_change(2);
-							send3(hzk[3],80,0);
+							send3_写汉字(hzk[3],80,0);
 						}
 					}
 					else if(line==1)		  
@@ -5764,40 +5764,40 @@ main()
 				if(star)			 //star标志位：页面第一次载入
 				{
 					star=0;
-					photo(screen1,0,0,128,8);
+					photo_显示指定大小的图片(screen1,0,0,128,8);
 					
-					//photo(name6,76,3,36,2);
-					displayModel();
+					//photo_显示指定大小的图片(name6,76,3,36,2);
+					displayModel_显示当前模型名称();
 
 				}	
 				
 				
 				
-				send2(hour/10+48,64,0);send2(hour%10+48,72,0);				
-				send2(minute/10+48,85,0);send2(minute%10+48,93,0);				
-				send2(second/10+48,106,0);send2(second%10+48,114,0);
+				send2_写大字母(hour/10+48,64,0);send2_写大字母(hour%10+48,72,0);				
+				send2_写大字母(minute/10+48,85,0);send2_写大字母(minute%10+48,93,0);				
+				send2_写大字母(second/10+48,106,0);send2_写大字母(second%10+48,114,0);
 				
 				location(40,2);
 				send(minute2/10+48);send(minute2%10+48);
 				LCD(0);LCD(0x24);
 				send(second2/10+48);send(second2%10+48);
 				
-				if(SA_P20_2档开关A)send2(123,74,5);
-				else send2(124,74,5);
+				if(SA_P20_2档开关A)send2_写大字母(123,74,5);
+				else send2_写大字母(124,74,5);
 				
-				if(SB1_P21_3档开关B_1&SB2_P22_3档开关B_2)send2(126,82,5);
-				else if(SB1_P21_3档开关B_1&!SB2_P22_3档开关B_2)send2(125,82,5);
-				else send2(127,82,5);
+				if(SB1_P21_3档开关B_1&SB2_P22_3档开关B_2)send2_写大字母(126,82,5);
+				else if(SB1_P21_3档开关B_1&!SB2_P22_3档开关B_2)send2_写大字母(125,82,5);
+				else send2_写大字母(127,82,5);
 				
-				if(SC1_P23_3档开关C_1&SC2_P24_3档开关C_2)send2(126,90,5);
-				else if(SC1_P23_3档开关C_1&!SC2_P24_3档开关C_2)send2(125,90,5);
-				else send2(127,90,5);
+				if(SC1_P23_3档开关C_1&SC2_P24_3档开关C_2)send2_写大字母(126,90,5);
+				else if(SC1_P23_3档开关C_1&!SC2_P24_3档开关C_2)send2_写大字母(125,90,5);
+				else send2_写大字母(127,90,5);
 				
-				if(SD_P26_2档开关D)send2(123,98,5);
-				else send2(124,98,5);
+				if(SD_P26_2档开关D)send2_写大字母(123,98,5);
+				else send2_写大字母(124,98,5);
 				
-				if(SE_P27_2档开关E)send2(123,106,5);
-				else send2(124,106,5);
+				if(SE_P27_2档开关E)send2_写大字母(123,106,5);
+				else send2_写大字母(124,106,5);
 				
 /*				
 				location(55,5);
@@ -5870,18 +5870,18 @@ main()
 				else temp=0;
 				write_num1000(temp,'.');
 				
-				if(Switch_Check(Return_alarm_switch)==3)
+				if(Switch_Check_获取开关状态(Return_alarm_switch)==3)
 				{
 					if(temp<Power_V)
 					{
-						warning(52,3,1);Message_DataReturn_bad_回传报警|=0x01;	
+						warning_显示警告图标(52,3,1);Message_DataReturn_bad_回传报警|=0x01;	
 					}
 					else
 					{
-						warning(52,3,0);Message_DataReturn_bad_回传报警&=~0x01;
+						warning_显示警告图标(52,3,0);Message_DataReturn_bad_回传报警&=~0x01;
 					}	
 				}
-				else warning(52,3,0),Message_DataReturn_bad_回传报警=0;	
+				else warning_显示警告图标(52,3,0),Message_DataReturn_bad_回传报警=0;	
 				
 				
 				
@@ -5896,54 +5896,54 @@ main()
 				else temp=0;
 				write_num1000(temp,'.');
 				
-				if(Switch_Check(Return_alarm_switch)==3)
+				if(Switch_Check_获取开关状态(Return_alarm_switch)==3)
 				{
 					if(temp<Chip_V)
 					{
-						warning(52,4,1);Message_DataReturn_bad_回传报警|=0x02;	
+						warning_显示警告图标(52,4,1);Message_DataReturn_bad_回传报警|=0x02;	
 					}
 					else
 					{
-						warning(52,4,0);Message_DataReturn_bad_回传报警&=~0x02;
+						warning_显示警告图标(52,4,0);Message_DataReturn_bad_回传报警&=~0x02;
 					}
 				}
-				else warning(52,4,0),Message_DataReturn_bad_回传报警=0;
+				else warning_显示警告图标(52,4,0),Message_DataReturn_bad_回传报警=0;
 				
 				location(23,5);temp=rx[0]*2;
 				if(temp>99)send('1'),send('0'),send('0');
 				else send(' '),send(temp/10+48),send(temp%10+48);
 				
 				
-				if(Switch_Check(Return_alarm_switch)==3)
+				if(Switch_Check_获取开关状态(Return_alarm_switch)==3)
 				{
 					if(temp<TX_min)
 					{
-						warning(52,5,1);Message_DataReturn_bad_回传报警|=0x04;	
+						warning_显示警告图标(52,5,1);Message_DataReturn_bad_回传报警|=0x04;	
 					}
 					else
 					{
-						warning(52,5,0);Message_DataReturn_bad_回传报警&=~0x04;
+						warning_显示警告图标(52,5,0);Message_DataReturn_bad_回传报警&=~0x04;
 					}
 				}
-				else warning(52,5,0),Message_DataReturn_bad_回传报警=0;
+				else warning_显示警告图标(52,5,0),Message_DataReturn_bad_回传报警=0;
 				
 				temp=FUCK_sum*2;
 				location(23,6);
 				if(temp>99)send('1'),send('0'),send('0');
 				else send(' '),send(temp/10+48),send(temp%10+48);
 
-				if(Switch_Check(Return_alarm_switch)==3)
+				if(Switch_Check_获取开关状态(Return_alarm_switch)==3)
 				{
-					if(temp<RX_min)warning(52,6,1),Message_DataReturn_bad_回传报警|=0x08;
-					else warning(52,6,0),Message_DataReturn_bad_回传报警&=~0x08;
+					if(temp<RX_min)warning_显示警告图标(52,6,1),Message_DataReturn_bad_回传报警|=0x08;
+					else warning_显示警告图标(52,6,0),Message_DataReturn_bad_回传报警&=~0x08;
 				}
-				else warning(52,6,0),Message_DataReturn_bad_回传报警=0;
+				else warning_显示警告图标(52,6,0),Message_DataReturn_bad_回传报警=0;
 				
 /*				flash_time++;
 				if(flash_time<7)
 				{
 					
-					warning(27,6);
+					warning_显示警告图标(27,6);
 				}
 				else if(flash_time<14)
 				{
@@ -5958,19 +5958,19 @@ main()
 				
 				if(throttle_lock)
 				{
-					display_throttle(0);
+					display_throttle_显示油门(0);
 				}
 				else
 				{
 					if(CH_inverted[2])
 					{
-						display_throttle(255-throttle*10/34);
+						display_throttle_显示油门(255-throttle*10/34);
 						location(6,2);
 						temp=100-throttle*20/169;
 					}
 					else
 					{
-						display_throttle(throttle*10/34);
+						display_throttle_显示油门(throttle*10/34);
 						location(6,2);
 						temp=throttle*20/169;
 					}
@@ -5995,25 +5995,25 @@ main()
 						if(CH_middle_change==0)
 						{
 							
-							photo(bmp3,77,4,32,3);
+							photo_显示指定大小的图片(bmp3,77,4,32,3);
 							location(80,5);
 						}
 						else if(CH_middle_change==1)
 						{
 							
-							photo(bmp3,90,2,32,3);
+							photo_显示指定大小的图片(bmp3,90,2,32,3);
 							location(93,3);
 						}
 						else if(CH_middle_change==2)
 						{
 							
-							photo(bmp3,5,2,32,3);
+							photo_显示指定大小的图片(bmp3,5,2,32,3);
 							location(8,3);
 						}
 						else if(CH_middle_change==3)
 						{
 							
-							photo(bmp3,17,4,32,3);
+							photo_显示指定大小的图片(bmp3,17,4,32,3);
 							location(20,5);
 								
 						}							
@@ -6029,16 +6029,16 @@ main()
 				}
 				
 				location(6,7);
-				if(CH_inverted[3]==1)display_trim2(125-CH_middle[3]);
-				else display_trim2(CH_middle[3]+125);
+				if(CH_inverted[3]==1)display_trim2_显示横微调(125-CH_middle[3]);
+				else display_trim2_显示横微调(CH_middle[3]+125);
 				location(67,7);
-				if(CH_inverted[0]==1)display_trim2(125-CH_middle[0]);
-				else display_trim2(CH_middle[0]+125);
+				if(CH_inverted[0]==1)display_trim2_显示横微调(125-CH_middle[0]);
+				else display_trim2_显示横微调(CH_middle[0]+125);
 
-				if(CH_inverted[2]==1)display_trim1(125-CH_middle[2],0);
-				else display_trim1(CH_middle[2]+125,0);
-				if(CH_inverted[1]==1)display_trim1(125-CH_middle[1],123);
-				else display_trim1(CH_middle[1]+125,123);
+				if(CH_inverted[2]==1)display_trim1_显示竖微调(125-CH_middle[2],0);
+				else display_trim1_显示竖微调(CH_middle[2]+125,0);
+				if(CH_inverted[1]==1)display_trim1_显示竖微调(125-CH_middle[1],123);
+				else display_trim1_显示竖微调(CH_middle[1]+125,123);
 				
 				LCD_OFF();
 			}
@@ -6334,20 +6334,20 @@ void ET0_isr()interrupt 1	  //数据处理定时器	 低优先级
 	{
 		
 		
-		if(Switch_Check(Com_Swt_IN1)==1)
+		if(Switch_Check_获取开关状态(Com_Swt_IN1)==1)
 		{
 			if(Com_Swt_IN2)
 			{
-				if(Switch_Check(Com_Swt_IN2)==1)Combination_Switch=0;	
+				if(Switch_Check_获取开关状态(Com_Swt_IN2)==1)Combination_Switch=0;	
 				else Combination_Switch=3;				
 			}
 			else Combination_Switch=0;
 		}
-		else if(Switch_Check(Com_Swt_IN1)==2)
+		else if(Switch_Check_获取开关状态(Com_Swt_IN1)==2)
 		{
 			if(Com_Swt_IN2)
 			{
-				if(Switch_Check(Com_Swt_IN2)==1)Combination_Switch=1;
+				if(Switch_Check_获取开关状态(Com_Swt_IN2)==1)Combination_Switch=1;
 				else Combination_Switch=4;
 			}
 			else Combination_Switch=1;
@@ -6356,7 +6356,7 @@ void ET0_isr()interrupt 1	  //数据处理定时器	 低优先级
 		{
 			if(Com_Swt_IN2)
 			{
-				if(Switch_Check(Com_Swt_IN2)==1)Combination_Switch=2;
+				if(Switch_Check_获取开关状态(Com_Swt_IN2)==1)Combination_Switch=2;
 				else Combination_Switch=5;
 			}
 			else Combination_Switch=2;
@@ -6370,15 +6370,15 @@ void ET0_isr()interrupt 1	  //数据处理定时器	 低优先级
 	
 	if(train_switch)
 	{
-		if(Switch_Check(train_switch)==3)train_output=1;
+		if(Switch_Check_获取开关状态(train_switch)==3)train_output=1;
 		else train_output=0;	
 	}
 	else train_output=0;
 	
 	if(clock_switch)
 	{		
-			if(Switch_Check(clock_switch)==3)clock_go=1;
-			else if(Switch_Check(clock_switch)==2)clock_go=0;
+			if(Switch_Check_获取开关状态(clock_switch)==3)clock_go=1;
+			else if(Switch_Check_获取开关状态(clock_switch)==2)clock_go=0;
 			else clock_go=0,clock2=0,second2=0,minute2=0;		
 		
 	}
@@ -6386,14 +6386,14 @@ void ET0_isr()interrupt 1	  //数据处理定时器	 低优先级
 	
 	if(ratio_switch)
 	{
-		if(Switch_Check(ratio_switch)==3)use_new_ratio=1;
+		if(Switch_Check_获取开关状态(ratio_switch)==3)use_new_ratio=1;
 		else use_new_ratio=0;
 	}
 	else use_new_ratio=0;
 	
 	if(auto_switch)
 	{
-		auto_mode=Switch_Check(auto_switch);
+		auto_mode=Switch_Check_获取开关状态(auto_switch);
 	}
 	
 	if(auto_mode==1)
@@ -6422,20 +6422,20 @@ void ET0_isr()interrupt 1	  //数据处理定时器	 低优先级
 /************************************************************************/
 //数据运算	
 	
-	function_filter(0);
-	function_filter(1);
-	function_filter(2);
-	function_filter(3);
-	function_filter(4);
-	function_filter(5);
-	function_filter(6);
-	function_filter(7);
+	function_filter_ADC滤波(0);
+	function_filter_ADC滤波(1);
+	function_filter_ADC滤波(2);
+	function_filter_ADC滤波(3);
+	function_filter_ADC滤波(4);
+	function_filter_ADC滤波(5);
+	function_filter_ADC滤波(6);
+	function_filter_ADC滤波(7);
 	
 	
-	CH_value[0]=CH_calib(adc[6],CH1_offset);
-	CH_value[1]=CH_calib(adc[7],CH2_offset);
-	CH_value[2]=CH_calib(adc[4],CH3_offset);
-	CH_value[3]=CH_calib(adc[5],CH4_offset);
+	CH_value[0]=CH_calib_修正摇杆行程(adc[6],CH1_offset);
+	CH_value[1]=CH_calib_修正摇杆行程(adc[7],CH2_offset);
+	CH_value[2]=CH_calib_修正摇杆行程(adc[4],CH3_offset);
+	CH_value[3]=CH_calib_修正摇杆行程(adc[5],CH4_offset);
 
 
 	if(throttle_lock)
@@ -6464,77 +6464,77 @@ void ET0_isr()interrupt 1	  //数据处理定时器	 低优先级
 	
 	
 	
-	function_mapping(0);
-	function_mapping(1);
-	function_mapping(2);
-	function_mapping(3);
-	function_mapping(4);
-	function_mapping(5);
-	function_mapping(6);
-	function_mapping(7);
+	function_mapping_输入映射(0);
+	function_mapping_输入映射(1);
+	function_mapping_输入映射(2);
+	function_mapping_输入映射(3);
+	function_mapping_输入映射(4);
+	function_mapping_输入映射(5);
+	function_mapping_输入映射(6);
+	function_mapping_输入映射(7);
 	
 	
-	function_curve(0);//1.5ms
-	function_curve(1);
-	function_curve(2);
+	function_curve_指数曲线(0);//1.5ms
+	function_curve_指数曲线(1);
+	function_curve_指数曲线(2);
 	
-	function_curve2(0);
-	function_curve2(1);
-	function_curve2(2);
-	function_curve2(3);
-	function_curve2(4);
+	function_curve2_多点曲线(0);
+	function_curve2_多点曲线(1);
+	function_curve2_多点曲线(2);
+	function_curve2_多点曲线(3);
+	function_curve2_多点曲线(4);
 	
 
 	if(use_new_ratio)
 	{
-		function_size(0,1);
-		function_size(1,1);
-		function_size(2,1);
-		function_size(3,1);	
+		function_size_舵量函数(0,1);
+		function_size_舵量函数(1,1);
+		function_size_舵量函数(2,1);
+		function_size_舵量函数(3,1);	
 	}
 	else 
 	{
-		function_size(0,0);
-		function_size(1,0);
-		function_size(2,0);
-		function_size(3,0);
+		function_size_舵量函数(0,0);
+		function_size_舵量函数(1,0);
+		function_size_舵量函数(2,0);
+		function_size_舵量函数(3,0);
 	}
 
 	
 	
-	function_size(4,0);
-	function_size(5,0);
-	function_size(6,0);
-	function_size(7,0);
+	function_size_舵量函数(4,0);
+	function_size_舵量函数(5,0);
+	function_size_舵量函数(6,0);
+	function_size_舵量函数(7,0);
 	
 	
 	
-	function_inverted(0);
-	function_inverted(1);
-	function_inverted(2);
-	function_inverted(3);
-	function_inverted(4);
-	function_inverted(5);
-	function_inverted(6);
-	function_inverted(7);
+	function_inverted_反转函数(0);
+	function_inverted_反转函数(1);
+	function_inverted_反转函数(2);
+	function_inverted_反转函数(3);
+	function_inverted_反转函数(4);
+	function_inverted_反转函数(5);
+	function_inverted_反转函数(6);
+	function_inverted_反转函数(7);
 	
 
 	
 	if(mixer1)
 	{
-		function_mix(mixer1_same,mixer1_contrary);
+		function_mix_混控函数(mixer1_same,mixer1_contrary);
 	}
 	if(mixer2)
 	{
-		function_mix(mixer2_same,mixer2_contrary);
+		function_mix_混控函数(mixer2_same,mixer2_contrary);
 	}
 	if(mixer3)
 	{
-		function_mix(mixer3_same,mixer3_contrary);
+		function_mix_混控函数(mixer3_same,mixer3_contrary);
 	}
 	if(mixer4)
 	{
-		function_mix(mixer4_same,mixer4_contrary);
+		function_mix_混控函数(mixer4_same,mixer4_contrary);
 	}
 	
 	
@@ -6651,7 +6651,7 @@ NRF_buff[7]=512;*/
 if(index_change)
 {
 	index_change=0;
-	get_curve(last_index);//40ms	
+	get_curve_计算指数曲线(last_index);//40ms	
 	
 }
 
