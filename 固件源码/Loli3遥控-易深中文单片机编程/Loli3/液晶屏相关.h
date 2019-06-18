@@ -1,5 +1,6 @@
 #include "引脚定义.h"
 #include "延时.h"
+#include "LOLI_3.h"
 
 #ifndef __液晶屏相关_H_
 #define __液晶屏相关_H_
@@ -208,10 +209,12 @@ void send3_写汉字(u8 *p,u8 x,u8 y)		 //写汉字
 	}
 }
 
-void write_显示汉字(u8 x,u8 y)			//显示汉字
+void write_显示汉字(u8 *d, u8 x, u8 y)			//显示汉字
 {
-	u8 *d;
-	d=word_hzk序号数组;
+	//柴门改：原源码中是void write_显示汉字(u8 x, u8 y)，然后在函数内部使用了全局变量，既然这样干嘛不干脆改为传参呢？
+	//改为传参后就与下一个write0_显示汉字串（）一样了，那这个就没必要存在了
+	//u8 *d;
+	//d=word_hzk序号数组;
 	while(*d)
 	{		
 		send3_写汉字(hzk[*d],x,y);
