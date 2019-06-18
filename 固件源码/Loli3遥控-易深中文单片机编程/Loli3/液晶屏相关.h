@@ -8,6 +8,11 @@
 //***********************************************
 //数据、标志位，12864液晶操作函数中使用
 //sdcc中没有bdata，bdata位于0x20-0x2F，bit也是位于该区域，因此bdata改为用data，然后用bit代替
+//应该也可以用联合体来代替使用吧？
+//union DataAndBit{
+		//__data u8 __at (0x20) DATA;
+		//__bit DX[8];
+	//}
 __data u8 __at (0x20) DATA;
 __bit __at (0x7) D_7;
 __bit __at (0x6) D_6;
