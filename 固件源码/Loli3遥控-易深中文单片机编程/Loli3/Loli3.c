@@ -2492,8 +2492,8 @@ main()
 			EEPROM_clean(4);
 //			EEPROM_clean(6);
 			IAP_CONTR=0;
-			word_hzk序号数组[0]=106/*hzk[106]="恢"*/,word_hzk序号数组[1]=107/*hzk[107]="复"*/,word_hzk序号数组[2]=32/*hzk[32]="出"*/,word_hzk序号数组[3]=136/*hzk[136]="厂"*/,word_hzk序号数组[4]=0,write_显示汉字(word_hzk序号数组,40,2);
-			word_hzk序号数组[0]=138/*hzk[138]="重"*/,word_hzk序号数组[1]=139/*hzk[139]="启"*/,word_hzk序号数组[2]=140/*hzk[140]="生"*/,word_hzk序号数组[3]=57/*hzk[57]="效"*/,word_hzk序号数组[4]=0,write_显示汉字(word_hzk序号数组,40,4);
+			word_hzk序号数组[0]=106/*hzk[106]="恢"*/,word_hzk序号数组[1]=107/*hzk[107]="复"*/,word_hzk序号数组[2]=32/*hzk[32]="出"*/,word_hzk序号数组[3]=136/*hzk[136]="厂"*/,word_hzk序号数组[4]=0,write0_显示汉字串(word_hzk序号数组,40,2);
+			word_hzk序号数组[0]=138/*hzk[138]="重"*/,word_hzk序号数组[1]=139/*hzk[139]="启"*/,word_hzk序号数组[2]=140/*hzk[140]="生"*/,word_hzk序号数组[3]=57/*hzk[57]="效"*/,word_hzk序号数组[4]=0,write0_显示汉字串(word_hzk序号数组,40,4);
 			while(1);
 		}
 	}
@@ -2502,9 +2502,9 @@ main()
 	{
 		while(1)//设置
 		{
-			word_hzk序号数组[0]=130,word_hzk序号数组[1]=81,word_hzk序号数组[2]=131,word_hzk序号数组[3]=58,word_hzk序号数组[4]=132,word_hzk序号数组[5]=0,write_显示汉字(word_hzk序号数组,30,0);//第一次开机
-			word_hzk序号数组[0]=141,word_hzk序号数组[1]=142,word_hzk序号数组[2]=18,word_hzk序号数组[3]=13,word_hzk序号数组[4]=0,write_显示汉字(word_hzk序号数组,0,2);//油门设置
-			word_hzk序号数组[0]=149,word_hzk序号数组[1]=150,word_hzk序号数组[2]=137,word_hzk序号数组[3]=109,word_hzk序号数组[4]=0,write_显示汉字(word_hzk序号数组,64,2);//菜单确认
+			word_hzk序号数组[0]=130,word_hzk序号数组[1]=81,word_hzk序号数组[2]=131,word_hzk序号数组[3]=58,word_hzk序号数组[4]=132,word_hzk序号数组[5]=0,write0_显示汉字串(word_hzk序号数组,30,0);//第一次开机
+			word_hzk序号数组[0]=141,word_hzk序号数组[1]=142,word_hzk序号数组[2]=18,word_hzk序号数组[3]=13,word_hzk序号数组[4]=0,write0_显示汉字串(word_hzk序号数组,0,2);//油门设置
+			word_hzk序号数组[0]=149,word_hzk序号数组[1]=150,word_hzk序号数组[2]=137,word_hzk序号数组[3]=109,word_hzk序号数组[4]=0,write0_显示汉字串(word_hzk序号数组,64,2);//菜单确认
 			if(adc_buff[4]>510)
 			{
 				send3_写汉字(hzk[1],0,4);send2_写大字母('1',12,4);send2_写大字母('2',20,4);send2_写大字母('L',28,4);send2_写大字母('E',36,4);
@@ -2539,7 +2539,7 @@ main()
 		
 		DATA_save1();
 		
-		word_hzk序号数组[0]=157,word_hzk序号数组[1]=132,word_hzk序号数组[2]=12,word_hzk序号数组[3]=13,word_hzk序号数组[4]=52,word_hzk序号数组[5]=53;word_hzk序号数组[6]=0,write_显示汉字(word_hzk序号数组,0,4);
+		word_hzk序号数组[0]=157,word_hzk序号数组[1]=132,word_hzk序号数组[2]=12,word_hzk序号数组[3]=13,word_hzk序号数组[4]=52,word_hzk序号数组[5]=53;word_hzk序号数组[6]=0,write0_显示汉字串(word_hzk序号数组,0,4);
 		delay_ms(500);
 		send3_写汉字(hzk[1],0,6);delay_ms(200);
 		send3_写汉字(hzk[1],12,6);delay_ms(200);
@@ -2561,11 +2561,11 @@ main()
 					if(boot_screen==0)photo_显示指定大小的图片(bmp5,40,2,50,4);
 					else
 					{
-						word_hzk序号数组[0]=141,word_hzk序号数组[1]=142,word_hzk序号数组[2]=185,word_hzk序号数组[3]=186,word_hzk序号数组[4]=0,write_显示汉字(word_hzk序号数组,38,4);
+						word_hzk序号数组[0]=141,word_hzk序号数组[1]=142,word_hzk序号数组[2]=185,word_hzk序号数组[3]=186,word_hzk序号数组[4]=0,write0_显示汉字串(word_hzk序号数组,38,4);
 					}
 				
 					word_hzk序号数组[0]=147,word_hzk序号数组[1]=148,word_hzk序号数组[2]=149,word_hzk序号数组[3]=150,word_hzk序号数组[4]=151,
-					word_hzk序号数组[5]=52,word_hzk序号数组[6]=153,word_hzk序号数组[7]=0,write_显示汉字(word_hzk序号数组,20,6); 
+					word_hzk序号数组[5]=52,word_hzk序号数组[6]=153,word_hzk序号数组[7]=0,write0_显示汉字串(word_hzk序号数组,20,6); 
 			
 					delay_ms(100);
 					if(KEY_P47_菜单键==0)break;
@@ -3312,11 +3312,11 @@ main()
 								
 								if(mixer_name==1)
 								{//三角翼
-									word_hzk序号数组[0]=110;word_hzk序号数组[1]=111;word_hzk序号数组[2]=112;word_hzk序号数组[3]=0;write_显示汉字(word_hzk序号数组,64,4);
+									word_hzk序号数组[0]=110;word_hzk序号数组[1]=111;word_hzk序号数组[2]=112;word_hzk序号数组[3]=0;write0_显示汉字串(word_hzk序号数组,64,4);
 								}
 								else if(mixer_name==2)
 								{//差速
-									word_hzk序号数组[0]=113;word_hzk序号数组[1]=114;word_hzk序号数组[2]=0;write_显示汉字(word_hzk序号数组,64,4);
+									word_hzk序号数组[0]=113;word_hzk序号数组[1]=114;word_hzk序号数组[2]=0;write0_显示汉字串(word_hzk序号数组,64,4);
 								}
 								else if(mixer_name==3)
 								{//V尾
@@ -3324,7 +3324,7 @@ main()
 								}
 								else if(mixer_name==4)
 								{//襟副翼
-									word_hzk序号数组[0]=116;word_hzk序号数组[1]=117;word_hzk序号数组[2]=112;word_hzk序号数组[3]=0;write_显示汉字(word_hzk序号数组,64,4);
+									word_hzk序号数组[0]=116;word_hzk序号数组[1]=117;word_hzk序号数组[2]=112;word_hzk序号数组[3]=0;write0_显示汉字串(word_hzk序号数组,64,4);
 								}
 								
 								
@@ -3648,8 +3648,8 @@ main()
 								WW_菜单字符串[7][0]=16,WW_菜单字符串[7][1]=17,WW_菜单字符串[7][2]=88,WW_菜单字符串[7][3]=0;//通道8
 								display_menu_显示菜单(line_2,7);
 								
-								word_hzk序号数组[0]=4;word_hzk序号数组[1]=94;word_hzk序号数组[2]=95;word_hzk序号数组[3]=0;write_显示汉字(word_hzk序号数组,60,0);
-								write_显示汉字(word_hzk序号数组,60,2);write_显示汉字(word_hzk序号数组,60,4);write_显示汉字(word_hzk序号数组,60,6);
+								word_hzk序号数组[0]=4;word_hzk序号数组[1]=94;word_hzk序号数组[2]=95;word_hzk序号数组[3]=0;write0_显示汉字串(word_hzk序号数组,60,0);
+								write0_显示汉字串(word_hzk序号数组,60,2);write0_显示汉字串(word_hzk序号数组,60,4);write0_显示汉字串(word_hzk序号数组,60,6);
 								
 								if(increase)
 								{
@@ -3695,7 +3695,7 @@ main()
 							}
 							else if(menu_2==11)//对频
 							{
-								word_hzk序号数组[0]=121;word_hzk序号数组[1]=122;word_hzk序号数组[2]=43;word_hzk序号数组[3]=44;word_hzk序号数组[4]=123;word_hzk序号数组[5]=0;write_显示汉字(word_hzk序号数组,24,0);
+								word_hzk序号数组[0]=121;word_hzk序号数组[1]=122;word_hzk序号数组[2]=43;word_hzk序号数组[3]=44;word_hzk序号数组[4]=123;word_hzk序号数组[5]=0;write0_显示汉字串(word_hzk序号数组,24,0);
 								send2_写大字母('.',84,0);send2_写大字母('.',92,0);send2_写大字母('.',100,0);
 								
 															
@@ -3703,12 +3703,12 @@ main()
 
 								if(cancel)
 								{
-									word_hzk序号数组[0]=16;word_hzk序号数组[1]=47;word_hzk序号数组[2]=126;word_hzk序号数组[3]=127;word_hzk序号数组[4]=0;write_显示汉字(word_hzk序号数组,40,4);
+									word_hzk序号数组[0]=16;word_hzk序号数组[1]=47;word_hzk序号数组[2]=126;word_hzk序号数组[3]=127;word_hzk序号数组[4]=0;write0_显示汉字串(word_hzk序号数组,40,4);
 									menu_2=0;cancel=0;
 								}
 								else
 								{
-									word_hzk序号数组[0]=16;word_hzk序号数组[1]=47;word_hzk序号数组[2]=124;word_hzk序号数组[3]=125;word_hzk序号数组[4]=0;write_显示汉字(word_hzk序号数组,40,4);
+									word_hzk序号数组[0]=16;word_hzk序号数组[1]=47;word_hzk序号数组[2]=124;word_hzk序号数组[3]=125;word_hzk序号数组[4]=0;write0_显示汉字串(word_hzk序号数组,40,4);
 									menu_2=0;menu=0;
 								}	
 								delay_ms(500);star=1;
@@ -3716,8 +3716,8 @@ main()
 							}
 							else if(menu_2==12)//恢复出厂
 							{
-								word_hzk序号数组[0]=106,word_hzk序号数组[1]=107,word_hzk序号数组[2]=32,word_hzk序号数组[3]=136,word_hzk序号数组[4]=0,write_显示汉字(word_hzk序号数组,40,2);
-								word_hzk序号数组[0]=137,word_hzk序号数组[1]=109,word_hzk序号数组[2]=0,write_显示汉字(word_hzk序号数组,52,4);send2_写大字母('?',80,4);
+								word_hzk序号数组[0]=106,word_hzk序号数组[1]=107,word_hzk序号数组[2]=32,word_hzk序号数组[3]=136,word_hzk序号数组[4]=0,write0_显示汉字串(word_hzk序号数组,40,2);
+								word_hzk序号数组[0]=137,word_hzk序号数组[1]=109,word_hzk序号数组[2]=0,write0_显示汉字串(word_hzk序号数组,52,4);send2_写大字母('?',80,4);
 								if(right)
 								{								
 									IAP_CONTR=0x83;		//擦除所有数据
@@ -3726,7 +3726,7 @@ main()
 									EEPROM_clean(4);
 									IAP_CONTR=0;
 									send3_写汉字(hzk[3],80,4);
-									word_hzk序号数组[0]=138,word_hzk序号数组[1]=139,word_hzk序号数组[2]=140,word_hzk序号数组[3]=57,word_hzk序号数组[4]=0,write_显示汉字(word_hzk序号数组,40,6);
+									word_hzk序号数组[0]=138,word_hzk序号数组[1]=139,word_hzk序号数组[2]=140,word_hzk序号数组[3]=57,word_hzk序号数组[4]=0,write0_显示汉字串(word_hzk序号数组,40,6);
 									TR0=0,TR1=0,CCON=0;while(1);
 								}
 							}
@@ -3970,8 +3970,8 @@ main()
 								WW_菜单字符串[7][0]=192,WW_菜单字符串[7][1]=193,WW_菜单字符串[7][2]=88,WW_菜单字符串[7][3]=0;//PPM PPM 八
 								display_menu_显示菜单(line_2,7);
 								
-								word_hzk序号数组[0]=4;word_hzk序号数组[1]=94;word_hzk序号数组[2]=95;word_hzk序号数组[3]=0;write_显示汉字(word_hzk序号数组,60,0);//“<-运算”
-								write_显示汉字(word_hzk序号数组,60,2);write_显示汉字(word_hzk序号数组,60,4);write_显示汉字(word_hzk序号数组,60,6);
+								word_hzk序号数组[0]=4;word_hzk序号数组[1]=94;word_hzk序号数组[2]=95;word_hzk序号数组[3]=0;write0_显示汉字串(word_hzk序号数组,60,0);//“<-运算”
+								write0_显示汉字串(word_hzk序号数组,60,2);write0_显示汉字串(word_hzk序号数组,60,4);write0_显示汉字串(word_hzk序号数组,60,6);
 								
 								if(increase)
 								{
@@ -4095,7 +4095,7 @@ main()
 							else if(menu_2==19)//全频扫描
 							{
 								
-								word_hzk序号数组[0]=76;word_hzk序号数组[1]=53;word_hzk序号数组[2]=77;word_hzk序号数组[3]=78;word_hzk序号数组[4]=0;write_显示汉字(word_hzk序号数组,0,0);
+								word_hzk序号数组[0]=76;word_hzk序号数组[1]=53;word_hzk序号数组[2]=77;word_hzk序号数组[3]=78;word_hzk序号数组[4]=0;write0_显示汉字串(word_hzk序号数组,0,0);
 								location(54,0);send('2');send('4');send('0');send('0');send('-');
 								send('2');send('5');send('2');send('5');send('M');send('h');send('z');
 								
