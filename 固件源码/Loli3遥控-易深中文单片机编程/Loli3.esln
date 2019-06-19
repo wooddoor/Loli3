@@ -10,8 +10,9 @@
                 "file": [
                     "EEPROM.h",
                     "intrins.h",
-                    "LOLI_3.h",
+                    "LOLI3_Picture.h",
                     "NRF24L01.h",
+                    "type.h",
                     "延时.h",
                     "引脚定义.h",
                     "液晶屏相关.h"
@@ -22,7 +23,10 @@
             },
             {
                 "file": [
-                    "Loli3.c"
+                    "LOLI3_Picture.c",
+                    "Loli3.c",
+                    "NRF24L01.c",
+                    "液晶屏相关.c"
                 ],
                 "folder": [
                 ],

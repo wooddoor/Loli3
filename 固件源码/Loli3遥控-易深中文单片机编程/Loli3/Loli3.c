@@ -1,8 +1,7 @@
 //#include<reg51.h>			//Large编译，否则xdata异常
 #include<math.h>
-#include"LOLI_3.h"  	 //显示需要的图形数据
-#define u8 unsigned char
-#define u16 unsigned int
+#include"LOLI3_Picture.h"  	 //显示需要的图形数据
+
 #include"intrins.h"
 //#引入 "STC12C5Axx.h"
 

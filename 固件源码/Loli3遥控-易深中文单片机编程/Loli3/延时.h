@@ -1,3 +1,5 @@
+#include "type.h"
+
 #ifndef __延时_H_
 #define __延时_H_
 
