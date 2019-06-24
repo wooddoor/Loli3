@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="Windows-1252" ?>
+<TKStudioOptions Version="3.00" Author="YinHandong[Òüº®¶¬]">
+    <Projects OPTPES="98,96,0,0,0,0,">
+        <Project ProjectGUID="{C9791908-6B26-436d-ABA3-AB33C43CCD6B}" Name="test2" ACTCFG="DebugRel">
+            <TARGOPT Name="DebugRel" OPTDF="0">
+                <OPTFFF VAL="&lt;.\intrins.h&gt; {0,1,-1,-1,52,52,1098,415,0,209}" />
+                <OPTFFF VAL="&lt;.\main.c&gt; {0,1,-1,-1,26,26,1072,412,2167,46756}" />
+                <OPTFFF VAL="&lt;.\loli_3.h&gt; {2,3,-1,-1,52,52,1098,415,0,118}" />
+            </TARGOPT>
+        </Project>
+    </Projects>
+</TKStudioOptions>

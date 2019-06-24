@@ -1,0 +1,674 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        05/23/2019  13:18:12  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+D:\KEIL\C51\BIN\BL51.EXE STARTUP.obj, main.obj TO Loli3_wooddoor RAMSIZE (256)
+
+
+MEMORY MODEL: LARGE WITH FLOATING POINT ARITHMETIC
+
+
+INPUT MODULES INCLUDED:
+  STARTUP.obj (?C_STARTUP)
+  main.obj (MAIN)
+  D:\KEIL\C51\LIB\C51FPL.LIB (?C?FPADD)
+  D:\KEIL\C51\LIB\C51FPL.LIB (?C?FPMUL)
+  D:\KEIL\C51\LIB\C51FPL.LIB (?C?FPDIV)
+  D:\KEIL\C51\LIB\C51FPL.LIB (?C?FPCMP)
+  D:\KEIL\C51\LIB\C51FPL.LIB (?C?FPNEG)
+  D:\KEIL\C51\LIB\C51FPL.LIB (?C?FCAST)
+  D:\KEIL\C51\LIB\C51FPL.LIB (?C?CASTF)
+  D:\KEIL\C51\LIB\C51FPL.LIB (POW)
+  D:\KEIL\C51\LIB\C51FPL.LIB (?C?FPGETOPN)
+  D:\KEIL\C51\LIB\C51FPL.LIB (?C?CHKFLOAT)
+  D:\KEIL\C51\LIB\C51FPL.LIB (EXP)
+  D:\KEIL\C51\LIB\C51FPL.LIB (LOG)
+  D:\KEIL\C51\LIB\C51FPL.LIB (?C?FPSERIES)
+  D:\KEIL\C51\LIB\C51L.LIB (?C_INIT)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?SCDIV)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?CLDPTR)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?CLDOPTR)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?CSTOPTR)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?IMUL)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?UIDIV)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?SIDIV)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?IILDX)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?ILDPTR)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?ISTPTR)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?LMUL)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?SLDIV)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?LNEG)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?ULSHR)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?SLSHR)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?LLDCODE)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?LLDXDATA0)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?LLDCODE0)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?LSTXDATA)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?LSTKXDATA)
+  D:\KEIL\C51\LIB\C51L.LIB (?C?ULDIV)
+
+
+LINK MAP OF MODULE:  Loli3_wooddoor (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+                    0008H     0018H                  *** GAP ***
+            DATA    0020H     0001H     BIT_ADDR     ?BA?MAIN
+            BIT     0021H.0   0009H.7   UNIT         ?BI?MAIN
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/23/2019  13:18:12  PAGE 2
+
+
+            BIT     002AH.7   0000H.2   UNIT         _BIT_GROUP_
+                    002BH.1   0000H.7                *** GAP ***
+            DATA    002CH     0051H     UNIT         ?DT?MAIN
+            IDATA   007DH     0001H     UNIT         ?STACK
+
+            * * * * * * *  X D A T A   M E M O R Y  * * * * * * *
+            XDATA   0000H     037FH     UNIT         ?XD?MAIN
+            XDATA   037FH     002FH     UNIT         _XDATA_GROUP_
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0003H     UNIT         ?PR?LCD_ON?MAIN
+            CODE    0006H     0003H     UNIT         ?PR?LCD_OFF?MAIN
+                    0009H     0002H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+                    000EH     0005H                  *** GAP ***
+            CODE    0013H     0003H     ABSOLUTE     
+                    0016H     0005H                  *** GAP ***
+            CODE    001BH     0003H     ABSOLUTE     
+            CODE    001EH     001DH     UNIT         ?PR?_TX_ADDRESS?MAIN
+            CODE    003BH     0003H     ABSOLUTE     
+            CODE    003EH     54BFH     UNIT         ?PR?MAIN?MAIN
+            CODE    54FDH     300FH     UNIT         ?CO?MAIN
+            CODE    850CH     0B39H     UNIT         ?PR?ET0_ISR?MAIN
+            CODE    9045H     08D8H     UNIT         ?PR?DATA_SAVE2?MAIN
+            CODE    991DH     07EEH     UNIT         ?PR?DATA_READ2?MAIN
+            CODE    A10BH     0784H     UNIT         ?C?LIB_CODE
+            CODE    A88FH     0449H     UNIT         ?PR?_DISPLAY_TRIM1?MAIN
+            CODE    ACD8H     03A5H     UNIT         ?PR?PCA_ISR?MAIN
+            CODE    B07DH     0284H     UNIT         ?PR?_FUNCTION_CURVE2?MAIN
+            CODE    B301H     0267H     UNIT         ?PR?_DISPLAY_MENU?MAIN
+            CODE    B568H     024EH     UNIT         ?PR?_DISPLAY_MAPPING?MAIN
+            CODE    B7B6H     021DH     UNIT         ?PR?_FUNCTION_CURVE?MAIN
+            CODE    B9D3H     01C6H     UNIT         ?C_INITSEG
+            CODE    BB99H     01C3H     UNIT         ?PR?DATA_READ1?MAIN
+            CODE    BD5CH     01B5H     UNIT         ?PR?_POINT?MAIN
+            CODE    BF11H     0197H     UNIT         ?PR?DATA_SAVE1?MAIN
+            CODE    C0A8H     0190H     UNIT         ?PR?_FUNCTION_MAPPING?MAIN
+            CODE    C238H     018FH     UNIT         ?PR?_GET_CURVE?MAIN
+            CODE    C3C7H     016EH     UNIT         ?PR?ET1_ISR?MAIN
+            CODE    C535H     016CH     UNIT         ?PR?GET_CURVE2?MAIN
+            CODE    C6A1H     016AH     UNIT         ?PR?_WRITE_NUM100?MAIN
+            CODE    C80BH     0166H     UNIT         ?PR?_POW?POW
+            CODE    C971H     0163H     UNIT         ?PR?DISPLAYMODEL?MAIN
+            CODE    CAD4H     013CH     UNIT         ?PR?_CHANGE_TRIM?MAIN
+            CODE    CC10H     0134H     UNIT         ?PR?MODEL_DATA_RESET?MAIN
+            CODE    CD44H     012AH     UNIT         ?PR?_DISPLAY_SWITCH?MAIN
+            CODE    CE6EH     0129H     UNIT         ?PR?_DISPLAY_THROTTLE?MAIN
+            CODE    CF97H     0129H     UNIT         ?PR?LOG?LOG
+            CODE    D0C0H     0125H     UNIT         ?PR?_WRITE_NUM1000?MAIN
+            CODE    D1E5H     00FAH     UNIT         ?PR?EX1_ISR?MAIN
+            CODE    D2DFH     00EAH     UNIT         ?PR?_DISPLAY_BAR?MAIN
+            CODE    D3C9H     00E0H     UNIT         ?PR?_SEND2_HEX?MAIN
+            CODE    D4A9H     00CFH     UNIT         ?PR?DEVICE_CONNECT?MAIN
+            CODE    D578H     00C8H     UNIT         ?PR?_DISPLAY_RECEIVER_MODE?MAIN
+            CODE    D640H     00C4H     UNIT         ?PR?NRF_TEST?MAIN
+            CODE    D704H     00A3H     UNIT         ?PR?_FUNCTION_SIZE?MAIN
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/23/2019  13:18:12  PAGE 3
+
+
+            CODE    D7A7H     009AH     UNIT         ?PR?EXP?EXP
+            CODE    D841H     008CH     UNIT         ?C_C51STARTUP
+            CODE    D8CDH     008CH     UNIT         ?PR?_SEND2?MAIN
+            CODE    D959H     0082H     UNIT         ?PR?_SEND2_REV?MAIN
+            CODE    D9DBH     0076H     UNIT         ?PR?_WARNING?MAIN
+            CODE    DA51H     0073H     UNIT         ?PR?DISPLAY_CURVE2?MAIN
+            CODE    DAC4H     0071H     UNIT         ?PR?LCD_INIT?MAIN
+            CODE    DB35H     006EH     UNIT         ?PR?_FUNCTION_INVERTED?MAIN
+            CODE    DBA3H     0068H     UNIT         ?PR?INITIAL?MAIN
+            CODE    DC0BH     0065H     UNIT         ?PR?_WRITE?MAIN
+            CODE    DC70H     0063H     UNIT         ?PR?_FUNCTION_MIX?MAIN
+            CODE    DCD3H     005FH     UNIT         ?PR?_MOVE_CURSOR?MAIN
+            CODE    DD32H     005BH     UNIT         ?PR?_LCD?MAIN
+            CODE    DD8DH     005AH     UNIT         ?PR?_EEPROM_WRITE?MAIN
+            CODE    DDE7H     005AH     UNIT         ?PR?_DISPLAY_TRIM2?MAIN
+            CODE    DE41H     0058H     UNIT         ?PR?_EEPROM_READ?MAIN
+            CODE    DE99H     0056H     UNIT         ?PR?DISPLAY_CURVE?MAIN
+            CODE    DEEFH     0054H     UNIT         ?PR?_WRITE0?MAIN
+            CODE    DF43H     0053H     UNIT         ?PR?_SEND3?MAIN
+            CODE    DF96H     0051H     UNIT         ?PR?_ROUNDING?MAIN
+            CODE    DFE7H     004FH     UNIT         ?PR?_PHOTO?MAIN
+            CODE    E036H     0049H     UNIT         ?PR?_SPI?MAIN
+            CODE    E07FH     0044H     UNIT         ?PR?_FUNCTION_FILTER?MAIN
+            CODE    E0C3H     0044H     UNIT         ?C?LDIV
+            CODE    E107H     0041H     UNIT         ?PR?_MODEL_ADRESS?MAIN
+            CODE    E148H     0040H     UNIT         ?PR?_CH_CALIB?MAIN
+            CODE    E188H     003EH     UNIT         ?PR?_LOCATION?MAIN
+            CODE    E1C6H     003AH     UNIT         ?PR?_SEND?MAIN
+            CODE    E200H     0039H     UNIT         ?PR?_SWITCH_CHECK?MAIN
+            CODE    E239H     0038H     UNIT         ?PR?_FIFO_READ?MAIN
+            CODE    E271H     0038H     UNIT         ?PR?_FIFO_READ2?MAIN
+            CODE    E2A9H     0037H     UNIT         ?PR?_XDATA_CHECK?MAIN
+            CODE    E2E0H     0036H     UNIT         ?PR?_LCD_CLEAN?MAIN
+            CODE    E316H     0032H     UNIT         ?PR?_FIFO_WRITE?MAIN
+            CODE    E348H     0032H     UNIT         ?PR?_FIFO_WRITE2?MAIN
+            CODE    E37AH     0027H     UNIT         ?PR?_NRF_POWER?MAIN
+            CODE    E3A1H     0025H     UNIT         ?PR?NRF_INIT?MAIN
+            CODE    E3C6H     001CH     UNIT         ?PR?_EEPROM_CLEAN?MAIN
+            CODE    E3E2H     001BH     UNIT         ?PR?_DATA_CHANGE?MAIN
+            CODE    E3FDH     0018H     UNIT         ?PR?_DELAY_MS?MAIN
+            CODE    E415H     0017H     UNIT         ?PR?_REG_WRITE?MAIN
+            CODE    E42CH     0013H     UNIT         ?PR?UARTINIT?MAIN
+            CODE    E43FH     000DH     UNIT         ?PR?_REG_READ?MAIN
+            CODE    E44CH     000CH     UNIT         ?PR?RX_MODE?MAIN
+            CODE    E458H     000CH     UNIT         ?PR?TX_MODE?MAIN
+            CODE    E464H     000CH     UNIT         ?PR?_NRF_SIZE?MAIN
+            CODE    E470H     000CH     UNIT         ?PR?_NRF_CHANNEL?MAIN
+            CODE    E47CH     000AH     UNIT         ?PR?_RX_ADDRESS?MAIN
+            CODE    E486H     0009H     UNIT         ?PR?DELAY1MS?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   Loli3_wooddoor (?C_STARTUP)
+
+
+SEGMENT                                    BIT_GROUP          XDATA_GROUP
+  +--> CALLED SEGMENT                   START    LENGTH     START    LENGTH
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/23/2019  13:18:12  PAGE 4
+
+
+---------------------------------------------------------------------------
+?C_C51STARTUP                           -----    -----      -----    -----
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN                           -----    -----      037FH    0004H
+  +--> ?PR?_DELAY_MS?MAIN
+  +--> ?PR?INITIAL?MAIN
+  +--> ?PR?DATA_READ1?MAIN
+  +--> ?PR?DATA_READ2?MAIN
+  +--> ?PR?LCD_INIT?MAIN
+  +--> ?PR?UARTINIT?MAIN
+  +--> ?PR?LCD_ON?MAIN
+  +--> ?PR?_EEPROM_CLEAN?MAIN
+  +--> ?PR?_WRITE?MAIN
+  +--> ?CO?MAIN
+  +--> ?PR?_SEND3?MAIN
+  +--> ?PR?_SEND2?MAIN
+  +--> ?PR?DATA_SAVE1?MAIN
+  +--> ?PR?_CH_CALIB?MAIN
+  +--> ?PR?_PHOTO?MAIN
+  +--> ?PR?NRF_TEST?MAIN
+  +--> ?PR?NRF_INIT?MAIN
+  +--> ?PR?_LOCATION?MAIN
+  +--> ?PR?_SEND?MAIN
+  +--> ?PR?_LCD?MAIN
+  +--> ?PR?_CHANGE_TRIM?MAIN
+  +--> ?PR?_LCD_CLEAN?MAIN
+  +--> ?PR?_MOVE_CURSOR?MAIN
+  +--> ?PR?_DISPLAY_MENU?MAIN
+  +--> ?PR?_DATA_CHANGE?MAIN
+  +--> ?PR?_WRITE_NUM100?MAIN
+  +--> ?PR?_DISPLAY_MAPPING?MAIN
+  +--> ?PR?_SEND2_HEX?MAIN
+  +--> ?PR?DEVICE_CONNECT?MAIN
+  +--> ?PR?_SWITCH_CHECK?MAIN
+  +--> ?PR?_DISPLAY_SWITCH?MAIN
+  +--> ?PR?_WRITE_NUM1000?MAIN
+  +--> ?PR?_DISPLAY_BAR?MAIN
+  +--> ?PR?_DISPLAY_RECEIVER_MODE?MAIN
+  +--> ?PR?DISPLAY_CURVE?MAIN
+  +--> ?PR?GET_CURVE2?MAIN
+  +--> ?PR?DISPLAY_CURVE2?MAIN
+  +--> ?PR?_SEND2_REV?MAIN
+  +--> ?PR?MODEL_DATA_RESET?MAIN
+  +--> ?PR?DISPLAYMODEL?MAIN
+  +--> ?PR?_WARNING?MAIN
+  +--> ?PR?_DISPLAY_THROTTLE?MAIN
+  +--> ?PR?_DISPLAY_TRIM2?MAIN
+  +--> ?PR?_DISPLAY_TRIM1?MAIN
+  +--> ?PR?LCD_OFF?MAIN
+  +--> ?PR?DATA_SAVE2?MAIN
+
+?PR?_DELAY_MS?MAIN                      -----    -----      -----    -----
+  +--> ?PR?DELAY1MS?MAIN
+
+?PR?DATA_READ1?MAIN                     -----    -----      0383H    0002H
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/23/2019  13:18:12  PAGE 5
+
+
+  +--> ?PR?_EEPROM_READ?MAIN
+
+?PR?DATA_READ2?MAIN                     -----    -----      0383H    0004H
+  +--> ?PR?_MODEL_ADRESS?MAIN
+  +--> ?PR?_EEPROM_READ?MAIN
+  +--> ?PR?MODEL_DATA_RESET?MAIN
+
+?PR?LCD_INIT?MAIN                       -----    -----      -----    -----
+  +--> ?PR?LCD_ON?MAIN
+  +--> ?PR?_DELAY_MS?MAIN
+  +--> ?PR?_LCD?MAIN
+  +--> ?PR?DELAY1MS?MAIN
+  +--> ?PR?_LCD_CLEAN?MAIN
+  +--> ?PR?LCD_OFF?MAIN
+
+?PR?_LCD_CLEAN?MAIN                     -----    -----      0385H    0004H
+  +--> ?PR?_LOCATION?MAIN
+  +--> ?PR?_LCD?MAIN
+
+?PR?_LOCATION?MAIN                      -----    -----      -----    -----
+  +--> ?PR?_LCD?MAIN
+
+?PR?_WRITE?MAIN                         -----    -----      0383H    0005H
+  +--> ?CO?MAIN
+  +--> ?PR?_SEND3?MAIN
+
+?PR?_SEND3?MAIN                         -----    -----      038AH    0005H
+  +--> ?CO?MAIN
+  +--> ?PR?_LOCATION?MAIN
+  +--> ?PR?_LCD?MAIN
+
+?PR?_SEND2?MAIN                         -----    -----      -----    -----
+  +--> ?PR?_LOCATION?MAIN
+  +--> ?CO?MAIN
+  +--> ?PR?_LCD?MAIN
+
+?PR?DATA_SAVE1?MAIN                     -----    -----      0383H    0002H
+  +--> ?PR?_EEPROM_CLEAN?MAIN
+  +--> ?PR?_EEPROM_WRITE?MAIN
+  +--> ?PR?_EEPROM_READ?MAIN
+
+?PR?_PHOTO?MAIN                         -----    -----      0383H    0007H
+  +--> ?PR?_LOCATION?MAIN
+  +--> ?PR?_LCD?MAIN
+
+?PR?NRF_TEST?MAIN                       -----    -----      0383H    0001H
+  +--> ?PR?_SPI?MAIN
+  +--> ?PR?_REG_WRITE?MAIN
+  +--> ?PR?_FIFO_WRITE?MAIN
+  +--> ?PR?_DELAY_MS?MAIN
+
+?PR?_REG_WRITE?MAIN                     -----    -----      -----    -----
+  +--> ?PR?_SPI?MAIN
+
+?PR?_FIFO_WRITE?MAIN                    -----    -----      0384H    0003H
+  +--> ?PR?_SPI?MAIN
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/23/2019  13:18:12  PAGE 6
+
+
+?PR?NRF_INIT?MAIN                       -----    -----      -----    -----
+  +--> ?PR?_REG_WRITE?MAIN
+  +--> ?PR?TX_MODE?MAIN
+  +--> ?PR?_NRF_CHANNEL?MAIN
+  +--> ?PR?_TX_ADDRESS?MAIN
+  +--> ?PR?_RX_ADDRESS?MAIN
+
+?PR?TX_MODE?MAIN                        -----    -----      -----    -----
+  +--> ?PR?_REG_WRITE?MAIN
+
+?PR?_NRF_CHANNEL?MAIN                   -----    -----      -----    -----
+  +--> ?PR?_REG_WRITE?MAIN
+
+?PR?_TX_ADDRESS?MAIN                    -----    -----      -----    -----
+  +--> ?PR?_NRF_POWER?MAIN
+  +--> ?PR?_NRF_SIZE?MAIN
+  +--> ?PR?_SPI?MAIN
+
+?PR?_NRF_POWER?MAIN                     -----    -----      -----    -----
+  +--> ?PR?_REG_WRITE?MAIN
+
+?PR?_NRF_SIZE?MAIN                      -----    -----      -----    -----
+  +--> ?PR?_REG_WRITE?MAIN
+
+?PR?_RX_ADDRESS?MAIN                    -----    -----      -----    -----
+  +--> ?PR?_SPI?MAIN
+
+?PR?_SEND?MAIN                          -----    -----      -----    -----
+  +--> ?PR?_LOCATION?MAIN
+  +--> ?CO?MAIN
+  +--> ?PR?_LCD?MAIN
+
+?PR?_MOVE_CURSOR?MAIN                   -----    -----      0383H    0002H
+  +--> ?PR?_LCD_CLEAN?MAIN
+
+?PR?_DISPLAY_MENU?MAIN                  -----    -----      0383H    0002H
+  +--> ?CO?MAIN
+  +--> ?PR?_SEND3?MAIN
+  +--> ?PR?_WRITE0?MAIN
+  +--> ?PR?_LOCATION?MAIN
+  +--> ?PR?_SEND?MAIN
+
+?PR?_WRITE0?MAIN                        -----    -----      0385H    0005H
+  +--> ?CO?MAIN
+  +--> ?PR?_SEND3?MAIN
+
+?PR?_WRITE_NUM100?MAIN                  -----    -----      0383H    0005H
+  +--> ?PR?_SEND2?MAIN
+
+?PR?_DISPLAY_MAPPING?MAIN               -----    -----      0383H    0002H
+  +--> ?CO?MAIN
+  +--> ?PR?_SEND3?MAIN
+  +--> ?PR?_SEND2?MAIN
+
+?PR?_SEND2_HEX?MAIN                     -----    -----      -----    -----
+  +--> ?PR?_LOCATION?MAIN
+  +--> ?CO?MAIN
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/23/2019  13:18:12  PAGE 7
+
+
+  +--> ?PR?_LCD?MAIN
+
+?PR?DEVICE_CONNECT?MAIN                 -----    -----      0383H    0001H
+  +--> ?PR?_NRF_CHANNEL?MAIN
+  +--> ?PR?_NRF_POWER?MAIN
+  +--> ?PR?_NRF_SIZE?MAIN
+  +--> ?CO?MAIN
+  +--> ?PR?_TX_ADDRESS?MAIN
+  +--> ?PR?_RX_ADDRESS?MAIN
+  +--> ?PR?TX_MODE?MAIN
+  +--> ?PR?_FIFO_WRITE?MAIN
+  +--> ?PR?DELAY1MS?MAIN
+  +--> ?PR?RX_MODE?MAIN
+  +--> ?PR?_FIFO_READ?MAIN
+  +--> ?PR?_REG_WRITE?MAIN
+
+?PR?RX_MODE?MAIN                        -----    -----      -----    -----
+  +--> ?PR?_REG_WRITE?MAIN
+
+?PR?_FIFO_READ?MAIN                     -----    -----      0384H    0003H
+  +--> ?PR?_SPI?MAIN
+
+?PR?_DISPLAY_SWITCH?MAIN                -----    -----      0383H    0002H
+  +--> ?PR?_SEND2?MAIN
+  +--> ?CO?MAIN
+  +--> ?PR?_SEND3?MAIN
+
+?PR?_WRITE_NUM1000?MAIN                 -----    -----      0383H    0001H
+  +--> ?PR?_SEND?MAIN
+  +--> ?PR?_LCD?MAIN
+
+?PR?_DISPLAY_BAR?MAIN                   -----    -----      0383H    0005H
+  +--> ?PR?_LOCATION?MAIN
+  +--> ?PR?_LCD?MAIN
+
+?PR?_DISPLAY_RECEIVER_MODE?MAIN         -----    -----      0383H    0002H
+  +--> ?CO?MAIN
+  +--> ?PR?_SEND3?MAIN
+  +--> ?PR?_SEND2?MAIN
+
+?PR?DISPLAY_CURVE?MAIN                  -----    -----      0383H    0001H
+  +--> ?PR?_POINT?MAIN
+
+?PR?_POINT?MAIN                         -----    -----      0385H    0006H
+  +--> ?PR?_LOCATION?MAIN
+  +--> ?PR?_LCD?MAIN
+
+?PR?GET_CURVE2?MAIN                     -----    -----      0383H    0007H
+
+?PR?DISPLAY_CURVE2?MAIN                 -----    -----      0383H    0002H
+  +--> ?PR?_POINT?MAIN
+
+?PR?_SEND2_REV?MAIN                     -----    -----      -----    -----
+  +--> ?PR?_LOCATION?MAIN
+  +--> ?CO?MAIN
+  +--> ?PR?_LCD?MAIN
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/23/2019  13:18:12  PAGE 8
+
+
+?PR?DISPLAYMODEL?MAIN                   002AH.7  0000H.1    0383H    0002H
+  +--> ?PR?_SEND2?MAIN
+  +--> ?CO?MAIN
+  +--> ?PR?_SEND3?MAIN
+
+?PR?_WARNING?MAIN                       -----    -----      -----    -----
+  +--> ?PR?_LOCATION?MAIN
+  +--> ?PR?_LCD?MAIN
+
+?PR?_DISPLAY_THROTTLE?MAIN              -----    -----      0383H    0004H
+  +--> ?PR?_LOCATION?MAIN
+  +--> ?PR?_LCD?MAIN
+
+?PR?_DISPLAY_TRIM2?MAIN                 -----    -----      -----    -----
+  +--> ?PR?_LCD?MAIN
+
+?PR?_DISPLAY_TRIM1?MAIN                 -----    -----      0383H    0010H
+  +--> ?PR?_LOCATION?MAIN
+  +--> ?PR?_LCD?MAIN
+
+?PR?DATA_SAVE2?MAIN                     -----    -----      0383H    0004H
+  +--> ?PR?_MODEL_ADRESS?MAIN
+  +--> ?PR?_EEPROM_CLEAN?MAIN
+  +--> ?PR?_EEPROM_WRITE?MAIN
+
+*** NEW ROOT ***************************************************
+
+?PR?ET0_ISR?MAIN                        -----    -----      0393H    0001H
+  +--> ?PR?_SWITCH_CHECK?MAIN
+  +--> ?PR?_FUNCTION_FILTER?MAIN
+  +--> ?PR?_CH_CALIB?MAIN
+  +--> ?PR?_FUNCTION_MAPPING?MAIN
+  +--> ?PR?_FUNCTION_CURVE?MAIN
+  +--> ?PR?_FUNCTION_CURVE2?MAIN
+  +--> ?PR?_FUNCTION_SIZE?MAIN
+  +--> ?PR?_FUNCTION_INVERTED?MAIN
+  +--> ?PR?_FUNCTION_MIX?MAIN
+  +--> ?PR?_XDATA_CHECK?MAIN
+  +--> ?PR?_GET_CURVE?MAIN
+
+?PR?_FUNCTION_FILTER?MAIN               -----    -----      0394H    0001H
+
+?PR?_FUNCTION_CURVE?MAIN                -----    -----      0394H    0007H
+  +--> ?PR?_POW?POW
+
+?PR?_POW?POW                            -----    -----      039BH    000AH
+  +--> ?PR?LOG?LOG
+  +--> ?PR?EXP?EXP
+
+?PR?LOG?LOG                             002BH.0  0000H.1    03A5H    0004H
+
+?PR?_FUNCTION_CURVE2?MAIN               -----    -----      0394H    0011H
+
+?PR?_FUNCTION_SIZE?MAIN                 -----    -----      0394H    0003H
+
+?PR?_FUNCTION_MIX?MAIN                  -----    -----      0394H    0004H
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/23/2019  13:18:12  PAGE 9
+
+
+?PR?_GET_CURVE?MAIN                     -----    -----      0394H    0005H
+  +--> ?PR?_POW?POW
+  +--> ?PR?_ROUNDING?MAIN
+
+?PR?_ROUNDING?MAIN                      -----    -----      0399H    0005H
+
+*** NEW ROOT ***************************************************
+
+?PR?EX1_ISR?MAIN                        -----    -----      -----    -----
+  +--> ?PR?_XDATA_CHECK?MAIN
+
+*** NEW ROOT ***************************************************
+
+?PR?ET1_ISR?MAIN                        -----    -----      03A9H    0002H
+
+*** NEW ROOT ***************************************************
+
+?PR?PCA_ISR?MAIN                        -----    -----      -----    -----
+  +--> ?PR?RX_MODE?MAIN
+  +--> ?PR?_REG_READ?MAIN
+  +--> ?PR?_NRF_CHANNEL?MAIN
+  +--> ?PR?_NRF_POWER?MAIN
+  +--> ?PR?_TX_ADDRESS?MAIN
+  +--> ?PR?_RX_ADDRESS?MAIN
+  +--> ?PR?_FIFO_WRITE2?MAIN
+  +--> ?PR?_REG_WRITE?MAIN
+  +--> ?PR?_FIFO_READ2?MAIN
+  +--> ?PR?TX_MODE?MAIN
+
+?PR?_REG_READ?MAIN                      -----    -----      -----    -----
+  +--> ?PR?_SPI?MAIN
+
+?PR?_FIFO_WRITE2?MAIN                   -----    -----      03ABH    0003H
+  +--> ?PR?_SPI?MAIN
+
+?PR?_FIFO_READ2?MAIN                    -----    -----      03ABH    0003H
+  +--> ?PR?_SPI?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  Loli3_wooddoor (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C?FPADD
+  C:A112H         PUBLIC        ?C?FPADD
+  C:A10EH         PUBLIC        ?C?FPSUB
+  -------         ENDMOD        ?C?FPADD
+
+  -------         MODULE        ?C?FPMUL
+  C:A203H         PUBLIC        ?C?FPMUL
+  -------         ENDMOD        ?C?FPMUL
+
+  -------         MODULE        ?C?FPDIV
+  C:A30CH         PUBLIC        ?C?FPDIV
+  -------         ENDMOD        ?C?FPDIV
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/23/2019  13:18:12  PAGE 10
+
+
+
+  -------         MODULE        ?C?FPCMP
+  C:A3ABH         PUBLIC        ?C?FPCMP
+  C:A3A9H         PUBLIC        ?C?FPCMP3
+  -------         ENDMOD        ?C?FPCMP
+
+  -------         MODULE        ?C?FPNEG
+  C:A416H         PUBLIC        ?C?FPNEG
+  -------         ENDMOD        ?C?FPNEG
+
+  -------         MODULE        ?C?FCAST
+  C:A431H         PUBLIC        ?C?FCASTC
+  C:A42CH         PUBLIC        ?C?FCASTI
+  C:A427H         PUBLIC        ?C?FCASTL
+  -------         ENDMOD        ?C?FCAST
+
+  -------         MODULE        ?C?CASTF
+  C:A465H         PUBLIC        ?C?CASTF
+  -------         ENDMOD        ?C?CASTF
+
+  -------         MODULE        POW
+  X:039BH         PUBLIC        ?_pow?BYTE
+  C:C80BH         PUBLIC        _pow
+  -------         ENDMOD        POW
+
+  -------         MODULE        ?C?CHKFLOAT
+  C:A4E6H         PUBLIC        ?C?CHKFLOAT
+  -------         ENDMOD        ?C?CHKFLOAT
+
+  -------         MODULE        EXP
+  C:D7DFH         PUBLIC        _EXP
+  -------         ENDMOD        EXP
+
+  -------         MODULE        LOG
+  C:CFCBH         PUBLIC        _LOG
+  C:CFC7H         PUBLIC        _LOG10
+  -------         ENDMOD        LOG
+
+  -------         MODULE        ?C?SCDIV
+  C:A54DH         PUBLIC        ?C?SCDIV
+  -------         ENDMOD        ?C?SCDIV
+
+  -------         MODULE        ?C?CLDPTR
+  C:A56FH         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        ?C?CLDOPTR
+  C:A588H         PUBLIC        ?C?CLDOPTR
+  -------         ENDMOD        ?C?CLDOPTR
+
+  -------         MODULE        ?C?CSTOPTR
+  C:A5B5H         PUBLIC        ?C?CSTOPTR
+  -------         ENDMOD        ?C?CSTOPTR
+
+  -------         MODULE        ?C?IMUL
+  C:A5D7H         PUBLIC        ?C?IMUL
+  -------         ENDMOD        ?C?IMUL
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/23/2019  13:18:12  PAGE 11
+
+
+
+  -------         MODULE        ?C?UIDIV
+  C:A5E9H         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+  -------         MODULE        ?C?SIDIV
+  C:A63EH         PUBLIC        ?C?SIDIV
+  -------         ENDMOD        ?C?SIDIV
+
+  -------         MODULE        ?C?IILDX
+  C:A674H         PUBLIC        ?C?IILDX
+  -------         ENDMOD        ?C?IILDX
+
+  -------         MODULE        ?C?ILDPTR
+  C:A68AH         PUBLIC        ?C?ILDPTR
+  -------         ENDMOD        ?C?ILDPTR
+
+  -------         MODULE        ?C?ISTPTR
+  C:A6B5H         PUBLIC        ?C?ISTPTR
+  -------         ENDMOD        ?C?ISTPTR
+
+  -------         MODULE        ?C?LMUL
+  C:A6D4H         PUBLIC        ?C?LMUL
+  -------         ENDMOD        ?C?LMUL
+
+  -------         MODULE        ?C?SLDIV
+  C:E0C3H         PUBLIC        ?C?SLDIV
+  -------         ENDMOD        ?C?SLDIV
+
+  -------         MODULE        ?C?LNEG
+  C:A723H         PUBLIC        ?C?LNEG
+  -------         ENDMOD        ?C?LNEG
+
+  -------         MODULE        ?C?ULSHR
+  C:A731H         PUBLIC        ?C?ULSHR
+  -------         ENDMOD        ?C?ULSHR
+
+  -------         MODULE        ?C?SLSHR
+  C:A744H         PUBLIC        ?C?SLSHR
+  -------         ENDMOD        ?C?SLSHR
+
+  -------         MODULE        ?C?LLDCODE
+  C:A758H         PUBLIC        ?C?LLDCODE
+  -------         ENDMOD        ?C?LLDCODE
+
+  -------         MODULE        ?C?LLDXDATA0
+  C:A768H         PUBLIC        ?C?LLDXDATA0
+  -------         ENDMOD        ?C?LLDXDATA0
+
+  -------         MODULE        ?C?LLDCODE0
+  C:A774H         PUBLIC        ?C?LLDCODE0
+  -------         ENDMOD        ?C?LLDCODE0
+
+  -------         MODULE        ?C?LSTXDATA
+  C:A784H         PUBLIC        ?C?LSTXDATA
+  -------         ENDMOD        ?C?LSTXDATA
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/23/2019  13:18:12  PAGE 12
+
+
+  -------         MODULE        ?C?LSTKXDATA
+  C:A790H         PUBLIC        ?C?LSTKXDATA
+  -------         ENDMOD        ?C?LSTKXDATA
+
+  -------         MODULE        ?C?ULDIV
+  C:A7FDH         PUBLIC        ?C?ULDIV
+  -------         ENDMOD        ?C?ULDIV
+
+Program Size: data=101.1 xdata=942 code=58499
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

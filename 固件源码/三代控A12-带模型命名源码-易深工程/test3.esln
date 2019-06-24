@@ -1,0 +1,154 @@
+{
+    "attribute": {
+        "homepage": {
+            "url": ""
+        },
+        "sdcc_asm": {
+            "checkBox_a": "0",
+            "checkBox_g": "0",
+            "checkBox_j": "0",
+            "checkBox_p": "0",
+            "def": "",
+            "other_control": "",
+            "paths": "",
+            "summary": "-x;-l;-o;-c;-s",
+            "undef": ""
+        },
+        "sdcc_cparam": {
+            "checkbox_fdollars_in_identifiers": "0",
+            "checkbox_float_reent": "0",
+            "checkbox_fsigned_char": "0",
+            "checkbox_int_long_reent": "0",
+            "checkbox_less_pedantic": "0",
+            "checkbox_no_peep": "0",
+            "checkbox_nogcse": "0",
+            "checkbox_noinduction": "0",
+            "checkbox_noinvariant": "0",
+            "checkbox_nolabelopt": "0",
+            "checkbox_noloopreverse": "0",
+            "checkbox_nooverlay": "0",
+            "checkbox_nostdinc": "0",
+            "checkbox_stack_auto": "0",
+            "checkbox_werror": "0",
+            "checkbox_xram_movc": "0",
+            "def": "",
+            "optimization": "默认",
+            "other_control": "",
+            "paths": "",
+            "std": "C99标准和SDCC拓展(不完全)",
+            "summary": "-mmcs51;--model-large;--debug;--std-sdcc99",
+            "undef": ""
+        },
+        "sdcc_linker": {
+            "code_length": "",
+            "code_name": "",
+            "code_start": "",
+            "const_name": "",
+            "data_length": "",
+            "data_start": "",
+            "disable_warninig_number": "",
+            "iram_length": "",
+            "lib_files": "",
+            "lib_paths": "",
+            "nostdlib": "0",
+            "other_control": "",
+            "stack_start": "",
+            "summary": "--model-large;--debug;--out-fmt-ihx",
+            "use_target_plan": "1",
+            "xram_length": "",
+            "xram_start": "",
+            "xstack_start": ""
+        },
+        "sdcc_list": {
+            "asm": "0",
+            "asm_lst": "0",
+            "asm_rel": "0",
+            "asm_sym": "0",
+            "clan": "0",
+            "link": "0",
+            "path": "./List"
+        },
+        "sdcc_output": {
+            "out_debug_info": "1",
+            "out_format": "Intel HEX文件(.hex)",
+            "out_name": "test3",
+            "out_path": "./输出",
+            "out_type": "exe"
+        },
+        "sdcc_target": {
+            "brand": "STC",
+            "code": {
+                "code1_length": "",
+                "code1_start": "",
+                "code2_length": "",
+                "code2_start": "",
+                "code3_length": "",
+                "code3_start": ""
+            },
+            "crystal": "12.000",
+            "data_mode": "大模式 : 变量位于XDATA",
+            "model": "STC12C5Axx",
+            "xdata": {
+                "xdata1_length": "",
+                "xdata1_start": "",
+                "xdata2_length": "",
+                "xdata2_start": "",
+                "xdata3_length": "",
+                "xdata3_start": ""
+            }
+        },
+        "sdcc_user": {
+            "build_after": {
+                "run1": "0",
+                "run1_path": "",
+                "run2": "0",
+                "run2_path": ""
+            },
+            "build_before": {
+                "run1": "0",
+                "run1_path": "",
+                "run2": "0",
+                "run2_path": ""
+            },
+            "compile_before": {
+                "run1": "0",
+                "run1_path": "",
+                "run2": "0",
+                "run2_path": ""
+            }
+        }
+    },
+    "root": {
+        "file": [
+        ],
+        "folder": [
+            {
+                "file": [
+                    {
+                        "name": "intrins.h",
+                        "relative_path": "."
+                    },
+                    {
+                        "name": "LOLI_3.h",
+                        "relative_path": "."
+                    }
+                ],
+                "folder": [
+                ],
+                "name": "头文件"
+            },
+            {
+                "file": [
+                    {
+                        "name": "main.c",
+                        "relative_path": "."
+                    }
+                ],
+                "folder": [
+                ],
+                "name": "源文件"
+            }
+        ],
+        "name": "test3"
+    }
+}

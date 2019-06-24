@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="Windows-1252" ?>
+<TKStudioProject Name="test2" BuildTool="12" Version="3.00" Author="YinHandong[Òüº®¶¬]" ProjectGUID="{C9791908-6B26-436d-ABA3-AB33C43CCD6B}" Rebuild="0" ToolVer="default">
+    <Configurations>
+        <Configuration Name="DebugRel" AsmParam='$(PARAM) &quot;$(SOURCE)&quot; &quot;$(REL)&quot;' CParam='$(PARAM) -c &quot;$(SOURCE)&quot; -o &quot;$(REL)&quot;' LinkParam="$(LNKPARAM) $(OBJS)" GlLnkParam=" --debug --out-fmt-ihx" GlAsmParam="" GlCParam="" SDCC_OPTDBG="1,-1,1,1,1,0,(),()" OPTDBG="1,-1,1,1,1,0,()" DEVICE="STC12C5A60S2" VENDOR="STC" FAMINY="0" CPU="IRAM(0-0x7F) IROM(0-0xFFF) CLOCK(33000000) MODAT2" RGF='REGX51.H(&quot;Atmel&quot;)' MONDL='S8051.DLL TP51.DLL(&quot;-pAT51&quot;)' SIMDL='S8051.DLL DP51.DLL(&quot;-pAT51&quot;)' SIMCLK="45.000000" AppFile=".\DebugRel\8051.ihx" CdbFile=".\DebugRel\8051.cdb" DSTType="2" CodeSTR="-1,-1#-1,-1#-1,-1" DataSTR="-1,-1#-1,-1#-1,-1" CLK="12.000000">
+            <SDCC_Output OutName="0,.\DebugRel\8051" OutType="0" DBGInfo="1" OutFormat="1" />
+            <SDCC_List Path=".\DebugRel" Asm="1,2,1,1,1" CLan="0" Link="0" />
+            <SDCC_User BfC="0,()#0,()" BfB="0,()#0,()" AfB="0,()#0,()" Beep="1" SDebug="0" />
+            <SDCC_CParam Def="" uDef="" Inc="" Misc="" Opt="-1,0,0,0,0,0,0,0" CStd="1" Language="0,0,0,0,0,0,0,0,0" />
+            <SDCC_AsmParam Def="" uDef="" Inc="" Misc="" Language="0,0,0,0" />
+            <SDCC_Linker UseDef="1" Lib="0" DWarm="" Ram="-1,-1,-1" Xstack="-1,-1" Data="-1,-1" Code="-1,-1" Seg="," Path="" Misc="" />
+            <SDCC_Debug DBGType="1" SWDbg="1,1" HWDbg="(),1,1" />
+            <DeviceProperties Item0="CPU=IRAM(0-0xFF) XRAM(0-0x3FF) IROM(0-0xEFFF) CLOCK(45000000) CLKSPERSTATE(1)" Item1='MON=S8051.DLL TP51.DLL(&quot;-p51&quot;)' Item2='SIM=S8051.DLL DP51.DLL(&quot;-p51&quot;)' Item3='SFILE=&quot;LIB\STARTUP.A51&quot; (&quot;Standard 8051 Startup Code&quot;)' Item4="REGFILE=REG51.H" Item5='BOOK0=DATASHTS\ATMEL\AT89S51_DS.PDF(&quot;Data Sheet&quot;)' Item6='REGFILE=REGX51.H(&quot;Atmel&quot;)' />
+            <DeviceDescription Description="8051-based microcontroller with 1T(1-clock) High-Speed Core,&#x0D;&#x0A;Dual DPTR, 36-44 I/O Lines, 2 Timers/Counters, 2 PCA Timers,&#x0D;&#x0A;Alternative build-in oscillator,&#x0D;&#x0A;Independent Baud Rate Generator, Programmable Clock-Out,&#x0D;&#x0A;60K bytes flash ROM, 1280 bytes data RAM,&#x0D;&#x0A;On-chip EEPROM, 2 UARTs, WDT, ISP/IAP, A/D, CCP/PWM" />
+        </Configuration>
+    </Configurations>
+    <Files>
+        <Filter Name="Source Files">
+            <File RelativePath="main.c" FileType="1" Output="main.rel" Rebuild="0" />
+            <File RelativePath="LOLI_3.h" FileType="4" />
+            <File RelativePath="STC12C5Axx.h" FileType="4" />
+            <File RelativePath="intrins.h" FileType="4" />
+        </Filter>
+    </Files>
+</TKStudioProject>

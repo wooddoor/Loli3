@@ -1,0 +1,19 @@
+-muwx
+-i D:/Users/Desktop/新建文件夹/test3/输出/test3.ihx
+-M
+-Y
+-y
+-b HOME = 0x0000
+-b XSEG = 0x0001
+-b PSEG = 0x0001
+-b ISEG = 0x0000
+-b BSEG = 0x0000
+-k D:\Program Files\易深编程1.1\sdcc\bin\..\lib\small
+-l mcs51
+-l libsdcc
+-l libint
+-l liblong
+-l libfloat
+D:/Users/Desktop/新建文件夹/test3/List/____hi0.rel
+
+-e
